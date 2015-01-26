@@ -1,0 +1,1145 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <title>doc.js</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, target-densitydpi=160dpi, initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
+  <link rel="stylesheet" media="all" href="docco.css" />
+</head>
+<body>
+  <div id="container">
+    <div id="background"></div>
+    
+      <ul id="jump_to">
+        <li>
+          <a class="large" href="javascript:void(0);">Jump To &hellip;</a>
+          <a class="small" href="javascript:void(0);">+</a>
+          <div id="jump_wrapper">
+          <div id="jump_page">
+            
+              
+              <a class="source" href="doc.html">
+                doc.js
+              </a>
+            
+              
+              <a class="source" href="index.html">
+                index.js
+              </a>
+            
+          </div>
+        </li>
+      </ul>
+    
+    <ul class="sections">
+        
+          <li id="title">
+              <div class="annotation">
+                  <h1>doc.js</h1>
+              </div>
+          </li>
+        
+        
+        
+        <li id="section-1">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-1">&#182;</a>
+              </div>
+              <h2 id="get-a-builder">Get a builder</h2>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="hljs-pi">'use strict'</span>;</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-2">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-2">&#182;</a>
+              </div>
+              <p>A builder is created from a tag name.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="hljs-keyword">var</span> builder = ceb().name(<span class="hljs-string">'demo-custom-element'</span>);</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-3">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-3">&#182;</a>
+              </div>
+              <p>It provides several methods helping to defined the structure of a custom element.
+A structure is composed of the following elements:</p>
+<ul>
+<li>extends and prototype values</li>
+<li>properties</li>
+<li>methods</li>
+<li>interceptors catching the set and get of properties</li>
+<li>wrapper wrapping the call of methods</li>
+</ul>
+
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-4">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-4">&#182;</a>
+              </div>
+              <h2 id="extends-and-prototype">Extends and prototype</h2>
+
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-5">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-5">&#182;</a>
+              </div>
+              <p>By default the structure doesn’t set an extends value.
+However, the prototype value is by default <em>Object.create(HTMLElement.prototype)</em></p>
+
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-6">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-6">&#182;</a>
+              </div>
+              <p>The builder’s method <strong>extends</strong> adds the given extends value to the structure.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>builder.extends(<span class="hljs-string">'button'</span>);</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-7">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-7">&#182;</a>
+              </div>
+              <p>The builder’s method <strong>prototype</strong> adds the given prototype value to the structure.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>builder.prototype(<span class="hljs-built_in">Object</span>.create(HTMLButtonElement.prototype));</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-8">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-8">&#182;</a>
+              </div>
+              <h2 id="properties">Properties</h2>
+
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-9">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-9">&#182;</a>
+              </div>
+              <p>The builder’s method <strong>properties</strong> adds the given hash of properties to the structure.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>builder.properties({</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-10">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-10">&#182;</a>
+              </div>
+              <p><strong>Writable value</strong></p>
+
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-11">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-11">&#182;</a>
+              </div>
+              <p>The property <em>propWritable</em> will be initialized with the value <em>initial value</em>.
+It can be updated on runtime.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>    propWritable: {
+        value: <span class="hljs-string">'initial value'</span>,
+        writable: <span class="hljs-literal">true</span>
+    },</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-12">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-12">&#182;</a>
+              </div>
+              <p><strong>Read only value</strong></p>
+<p>The property <em>propReadonly</em> will be initialized with the value <em>initial value</em>.
+It can’t be updated on runtime.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>    propReadonly: {
+        value: <span class="hljs-string">'initial value'</span>,
+        writable: <span class="hljs-literal">false</span>
+    },</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-13">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-13">&#182;</a>
+              </div>
+              <p><strong>Accessors</strong></p>
+
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-14">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-14">&#182;</a>
+              </div>
+              <p>The property <em>propAccessors</em> will be initialized given the value <em>initial value</em> to the setter.</p>
+<p>When <em>propAccessors</em> will be set (<em>obj.propAccessors = ‘value’</em>), the setter will be called.</p>
+<p>When <em>propAccessors</em> will be get (<em>var value = obj.propAccessors</em>), the getter will be called.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>    propAccessors: {
+        value: <span class="hljs-string">'initial value'</span>,</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-15">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-15">&#182;</a>
+              </div>
+              <p>Set accessors are called with the custom element instance and the set value.
+They should store the values somewhere in order to retrieve them for the getters.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>        set: <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(el, value)</span> </span>{
+            el._setAndGetProperty = value;
+        },</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-16">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-16">&#182;</a>
+              </div>
+              <p>Get accessors are called with the custom element instance.
+They should return something.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>        get: <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(el)</span> </span>{
+            <span class="hljs-keyword">return</span> el._setAndGetProperty;
+        }
+    }
+});</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-17">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-17">&#182;</a>
+              </div>
+              <h3 id="properties-and-attributes">Properties and attributes</h3>
+
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-18">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-18">&#182;</a>
+              </div>
+              <p>Properties can be linked to element’s attributes.
+When a property is updated, the linked attribute is updated too.
+When an attribute is updated, the linked property is updated too.</p>
+<p>Properties linked to attributes have automatically built accessors.
+Properties linked to attributes can only handle string and boolean values.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>builder.properties({</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-19">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-19">&#182;</a>
+              </div>
+              <p><strong>Default behavior</strong></p>
+
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-20">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-20">&#182;</a>
+              </div>
+              <p>The property <em>propAtt</em> is linked to the attribute <em>prop-att</em>.
+<em>propAtt</em> and its attribute is initialized with the value <em>initial value</em>.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>    propAtt: {
+        value: <span class="hljs-string">'initial value'</span>,
+        attribute: <span class="hljs-literal">true</span>
+    },</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-21">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-21">&#182;</a>
+              </div>
+              <p><strong>Boolean value</strong></p>
+
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-22">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-22">&#182;</a>
+              </div>
+              <p>The property <em>propAttBool</em> is linked to the attribute <em>prop-att-bool</em>.
+<em>propAttBool</em> and its attribute is initialized with the value <em>initial value</em>.</p>
+<p>When <em>propAttBool</em> is true, attribute is present into the DOM and have the value <em>“”</em>.
+When <em>propAttBool</em> is false, attribute is not present into the DOM.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>    propAttBool: {
+        value: <span class="hljs-literal">true</span>,
+        attribute: {
+            boolean: <span class="hljs-literal">true</span>
+        }
+    },</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-23">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-23">&#182;</a>
+              </div>
+              <p><strong>Linked to another attribute name</strong></p>
+
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-24">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-24">&#182;</a>
+              </div>
+              <p>The property <em>propAttBis</em> is linked to the attribute having the name <em>another-attribute-name</em>.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>    propAttBis: {
+        attribute: {
+            name: <span class="hljs-string">'another-attribute-name'</span>
+        }
+    },</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-25">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-25">&#182;</a>
+              </div>
+              <p><strong>Setter and getter</strong></p>
+
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-26">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-26">&#182;</a>
+              </div>
+              <p>Properties linked to attributes can have setters and getters too.
+However, their accessors are already defined by <em>ceb</em> to deal with the linked attributes.
+Their API are closed, but fundamentally different.</p>
+<p>Attribute’s setter and getter act as interceptors.
+They give a way to change the future attribute value or to change the read attribute value.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>    propAttAccessors: {
+        value: <span class="hljs-string">'initial value'</span>,
+        attribute: <span class="hljs-literal">true</span>,</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-27">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-27">&#182;</a>
+              </div>
+              <p>Attributes’ setter are called with the element instance and the set value.
+The returned value will be the attribute’s value.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>        setter: <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(el, value)</span> </span>{
+            <span class="hljs-keyword">return</span> value;
+        },</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-28">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-28">&#182;</a>
+              </div>
+              <p>Attributes’ getter are called with the element instance and the attribute’s value.
+The returned value will be the get value.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>        getter: <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(el, value)</span> </span>{
+            <span class="hljs-keyword">return</span> value;
+        }
+    }
+});</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-29">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-29">&#182;</a>
+              </div>
+              <h2 id="methods">Methods</h2>
+
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-30">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-30">&#182;</a>
+              </div>
+              <p>The builder’s method <strong>methods</strong> adds the given hash of methods to the structure.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>builder.methods({
+    sayHelloTo: <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(el, name)</span> </span>{</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-31">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-31">&#182;</a>
+              </div>
+              <p>The first argument of a method is the element instance.
+The following arguments are the invoked arguments.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>        <span class="hljs-keyword">return</span> <span class="hljs-string">'Hello '</span> + name + <span class="hljs-string">'! I am '</span> + el.tagName;
+    }
+});</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-32">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-32">&#182;</a>
+              </div>
+              <h2 id="interceptors">Interceptors</h2>
+
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-33">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-33">&#182;</a>
+              </div>
+              <p>Properties having accessors or properties linked to attributes can have interceptors.
+Interceptors can intercept write and read accesses of properties.
+They wrap the accessors, by this way they can process logic around the effective access.</p>
+
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-34">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-34">&#182;</a>
+              </div>
+              <p>Interceptors work only against structure’s properties.</p>
+<p>The property <em>propIntercepted</em> has accesors, so accesses can be intercetped.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>builder.properties({
+    propIntercepted: {
+        set: <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(el, value)</span> </span>{
+            el._propIntercepted = value;
+        },
+        get: <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(el)</span> </span>{
+            <span class="hljs-keyword">return</span> el._propIntercepted;
+        }
+    }
+});</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-35">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-35">&#182;</a>
+              </div>
+              <h3 id="write-callback">Write callback</h3>
+
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-36">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-36">&#182;</a>
+              </div>
+              <p>The function <em>interceptWrite</em> is a write access callback.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">interceptWrite</span><span class="hljs-params">(next, el, value)</span> </span>{</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-37">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-37">&#182;</a>
+              </div>
+              <p>The argument <em>value</em> is the value of the previous stacked callback.</p>
+
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-38">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-38">&#182;</a>
+              </div>
+              <p>There, logic can be done with the element instance and the given value.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>    <span class="hljs-keyword">var</span> processedValue = (value || <span class="hljs-string">''</span>).toUpperCase();</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-39">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-39">&#182;</a>
+              </div>
+              <p>The function <em>next</em> will call the next stacked callback.
+Its argument will be the <em>value</em> of the next stacked callback.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>    <span class="hljs-keyword">var</span> result = next(processedValue);</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-40">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-40">&#182;</a>
+              </div>
+              <p>There, logic can be done with the element instance and the returned value.
+Usually accessors set and so interceptors dedicated for writing don’t return values.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>    <span class="hljs-built_in">console</span>.log(el.tagName, <span class="hljs-string">'a property has been written'</span>);</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-41">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-41">&#182;</a>
+              </div>
+              <p><em>result</em> will be the returned value of the function <em>next</em> into the previous stacked callback.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>    <span class="hljs-keyword">return</span> result;
+}</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-42">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-42">&#182;</a>
+              </div>
+              <h3 id="read-callback">Read callback</h3>
+
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-43">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-43">&#182;</a>
+              </div>
+              <p>The function <em>interceptRead</em> is a read access callback.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">interceptRead</span><span class="hljs-params">(next, el, value)</span> </span>{</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-44">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-44">&#182;</a>
+              </div>
+              <p>The argument <em>value</em> is the value of the previous stacked callback.
+Usually accessors get and so interceptors dedicated for reading don’t have given value.</p>
+
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-45">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-45">&#182;</a>
+              </div>
+              <p>There, logic can be done with the element instance and the given value.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>    <span class="hljs-built_in">console</span>.log(el.tagName, <span class="hljs-string">'a property is going to be read'</span>);</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-46">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-46">&#182;</a>
+              </div>
+              <p>The function <em>next</em> will call the next stacked callback.
+Its argument will be the value of the next stacked callback.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>    <span class="hljs-keyword">var</span> result = next(value);</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-47">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-47">&#182;</a>
+              </div>
+              <p>There, logic can be done with the element instance and the returned value.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>    <span class="hljs-keyword">var</span> processedResult = (result || <span class="hljs-string">''</span>).toLowerCase();</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-48">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-48">&#182;</a>
+              </div>
+              <p><em>processedResult</em> will be the returned value of the function <em>next</em> into the previous stacked callback.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>    <span class="hljs-keyword">return</span> processedResult;
+}</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-49">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-49">&#182;</a>
+              </div>
+              <h3 id="intercept">Intercept</h3>
+
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-50">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-50">&#182;</a>
+              </div>
+              <p>The builder’s method <strong>intercept</strong> adds to the structure the given interceptors according to the intercepted property.</p>
+<p>The first argument of the method <em>intercept</em> is the property name.
+The second argument is the callback dedicated to the write access, it’s optional.
+The third argument is the callback dedicated to the read access, it’s optional.</p>
+
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-51">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-51">&#182;</a>
+              </div>
+              <p>The write accesses of the property <em>propIntercepted</em> will be intercepted by the callback <em>interceptWrite</em>.
+The read accesses of the property <em>propIntercepted</em> will be intercepted by the callback <em>interceptRead</em>.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>builder.intercept(<span class="hljs-string">'propIntercepted'</span>, interceptWrite, interceptRead);</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-52">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-52">&#182;</a>
+              </div>
+              <h2 id="wrappers">Wrappers</h2>
+
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-53">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-53">&#182;</a>
+              </div>
+              <p>Methods can have wrappers.
+Wrappers will wrap the method execution, by this way they can process logic around the effective execution.</p>
+
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-54">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-54">&#182;</a>
+              </div>
+              <p>Interceptors work only against structure’s methods.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>builder.methods({
+    methodWrapped: <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(el, firsname, lastname)</span> </span>{
+        <span class="hljs-keyword">return</span> <span class="hljs-string">'Hello '</span> + firsname + <span class="hljs-string">' '</span> + lastname + <span class="hljs-string">'!'</span>;
+    }
+});</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-55">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-55">&#182;</a>
+              </div>
+              <h3 id="callback">Callback</h3>
+
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-56">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-56">&#182;</a>
+              </div>
+              <p>The function <em>wrapper</em> is the wrapper callback.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">wrapper</span><span class="hljs-params">(next, el, firsname, lastname)</span> </span>{</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-57">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-57">&#182;</a>
+              </div>
+              <p>The first two arguments are always valuated, however the following are given according tothe method execution.</p>
+
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-58">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-58">&#182;</a>
+              </div>
+              <p>There, logic can be done with the element instance and the given arguments.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>    <span class="hljs-keyword">var</span> f = firsname || <span class="hljs-string">'anonymous'</span>;
+    <span class="hljs-keyword">var</span> l = lastname || <span class="hljs-string">''</span>;</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-59">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-59">&#182;</a>
+              </div>
+              <p>The function <em>next</em> will call the next stacked callback.</p>
+<p>When input arguments are not changed <em>next(arguments)</em> works well.
+Because arguments are changed, the arguments’ array have to created manually.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>    <span class="hljs-keyword">var</span> result = next(<span class="hljs-built_in">Array</span>.prototype.slice.call(<span class="hljs-built_in">arguments</span>).slice(<span class="hljs-number">0</span>, <span class="hljs-number">2</span>).concat([f, l]));</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-60">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-60">&#182;</a>
+              </div>
+              <p>There, logic can be done with the element instance and the returned value.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>    <span class="hljs-keyword">var</span> processedResult = <span class="hljs-string">'&lt;blink&gt;'</span> + result + <span class="hljs-string">'&lt;/blink&gt;'</span>;</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-61">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-61">&#182;</a>
+              </div>
+              <p><em>processedResult</em> will be the returned value of the function <em>next</em> into the previous stacked callback.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>    <span class="hljs-keyword">return</span> processedResult;
+}</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-62">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-62">&#182;</a>
+              </div>
+              <h3 id="wrap">Wrap</h3>
+
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-63">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-63">&#182;</a>
+              </div>
+              <p>The builder’s method <strong>wrap</strong> adds to the structure the given wrapper according to the wrapper method.</p>
+<p>The first argument of the method <em>wrap</em> is the method name.
+The second argument is the callback.</p>
+
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-64">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-64">&#182;</a>
+              </div>
+              <p>The execution of <em>methodWrapped</em> will be wrapped with the callback <em>wrapper</em>.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>builder.wrap(<span class="hljs-string">'methodWrapped'</span>, wrapper);</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-65">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-65">&#182;</a>
+              </div>
+              <h2 id="make-it-works">Make it works</h2>
+
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-66">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-66">&#182;</a>
+              </div>
+              <p>When the setup of the structure is done,
+the builder’s method <strong>register</strong> will register the corresponding custom element.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="hljs-keyword">var</span> DemoCustomElement = builder.register();</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-67">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-67">&#182;</a>
+              </div>
+              <p>The returned value is the JavaScript class of the registered custom element.
+It can be used as prototype of another one.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>ceb().name(<span class="hljs-string">'proto-demo-custom-element'</span>).prototype(<span class="hljs-built_in">Object</span>.create(DemoCustomElement.prototype));</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-68">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-68">&#182;</a>
+              </div>
+              <h2 id="reuse-a-structure">Reuse a structure</h2>
+
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-69">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-69">&#182;</a>
+              </div>
+              <p>The builder’s structure can be retrieved using the builder’s method <strong>get</strong>.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="hljs-keyword">var</span> aStructure = builder.get();</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-70">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-70">&#182;</a>
+              </div>
+              <p>The given structure can be used as based structure of a future builder.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>ceb({
+    struct: aStructure
+}).name(<span class="hljs-string">'based-custom-element'</span>).register();</pre></div></div>
+            
+        </li>
+        
+    </ul>
+  </div>
+</body>
+</html>

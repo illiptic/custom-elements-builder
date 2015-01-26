@@ -1,0 +1,34 @@
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Custom Element Builder - Mocha Tests</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/mocha/2.1.0/mocha.css" />
+
+</head>
+
+<body>
+
+    <div id="mocha"></div>
+
+    <!-- testing -->
+    <script src="//cdnjs.cloudflare.com/ajax/libs/chai/1.10.0/chai.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/mocha/2.1.0/mocha.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/sinon.js/1.7.3/sinon-min.js"></script>
+
+    <script>
+        window.expect = chai.expect;
+        mocha.setup('bdd');
+    </script>
+
+    <script src="https://raw.githubusercontent.com/tmorin/custom-element-builder/master/dist/ceb.shims.min.js"></script>
+    <script src="ceb.spec.js"></script>
+
+    <script>
+        mocha.globals([]);
+        mocha.run();
+    </script>
+</body>
+
+</html>
