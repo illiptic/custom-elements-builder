@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <title>doc.1.usage.js</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, target-densitydpi=160dpi, initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
+  <link rel="stylesheet" media="all" href="docco.css" />
+</head>
+<body>
+  <div id="container">
+    <div id="background"></div>
+    
+      <ul id="jump_to">
+        <li>
+          <a class="large" href="javascript:void(0);">Jump To &hellip;</a>
+          <a class="small" href="javascript:void(0);">+</a>
+          <div id="jump_wrapper">
+          <div id="jump_page">
+            
+              
+              <a class="source" href="doc.1.usage.html">
+                doc.1.usage.js
+              </a>
+            
+              
+              <a class="source" href="doc.2.inheritance.html">
+                doc.2.inheritance.js
+              </a>
+            
+              
+              <a class="source" href="doc.3.properties.html">
+                doc.3.properties.js
+              </a>
+            
+              
+              <a class="source" href="doc.4.interceptors.html">
+                doc.4.interceptors.js
+              </a>
+            
+              
+              <a class="source" href="doc.5.methods.html">
+                doc.5.methods.js
+              </a>
+            
+              
+              <a class="source" href="doc.6.wrappers.html">
+                doc.6.wrappers.js
+              </a>
+            
+              
+              <a class="source" href="doc.7.listeners.html">
+                doc.7.listeners.js
+              </a>
+            
+              
+              <a class="source" href="doc.8.features.html">
+                doc.8.features.js
+              </a>
+            
+              
+              <a class="source" href="index.html">
+                index.js
+              </a>
+            
+          </div>
+        </li>
+      </ul>
+    
+    <ul class="sections">
+        
+          <li id="title">
+              <div class="annotation">
+                  <h1>doc.1.usage.js</h1>
+              </div>
+          </li>
+        
+        
+        
+        <li id="section-1">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-1">&#182;</a>
+              </div>
+              <hr>
+<h2 id="get-a-builder">Get a builder</h2>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="hljs-pi">'use strict'</span>;</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-2">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-2">&#182;</a>
+              </div>
+              <p>The builder’s method <strong>name</strong>, taking the name of the future custom element’s name, returned a builder.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="hljs-keyword">var</span> builder = ceb().name(<span class="hljs-string">'demo-custom-element'</span>);</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-3">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-3">&#182;</a>
+              </div>
+              <p>A builder provides several methods helping to defined the structure of a custom element.
+A structure is composed of the following elements:</p>
+<ul>
+<li>extends and prototype values</li>
+<li>properties</li>
+<li>methods</li>
+<li>interceptors catching the set and get of properties</li>
+<li>wrappers wrapping the call of methods</li>
+<li>features enhancing the structure with reusable logic</li>
+</ul>
+
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-4">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-4">&#182;</a>
+              </div>
+              <hr>
+<h2 id="add-stuff-to-the-structure">Add stuff to the structure</h2>
+
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-5">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-5">&#182;</a>
+              </div>
+              <p><a href="doc.2.inheritance.html">Set extends and prototype values</a></p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>builder.extends( <span class="hljs-comment">/* the tag to extend*/</span> ).prototype( <span class="hljs-comment">/* the prototype to inherit */</span> );</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-6">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-6">&#182;</a>
+              </div>
+              <p><a href="doc.3.properties.html">Add properties</a></p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>builder.properties( <span class="hljs-comment">/* a hash of properties */</span> );</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-7">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-7">&#182;</a>
+              </div>
+              <p><a href="doc.4.interceptors.html">Add interceptors</a></p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>builder.intercept(
+    <span class="hljs-comment">/* the property's name */</span>
+    ,
+    <span class="hljs-comment">/* [the write callback] */</span>
+    ,
+    <span class="hljs-comment">/* [the read callback] */</span>
+    ,
+    <span class="hljs-comment">/* [the level] */</span>
+);</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-8">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-8">&#182;</a>
+              </div>
+              <p><a href="doc.5.methods.html">Add methods</a></p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>builder.methods( <span class="hljs-comment">/* a hash of methods */</span> );</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-9">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-9">&#182;</a>
+              </div>
+              <p><a href="doc.6.wrappers.html">Add wrappers</a></p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>builder.wrap(
+    <span class="hljs-comment">/* the method's name */</span>
+    ,
+    <span class="hljs-comment">/* the callback */</span>
+    ,
+    <span class="hljs-comment">/* [the level] */</span>
+);</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-10">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-10">&#182;</a>
+              </div>
+              <p><a href="doc.7.listeners.html">Add listeners</a></p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>builder.listen(
+    <span class="hljs-comment">/* a mix of html selector and event's name */</span>
+    ,
+    <span class="hljs-comment">/* the callback */</span>
+);</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-11">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-11">&#182;</a>
+              </div>
+              <p><a href="doc.8.features.html">Add features</a></p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>builder.feature(
+    <span class="hljs-comment">/* the feature's function */</span>
+    ,
+    <span class="hljs-comment">/* [the feature's options] */</span>
+    ,
+    <span class="hljs-comment">/* [the level] */</span>
+);</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-12">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-12">&#182;</a>
+              </div>
+              <hr>
+<h2 id="make-it-works">Make it works</h2>
+
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-13">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-13">&#182;</a>
+              </div>
+              <p>When the setup of the structure is done,
+the builder’s method <strong>register</strong> will register the corresponding custom element.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="hljs-keyword">var</span> DemoCustomElement = builder.register();</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-14">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-14">&#182;</a>
+              </div>
+              <p>The returned value is the JavaScript class of the registered custom element.
+It can be used as prototype of another one.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>ceb().name(<span class="hljs-string">'proto-demo-custom-element'</span>).prototype(<span class="hljs-built_in">Object</span>.create(DemoCustomElement.prototype));</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-15">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-15">&#182;</a>
+              </div>
+              <hr>
+<h2 id="make-it-alive">Make it alive</h2>
+
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-16">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-16">&#182;</a>
+              </div>
+              <p><em>demo-custom-element</em> is available from JavaScript as another HTML element.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="hljs-keyword">var</span> aDemoCustomElementFromJs = <span class="hljs-built_in">document</span>.createElement(<span class="hljs-string">'demo-custom-element'</span>);
+<span class="hljs-built_in">document</span>.body.appendChild(aDemoCustomElementFromJs);</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-17">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-17">&#182;</a>
+              </div>
+              <p><em>demo-custom-element</em> is available from HTML as another HTML element.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="hljs-built_in">document</span>.body.innerHTML = <span class="hljs-string">'&lt;demo-custom-element&gt;&lt;/demo-custom-element&gt;'</span>;
+aDemoCustomElementFromHTML = <span class="hljs-built_in">document</span>.body.querySelector(<span class="hljs-string">'demo-custom-element'</span>);</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-18">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-18">&#182;</a>
+              </div>
+              <p>In both cases aDemoCustomElementFromJs and aDemoCustomElementFromHTML are HTML elements.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>assert(aDemoCustomElementFromJs.nodeType === aDemoCustomElementFromHTML.nodeType === HTMLElement.ELEMENT_NODE);</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-19">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-19">&#182;</a>
+              </div>
+              <hr>
+<h2 id="reuse-a-structure">Reuse a structure</h2>
+
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-20">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-20">&#182;</a>
+              </div>
+              <p>The builder’s structure can be retrieved using the builder’s method <strong>get</strong>.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="hljs-keyword">var</span> aStructure = builder.get();</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-21">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-21">&#182;</a>
+              </div>
+              <p>An existing structure can be used as based structure of a future builder.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>ceb({
+    struct: aStructure
+}).name(<span class="hljs-string">'based-custom-element'</span>).register();</pre></div></div>
+            
+        </li>
+        
+    </ul>
+  </div>
+</body>
+</html>

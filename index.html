@@ -19,8 +19,43 @@
           <div id="jump_page">
             
               
-              <a class="source" href="doc.html">
-                doc.js
+              <a class="source" href="doc.1.usage.html">
+                doc.1.usage.js
+              </a>
+            
+              
+              <a class="source" href="doc.2.inheritance.html">
+                doc.2.inheritance.js
+              </a>
+            
+              
+              <a class="source" href="doc.3.properties.html">
+                doc.3.properties.js
+              </a>
+            
+              
+              <a class="source" href="doc.4.interceptors.html">
+                doc.4.interceptors.js
+              </a>
+            
+              
+              <a class="source" href="doc.5.methods.html">
+                doc.5.methods.js
+              </a>
+            
+              
+              <a class="source" href="doc.6.wrappers.html">
+                doc.6.wrappers.js
+              </a>
+            
+              
+              <a class="source" href="doc.7.listeners.html">
+                doc.7.listeners.js
+              </a>
+            
+              
+              <a class="source" href="doc.8.features.html">
+                doc.8.features.js
               </a>
             
               
@@ -48,33 +83,42 @@
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-1">&#182;</a>
               </div>
-              <p>ceb is a builder to help the development of Custom Elements.</p>
-<p>The project is hosted on <a href="https://github.com/tmorin/custom-element-builder">Github</a>.
-Every use cases implemented are tested and validated from theses <a href="./specs">specs</a></p>
-<p>ceb is continuously tested on <a href="https://travis-ci.org/tmorin/custom-element-builder">Travis</a>.
-The test suite is automatically executed on several devices using <a href="https://saucelabs.com/u/customelementbuilder">Sauce Labs</a>.
-The code coverage can be found on <a href="https://coveralls.io/r/tmorin/custom-element-builder">coveralls</a>.</p>
-<p>Documentation can be found <a href="doc.html">there</a>.</p>
-<p>To execute ceb into none evergreen browsers, you should need of:</p>
+              <p><strong>ceb</strong> is a builder to help the development of Custom Elements.</p>
 <ul>
-<li>Obviously <a href="http://www.w3.org/TR/custom-elements/">Custom Elements</a><ul>
+<li>The project is hosted on <a href="https://github.com/tmorin/custom-element-builder">Github</a></li>
+<li>Read the <a href="doc.1.usage.html">documentation</a> for more details</li>
+<li>Every use cases are tested and validated from this <a href="./testsuite">test suite</a></li>
+<li>The source code is continuously built on <a href="https://travis-ci.org/tmorin/custom-element-builder">Travis</a></li>
+<li>The test suite is automatically executed using <a href="https://saucelabs.com/u/customelementbuilder">Sauce Labs</a></li>
+<li>The code coverage report is pushed to <a href="https://coveralls.io/r/tmorin/custom-element-builder">coveralls</a></li>
+</ul>
+<hr>
+<h2 id="compatibilities">Compatibilities</h2>
+<p><a href="https://saucelabs.com/u/customelementbuilder"><img src="https://saucelabs.com/browser-matrix/customelementbuilder.svg" alt="Sauce Test Status"></a></p>
+<p><strong>ceb</strong> should and will work without dependencies on evergreen browsers.
+To execute it with none evergreen browsers, you should need of:</p>
+<ul>
+<li>Obviously <a href="http://www.w3.org/TR/custom-elements/">Custom Elements</a> polyfill<ul>
 <li>webcomponents-lite.js from <a href="http://webcomponents.org/polyfills/">webcomponents.org</a></li>
 <li>or <a href="https://github.com/WebReflection/document-register-element">document-register-element</a></li>
 </ul>
 </li>
 <li>ES5 and some features from ES6 <a href="https://github.com/paulmillr/es6-shim">es6-shim</a></li>
 </ul>
+<hr>
+<h2 id="downloads">Downloads</h2>
 <p>Distributed files can be found <a href="https://github.com/tmorin/custom-element-builder/tree/master/dist">there</a></p>
 <ul>
-<li><a href="https://raw.githubusercontent.com/tmorin/custom-element-builder/master/dist/ceb.min.js">ceb.min.js</a><ul>
-<li>minificated source code</li>
+<li><a href="https://raw.githubusercontent.com/tmorin/custom-element-builder/master/dist/ceb.min.js">ceb.min.js</a> <em>minified</em></li>
+<li><a href="https://raw.githubusercontent.com/tmorin/custom-element-builder/master/dist/ceb.legacy.min.js">ceb.legacy.min.js</a> <em>shims, minified</em></li>
 </ul>
-</li>
-<li><a href="https://raw.githubusercontent.com/tmorin/custom-element-builder/master/dist/ceb.shims.min.js">ceb.shims.min.js</a><ul>
-<li>required Custom Elements polyfill and ES6 shims</li>
-<li>minificated source code</li>
-</ul>
-</li>
+<hr>
+<h2 id="installation">Installation</h2>
+<ul>
+<li>npm: <code>npm install ceb —save</code></li>
+<li>bower: <code>npm bower ceb —save</code></li>
+<li>component <code>component install tmorin/custom-element-builder</code></li>
+<li>amd <code>require([‘ceb’, …</code></li>
 </ul>
 
             </div>
@@ -89,7 +133,7 @@ builder.properties({
     }
 }).methods({
     sayHelloTo: <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(el, n)</span> </span>{
-        <span class="hljs-keyword">return</span> el.name + <span class="hljs-string">' say hello to '</span>+ n + <span class="hljs-string">'!'</span>;
+        <span class="hljs-keyword">return</span> el.name + <span class="hljs-string">' say hello to '</span> + n + <span class="hljs-string">'!'</span>;
     }
 });
 

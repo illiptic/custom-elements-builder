@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <title>doc.8.features.js</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, target-densitydpi=160dpi, initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
+  <link rel="stylesheet" media="all" href="docco.css" />
+</head>
+<body>
+  <div id="container">
+    <div id="background"></div>
+    
+      <ul id="jump_to">
+        <li>
+          <a class="large" href="javascript:void(0);">Jump To &hellip;</a>
+          <a class="small" href="javascript:void(0);">+</a>
+          <div id="jump_wrapper">
+          <div id="jump_page">
+            
+              
+              <a class="source" href="doc.1.usage.html">
+                doc.1.usage.js
+              </a>
+            
+              
+              <a class="source" href="doc.2.inheritance.html">
+                doc.2.inheritance.js
+              </a>
+            
+              
+              <a class="source" href="doc.3.properties.html">
+                doc.3.properties.js
+              </a>
+            
+              
+              <a class="source" href="doc.4.interceptors.html">
+                doc.4.interceptors.js
+              </a>
+            
+              
+              <a class="source" href="doc.5.methods.html">
+                doc.5.methods.js
+              </a>
+            
+              
+              <a class="source" href="doc.6.wrappers.html">
+                doc.6.wrappers.js
+              </a>
+            
+              
+              <a class="source" href="doc.7.listeners.html">
+                doc.7.listeners.js
+              </a>
+            
+              
+              <a class="source" href="doc.8.features.html">
+                doc.8.features.js
+              </a>
+            
+              
+              <a class="source" href="index.html">
+                index.js
+              </a>
+            
+          </div>
+        </li>
+      </ul>
+    
+    <ul class="sections">
+        
+          <li id="title">
+              <div class="annotation">
+                  <h1>doc.8.features.js</h1>
+              </div>
+          </li>
+        
+        
+        
+        <li id="section-1">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-1">&#182;</a>
+              </div>
+              <p>Get a builder.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="hljs-pi">'use strict'</span>;
+<span class="hljs-keyword">var</span> builder = ceb().name(<span class="hljs-string">'featured-tag'</span>);</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-2">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-2">&#182;</a>
+              </div>
+              <h2 id="the-needs">The needs</h2>
+
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-3">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-3">&#182;</a>
+              </div>
+              <p>Custom Elements are, at the end, objects.
+So, they can inherit from another element (i.e. [Extends and prototype]),
+This relation is vertical and one element can only inherit from another one.</p>
+
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-4">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-4">&#182;</a>
+              </div>
+              <p>Due to the dynamic part of JavaScript, the <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/assign">mixin way</a> can be used to share functionalities.
+This new relation is horizontal and allows one object to be enhanced with others.
+However, this merging process overrides the properties and methods of the initial object.</p>
+
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-5">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-5">&#182;</a>
+              </div>
+              <p>The <em>interceptors</em> and <em>wrappers</em> provided by <strong>ceb</strong> resolve the side effect of overriding.
+They act as an horizontal relations keeping alive the originals properties and methods.</p>
+
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-6">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-6">&#182;</a>
+              </div>
+              <p>The features are containers of functionalities.
+They provide to custom elements where they are applied their functionalities.</p>
+
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-7">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-7">&#182;</a>
+              </div>
+              <h2 id="features">Features</h2>
+
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-8">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-8">&#182;</a>
+              </div>
+              <p>A feature is a simple function taking only one argument: the element instance.
+This function is, for a custom element, the public API of the feature.</p>
+
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-9">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-9">&#182;</a>
+              </div>
+              <p>However, a function <em>setup</em> can be attached to the feature’s function.
+It will be called by <strong>ceb</strong> before the full process of the structure.
+That’s mean the function <em>setup</em> can have access to the whole structure of future custom element.
+Moreover, a builder is given to this function, allowing feature to adds stuff to the structure.</p>
+
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-10">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-10">&#182;</a>
+              </div>
+              <p>The following feature will handle a placeholder.
+The placeholder will be displayed according to the attributes placeholder-value and placeholder-target.
+By default the target is the element instance.</p>
+
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-11">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-11">&#182;</a>
+              </div>
+              <p>There is no public API provided by the feature’s function.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">placeholderFeature</span><span class="hljs-params">()</span> </span>{}</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-12">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-12">&#182;</a>
+              </div>
+              <p>The setup function is called with three arguments</p>
+<ul>
+<li>struct: the current structure</li>
+<li>featureBuilder: a builder based on the current structure</li>
+<li>options: the options given when the feature has been added to the structure</li>
+</ul>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>placeholderFeature.setup = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(struct, featureBuilder, options)</span> </span>{</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-13">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-13">&#182;</a>
+              </div>
+              <p>Check from the options if the native placeholder should be used.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>    <span class="hljs-keyword">var</span> native = options.hasOwnProperty(<span class="hljs-string">'native'</span>) ? options.native : <span class="hljs-literal">false</span>;</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-14">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-14">&#182;</a>
+              </div>
+              <p>This function is an interceptor.
+The goal of this interceptor is to update the UI according to the value set.
+That’s means, just after the write of the value, the UI must be updated.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>    <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">writeInterceptor</span><span class="hljs-params">(next, el, value)</span> </span>{</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-15">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-15">&#182;</a>
+              </div>
+              <p>call the original set accessor in order to update the DOM’s attributes.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>        <span class="hljs-keyword">var</span> result = next(value);</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-16">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-16">&#182;</a>
+              </div>
+              <p>There, the DOM attribute has been written,
+so <code>el.placeholderValue === value</code>
+or <code>el.placeholderTarget === value</code></p>
+
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-17">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-17">&#182;</a>
+              </div>
+              <p>Detect the target according to the value of placeholderTarget.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>        <span class="hljs-keyword">var</span> target = el.placeholderTarget ? el.querySelector(el.placeholderTarget) : el;
+
+        <span class="hljs-keyword">if</span> (native) {</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-18">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-18">&#182;</a>
+              </div>
+              <p>The previous target is cleaned, because the target can change at any time.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>            <span class="hljs-keyword">if</span> (el.__placeholderTarget &amp;&amp; el.__placeholderTarget.hasAttribute(<span class="hljs-string">'placeholder'</span>)) {
+                el.__placeholderTarget.removeAttribute(<span class="hljs-string">'placeholder'</span>);
+                <span class="hljs-keyword">delete</span> el.__placeholderTarget;
+            }</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-19">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-19">&#182;</a>
+              </div>
+              <p>Display the placeholder using the native attribute,
+and keep a reference of the DOM node which will be cleaned.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>            <span class="hljs-keyword">if</span> (el.placeholderValue) {
+                target.setAttribute(<span class="hljs-string">'placeholder'</span>, el.placeholderValue);
+                el.__placeholderTarget = target;
+            }
+
+        } <span class="hljs-keyword">else</span> {</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-20">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-20">&#182;</a>
+              </div>
+              <p>The previous jquery’s plugin is destroyed, because the target can change at any time.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>            <span class="hljs-keyword">if</span> (el.__$placeholderTarget) {
+                el.__$placeholderTarget.placeholder(<span class="hljs-string">'destroy'</span>);
+                <span class="hljs-keyword">delete</span> el.__$placeholderTarget;
+            }</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-21">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-21">&#182;</a>
+              </div>
+              <p>Display the placeholder using a dedicated jquery plugin,
+and keep a reference of jquery instance in order to destroy it.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>            <span class="hljs-keyword">if</span> (el.placeholderValue) {
+                el.__$placeholderTarget = <span class="hljs-built_in">window</span>.$(target).placeholder({
+                    value: el.placeholderValue
+                });
+            }
+
+        }
+
+        <span class="hljs-keyword">return</span> result;
+    }</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-22">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-22">&#182;</a>
+              </div>
+              <p>Defined the two properties of the features.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>    featureBuilder.properties({
+        placeholderValue: {
+            attribute: <span class="hljs-literal">true</span>
+        },
+        placeholderTarget: {
+            attribute: <span class="hljs-literal">true</span>
+        }
+    });</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-23">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-23">&#182;</a>
+              </div>
+              <p>Intercept the property placeholderValue and placeholderTarget to update the UI on the fly.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>    featureBuilder.intercept(<span class="hljs-string">'placeholderValue'</span>, writeInterceptor).intercept(<span class="hljs-string">'placeholderTarget'</span>, writeInterceptor);</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-24">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-24">&#182;</a>
+              </div>
+              <p>When the element is detached, the jquery plugin must be destroy to avoid memory leak.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>    featureBuilder.wrap(<span class="hljs-string">'detachedCallback'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(next, el)</span> </span>{
+        <span class="hljs-keyword">if</span> (el.__$placeholderTarget) {
+            el.__$placeholderTarget.placeholder(<span class="hljs-string">'destroy'</span>);
+            <span class="hljs-keyword">delete</span> el.__$placeholderTarget;
+        }
+        next(<span class="hljs-built_in">arguments</span>);
+    });</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-25">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-25">&#182;</a>
+              </div>
+              <p>So, when the element is attached, the jquery plugin must be created if the element has just been cloned.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>    featureBuilder.wrap(<span class="hljs-string">'attachedCallback'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(next, el)</span> </span>{
+        next(<span class="hljs-built_in">arguments</span>);
+        <span class="hljs-keyword">var</span> target = el.placeholderTarget ? el.querySelector(el.placeholderTarget) : el;
+        <span class="hljs-keyword">if</span> (!native &amp;&amp; el.placeholderValue) {
+            el.__$placeholderTarget = <span class="hljs-built_in">window</span>.$(target).placeholder({
+                value: el.placeholderValue
+            });
+        }
+    });
+
+};</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-26">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-26">&#182;</a>
+              </div>
+              <p>The builder’s method feature adds the given feature to the structure.
+The first argument is the feature’s function.
+The second argument is the feature’s options.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>builder.feature(placeholderFeature, {
+    native: <span class="hljs-literal">true</span>
+});</pre></div></div>
+            
+        </li>
+        
+    </ul>
+  </div>
+</body>
+</html>
