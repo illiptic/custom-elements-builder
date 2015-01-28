@@ -1,0 +1,1990 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <title>ceb.js</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, target-densitydpi=160dpi, initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
+  <link rel="stylesheet" media="all" href="docco.css" />
+</head>
+<body>
+
+
+
+  <div id="container">
+    <div id="background"></div>
+
+    
+      <ul id="jump_to">
+        <li>
+          <a class="large" href="javascript:void(0);">Jump To &hellip;</a>
+          <a class="small" href="javascript:void(0);">+</a>
+          <div id="jump_wrapper">
+          <div id="jump_page">
+            
+              
+              <a class="source" href="index.html">
+                index
+              </a>
+            
+              
+              <a class="source" href="doc.1.usage.html">
+                doc - usage
+              </a>
+            
+              
+              <a class="source" href="doc.2.inheritance.html">
+                doc - inheritance
+              </a>
+            
+              
+              <a class="source" href="doc.3.properties.html">
+                doc - properties
+              </a>
+            
+              
+              <a class="source" href="doc.4.interceptors.html">
+                doc - interceptors
+              </a>
+            
+              
+              <a class="source" href="doc.5.methods.html">
+                doc - methods
+              </a>
+            
+              
+              <a class="source" href="doc.6.wrappers.html">
+                doc - wrappers
+              </a>
+            
+              
+              <a class="source" href="doc.7.listeners.html">
+                doc - listeners
+              </a>
+            
+              
+              <a class="source" href="doc.8.features.html">
+                doc - features
+              </a>
+            
+              
+              <a class="source" href="ceb.html">
+                source - ceb.js
+              </a>
+            
+          </div>
+        </li>
+      </ul>
+    
+    <ul class="sections">
+        
+        
+        
+        <li id="section-1">
+            <div class="annotation">
+              
+              <div class="pilwrap for-h1">
+                <a class="pilcrow" href="#section-1">&#182;</a>
+              </div>
+              <h1 id="ceb-js">ceb.js</h1>
+<pre><code>Custom Elements Builder
+http:<span class="hljs-comment">//tmorin.github.io/custom-element-builder</span>
+ceb may be freely distributed under the MIT license.
+</code></pre>
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>(<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(g, factory)</span> </span>{
+<span class="hljs-pi">    'use strict'</span>;</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-2">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-2">&#182;</a>
+              </div>
+              <p>Export the <strong>ceb</strong> function according the detected loader.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>
+    <span class="hljs-comment">/* istanbul ignore next */</span>
+    <span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span> exports === <span class="hljs-string">'object'</span>) {
+        <span class="hljs-built_in">module</span>.exports = factory();
+    } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span> define === <span class="hljs-string">'function'</span> &amp;&amp; define.amd) {
+        define(<span class="hljs-string">'ceb'</span>, [], factory);
+    } <span class="hljs-keyword">else</span> {
+        g.ceb = factory();
+    }
+
+}(<span class="hljs-keyword">this</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">()</span> </span>{
+<span class="hljs-pi">    'use strict'</span>;</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-3">
+            <div class="annotation">
+              
+              <div class="pilwrap for-h2">
+                <a class="pilcrow" href="#section-3">&#182;</a>
+              </div>
+              <h2 id="tools">Tools</h2>
+
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-4">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-4">&#182;</a>
+              </div>
+              <p>Return a new empty function.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>    <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">emptyFn</span><span class="hljs-params">()</span> </span>{
+        <span class="hljs-keyword">return</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">()</span> </span>{};
+    }</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-5">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-5">&#182;</a>
+              </div>
+              <p>List the values of an object.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>    <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">listValues</span><span class="hljs-params">(o)</span> </span>{
+        <span class="hljs-keyword">return</span> <span class="hljs-built_in">Object</span>.getOwnPropertyNames(o).map(<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(propName)</span> </span>{
+            <span class="hljs-keyword">return</span> o[propName];
+        });
+    }</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-6">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-6">&#182;</a>
+              </div>
+              <p>Transform property notation to attribute notation.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>    <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">fromCamelCaseToHyphenCase</span><span class="hljs-params">(value)</span> </span>{
+        <span class="hljs-keyword">return</span> value.split(<span class="hljs-regexp">/(?=[A-Z])/</span>).map(<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(part)</span> </span>{
+            <span class="hljs-keyword">return</span> part.charAt(<span class="hljs-number">0</span>).toLowerCase() + part.slice(<span class="hljs-number">1</span>);
+        }).join(<span class="hljs-string">'-'</span>);
+    }</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-7">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-7">&#182;</a>
+              </div>
+              <p>Compare object according to their levels.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>    <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">compareLevels</span><span class="hljs-params">(a, b)</span> </span>{
+        <span class="hljs-keyword">return</span> a.level - b.level;
+    }</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-8">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-8">&#182;</a>
+              </div>
+              <p>Apply an attribute value to an element.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>    <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">applyAttributeValue</span><span class="hljs-params">(el, attName, value, isBoolean)</span> </span>{
+        <span class="hljs-keyword">if</span> (isBoolean) {</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-9">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-9">&#182;</a>
+              </div>
+              <p>Handle boolean value</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>            <span class="hljs-keyword">if</span> (value &amp;&amp; !el.hasAttribute(attName)) {</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-10">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-10">&#182;</a>
+              </div>
+              <p>Set attribute only if the attribute is not preset</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>                el.setAttribute(attName, <span class="hljs-string">''</span>);
+            } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (!value &amp;&amp; el.hasAttribute(attName)) {</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-11">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-11">&#182;</a>
+              </div>
+              <p>The value is false so the attribute must be removed</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>                el.removeAttribute(attName);
+            }
+        } <span class="hljs-keyword">else</span> {</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-12">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-12">&#182;</a>
+              </div>
+              <p>Handle none boolean value</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>            <span class="hljs-keyword">if</span> ((value === <span class="hljs-literal">null</span> || value === <span class="hljs-literal">undefined</span>) &amp;&amp; el.hasAttribute(attName)) {</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-13">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-13">&#182;</a>
+              </div>
+              <p>There is no value, so the attribute must be removed</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>                el.removeAttribute(attName);
+            } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> ((value !== <span class="hljs-literal">null</span> &amp;&amp; value !== <span class="hljs-literal">undefined</span>) &amp;&amp; el.getAttribute(attName) !== value) {</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-14">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-14">&#182;</a>
+              </div>
+              <p>Sync the attribute value with value</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>                el.setAttribute(attName, value);
+            }
+        }
+    }</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-15">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-15">&#182;</a>
+              </div>
+              <p>Create an accessor function in order to wrap the original accessor with its accessors.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>    <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">accessorFactory</span><span class="hljs-params">(wrappers, wrapped)</span> </span>{</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-16">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-16">&#182;</a>
+              </div>
+              <p>Order the stack of wrappers</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>        <span class="hljs-keyword">var</span> stack = wrappers.sort(compareLevels);
+        <span class="hljs-keyword">return</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">accessor</span><span class="hljs-params">()</span> </span>{
+            <span class="hljs-keyword">var</span> el = <span class="hljs-keyword">this</span>;</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-17">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-17">&#182;</a>
+              </div>
+              <p>The first function of the stack is called,
+calling the next function when its argument function next is called.
+The original accessor is the last call.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>            <span class="hljs-keyword">return</span> stack.reduce(<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(previous, current)</span> </span>{
+                <span class="hljs-keyword">return</span> current.bind(el, previous, el);
+            }, wrapped.bind(el, el)).apply(el, <span class="hljs-built_in">arguments</span>);
+        };
+    }</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-18">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-18">&#182;</a>
+              </div>
+              <p>Create the accessor set for a property linked to an attribute</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>    <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">attributeAccessorSetFactory</span><span class="hljs-params">(attName, setter, isBoolean)</span> </span>{
+        <span class="hljs-keyword">return</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">attributeAccessorSet</span><span class="hljs-params">(el, value)</span> </span>{</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-19">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-19">&#182;</a>
+              </div>
+              <p>By default, the attribute value is the set value.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>            <span class="hljs-keyword">var</span> attValue = value;
+            <span class="hljs-keyword">if</span> (setter) {</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-20">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-20">&#182;</a>
+              </div>
+              <p>The default value can be overridden by a given setter.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>                attValue = setter.call(el, el, value);
+            }</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-21">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-21">&#182;</a>
+              </div>
+              <p>Finally apply the attribute to the linked attribute.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>            applyAttributeValue(el, attName, attValue, isBoolean);
+        };
+    }</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-22">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-22">&#182;</a>
+              </div>
+              <p>Create the accessor get for a property linked to an attribute</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>    <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">attributeAccessorGetFactory</span><span class="hljs-params">(attName, getter, isBoolean)</span> </span>{
+        <span class="hljs-keyword">return</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">attributeAccessorGet</span><span class="hljs-params">(el)</span> </span>{</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-23">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-23">&#182;</a>
+              </div>
+              <p>By default, the returned value is the attribute value.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>            <span class="hljs-keyword">var</span> value = isBoolean ? el.hasAttribute(attName) : el.getAttribute(attName);
+            <span class="hljs-keyword">if</span> (getter) {</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-24">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-24">&#182;</a>
+              </div>
+              <p>The returned value can be overridden by a given getter.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>                value = getter.call(el, el, value);
+            }</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-25">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-25">&#182;</a>
+              </div>
+              <p>Finally the value is returned</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>            <span class="hljs-keyword">return</span> value;
+        };
+    }</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-26">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-26">&#182;</a>
+              </div>
+              <p>Create an element’s method</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>    <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">methodFactory</span><span class="hljs-params">(wrappers, wrapped)</span> </span>{</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-27">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-27">&#182;</a>
+              </div>
+              <p>Order the stack of wrappers</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>        <span class="hljs-keyword">var</span> stack = wrappers.sort(compareLevels);
+        <span class="hljs-keyword">return</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">()</span> </span>{
+            <span class="hljs-keyword">var</span> el = <span class="hljs-keyword">this</span>;</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-28">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-28">&#182;</a>
+              </div>
+              <p>The first function of the stack is called, calling the next function when its argument function next is called.
+The original method is the last call.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>            <span class="hljs-keyword">return</span> stack.reduce(<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(previous, current)</span> </span>{
+                <span class="hljs-keyword">return</span> current.bind(el, <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">next</span><span class="hljs-params">(args)</span> </span>{
+                    <span class="hljs-keyword">return</span> previous.apply(el, <span class="hljs-built_in">Array</span>.prototype.slice.call(args).slice(<span class="hljs-number">2</span>, args.length));
+                }, el);
+            }, wrapped.bind(el, el)).apply(el, <span class="hljs-built_in">arguments</span>);
+        };
+    }</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-29">
+            <div class="annotation">
+              
+              <div class="pilwrap for-h2">
+                <a class="pilcrow" href="#section-29">&#182;</a>
+              </div>
+              <h2 id="life-cycle">Life cycle</h2>
+
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-30">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-30">&#182;</a>
+              </div>
+              <p>Sanitize a structure to avoid the errors <code>?? not defined</code></p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>    <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">sanitizeStructure</span><span class="hljs-params">(struct)</span> </span>{
+        struct.prototype = struct.prototype || <span class="hljs-built_in">Object</span>.create(HTMLElement.prototype);
+        struct.features = struct.features || [];
+        struct.interceptors = struct.interceptors || [];
+        struct.wrappers = struct.wrappers || [];
+        struct.listeners = struct.listeners || [];
+        struct.properties = struct.properties || {};
+        struct.methods = <span class="hljs-built_in">Object</span>.assign({
+            createdCallback: emptyFn(),
+            attachedCallback: emptyFn(),
+            detachedCallback: emptyFn(),
+            attributeChangedCallback: emptyFn()
+        }, struct.methods);
+        <span class="hljs-keyword">return</span> struct;
+    }</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-31">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-31">&#182;</a>
+              </div>
+              <p>Call the setup’s method of features.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>    <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">setupFeatures</span><span class="hljs-params">(struct)</span> </span>{</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-32">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-32">&#182;</a>
+              </div>
+              <p>Create a builder from the current structure.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>        <span class="hljs-keyword">var</span> b = builder(struct.tagName, {
+            struct: struct,
+            registered: <span class="hljs-literal">true</span>
+        });</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-33">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-33">&#182;</a>
+              </div>
+              <p>Call setup functions according their features’s levels.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>        struct.features.sort(compareLevels).forEach(<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(feature)</span> </span>{
+            <span class="hljs-keyword">if</span> (feature.fn &amp;&amp; feature.fn.setup) {
+                feature.fn.setup(struct, b, feature.options);
+            }
+        });
+    }</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-34">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-34">&#182;</a>
+              </div>
+              <p>Create an hash of attributes from the structure’s properties.
+The hash of attributes is used to keep in sync properties’ values and attributes’ values.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>    <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">createAttributesHash</span><span class="hljs-params">(struct)</span> </span>{
+        <span class="hljs-keyword">return</span> listValues(struct.properties).filter(<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(property)</span> </span>{
+            <span class="hljs-keyword">return</span> property.attName;
+        }).reduce(<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(previous, current)</span> </span>{
+            previous[current.attName] = current;
+            <span class="hljs-keyword">return</span> previous;
+        }, {});
+    }</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-35">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-35">&#182;</a>
+              </div>
+              <p>Create an hash of defined properties from the structure’s properties.
+The defined properties are the input of Object.defineProperties().</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>    <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">createDefinedPropertiesHash</span><span class="hljs-params">(struct)</span> </span>{
+        <span class="hljs-keyword">return</span> listValues(struct.properties).map(<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(property)</span> </span>{</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-36">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-36">&#182;</a>
+              </div>
+              <p>By default properties should not be configurable but enumerable.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>            <span class="hljs-keyword">var</span> definedProperty = {
+                configurable: <span class="hljs-literal">false</span>,
+                enumerable: <span class="hljs-literal">true</span>
+            };
+
+            <span class="hljs-keyword">if</span> (property.attribute) {</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-37">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-37">&#182;</a>
+              </div>
+              <p>Create attribute accessors.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>                property.set = attributeAccessorSetFactory(property.attName, property.setter, !!property.attribute.boolean);
+                property.get = attributeAccessorGetFactory(property.attName, property.getter, !!property.attribute.boolean);
+            } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (property.hasOwnProperty(<span class="hljs-string">'value'</span>) &amp;&amp; property.hasOwnProperty(<span class="hljs-string">'writable'</span>) &amp;&amp; !property.writable) {</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-38">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-38">&#182;</a>
+              </div>
+              <p>A constant has a value which is not writable.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>                definedProperty.value = property.value;
+                definedProperty.writable = <span class="hljs-literal">false</span>;
+            } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (!property.set &amp;&amp; !property.get) {</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-39">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-39">&#182;</a>
+              </div>
+              <p>A none constant property without accessor must be writable.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>                definedProperty.writable = <span class="hljs-literal">true</span>;
+            }
+
+            <span class="hljs-keyword">if</span> (!definedProperty.hasOwnProperty(<span class="hljs-string">'writable'</span>)) {</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-40">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-40">&#182;</a>
+              </div>
+              <p>Create the property’s function set and get according to their interceptors.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>                <span class="hljs-keyword">var</span> interceptors = struct.interceptors[property.propName] || {};
+                <span class="hljs-keyword">if</span> (property.set) {
+                    <span class="hljs-keyword">var</span> setStack = interceptors.set || [];
+                    definedProperty.set = accessorFactory(setStack, property.set);
+                }
+                <span class="hljs-keyword">if</span> (property.get) {
+                    <span class="hljs-keyword">var</span> getStack = interceptors.get || [];
+                    definedProperty.get = accessorFactory(getStack, property.get);
+                }
+            }</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-41">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-41">&#182;</a>
+              </div>
+              <p>Finally add the defined property to the current property</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>            <span class="hljs-keyword">return</span> <span class="hljs-built_in">Object</span>.assign(property, {
+                property: definedProperty
+            });
+        }).reduce(<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(previous, current)</span> </span>{
+            previous[current.propName] = current.property;
+            <span class="hljs-keyword">return</span> previous;
+        }, {});
+    }</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-42">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-42">&#182;</a>
+              </div>
+              <p>Create an hash of methods from the structure’s methods.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>    <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">createMethodsHash</span><span class="hljs-params">(struct)</span> </span>{</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-43">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-43">&#182;</a>
+              </div>
+              <p>Iterate over methods in order to wrap them with their wrappers.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>        <span class="hljs-keyword">return</span> <span class="hljs-built_in">Object</span>.getOwnPropertyNames(struct.methods).map(<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(methName)</span> </span>{
+            <span class="hljs-keyword">var</span> stack = struct.wrappers[methName] || [];
+            <span class="hljs-keyword">var</span> fn = struct.methods[methName];
+            <span class="hljs-keyword">return</span> {
+                methName: methName,
+                fn: methodFactory(stack, fn)
+            };
+        }).reduce(<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(previous, current)</span> </span>{
+            previous[current.methName] = current.fn;
+            <span class="hljs-keyword">return</span> previous;
+        }, {});
+    }</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-44">
+            <div class="annotation">
+              
+              <div class="pilwrap for-h2">
+                <a class="pilcrow" href="#section-44">&#182;</a>
+              </div>
+              <h2 id="build">Build</h2>
+
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-45">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-45">&#182;</a>
+              </div>
+              <p>Work with the structure in order to register the corresponding custom element.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>    <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">build</span><span class="hljs-params">(struct)</span> </span>{</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-46">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-46">&#182;</a>
+              </div>
+              <p>Clean the structure to avoid potential errors.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>        sanitizeStructure(struct);</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-47">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-47">&#182;</a>
+              </div>
+              <p>Let’s feature enhanced the structure.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>        setupFeatures(struct);</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-48">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-48">&#182;</a>
+              </div>
+              <p>Build an hash of attribute for sync attributes’ and properties’ values.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>        struct.attributes = createAttributesHash(struct);</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-49">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-49">&#182;</a>
+              </div>
+              <p>Create the public properties definition of the custom element.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>        <span class="hljs-keyword">var</span> definedProperties = createDefinedPropertiesHash(struct);</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-50">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-50">&#182;</a>
+              </div>
+              <p>Apply the public properties definition to the custom element prototype.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>        <span class="hljs-built_in">Object</span>.defineProperties(struct.prototype, definedProperties);</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-51">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-51">&#182;</a>
+              </div>
+              <p>Override the originals methods to create the wrapped ones.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>        <span class="hljs-keyword">var</span> wrappedMethods = createMethodsHash(struct);</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-52">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-52">&#182;</a>
+              </div>
+              <p>Apply the wrapped methods to the custom element prototype.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>        <span class="hljs-built_in">Object</span>.assign(struct.prototype, wrappedMethods);</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-53">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-53">&#182;</a>
+              </div>
+              <p>Register the custom element according to its structure.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>        <span class="hljs-keyword">return</span> <span class="hljs-built_in">document</span>.registerElement(struct.tagName, struct);
+    }</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-54">
+            <div class="annotation">
+              
+              <div class="pilwrap for-h2">
+                <a class="pilcrow" href="#section-54">&#182;</a>
+              </div>
+              <h2 id="built-in-feature">Built-in feature</h2>
+
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-55">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-55">&#182;</a>
+              </div>
+              <p><strong>ceb</strong> defines an internal feature in order to add runtime functionalities:</p>
+<ul>
+<li>initialize properties’ values</li>
+<li>add and remove event listeners</li>
+<li>sync properties’ values when theirs linked attributes change</li>
+<li>handle delegation of property access to a child element</li>
+</ul>
+
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-56">
+            <div class="annotation">
+              
+              <div class="pilwrap for-h3">
+                <a class="pilcrow" href="#section-56">&#182;</a>
+              </div>
+              <h3 id="interceptors">Interceptors</h3>
+
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-57">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-57">&#182;</a>
+              </div>
+              <p>Intercept write accesses of delegable properties.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>    <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">delegableSetAccessorInterceptor</span><span class="hljs-params">(property, next, el, value)</span> </span>{
+        next(value);</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-58">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-58">&#182;</a>
+              </div>
+              <p>Logic should be done after the effective write.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>        <span class="hljs-keyword">var</span> target = el.querySelector(property.delegate.target);
+        <span class="hljs-comment">/* istanbul ignore else  */</span>
+        <span class="hljs-keyword">if</span> (target) {</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-59">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-59">&#182;</a>
+              </div>
+              <p>Resolve the eventual targeted property’s name or attribute’s name.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>            <span class="hljs-keyword">var</span> targetPropName = property.delegate.property;
+            <span class="hljs-keyword">var</span> targetAttName = property.delegate.attribute;
+            <span class="hljs-keyword">if</span> (!targetPropName &amp;&amp; !targetAttName) {
+                targetPropName = property.propName;
+                targetAttName = property.attName;
+            }</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-60">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-60">&#182;</a>
+              </div>
+              <p>Check the boolean nature of the value.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>            <span class="hljs-keyword">var</span> isBoolean = property.attribute &amp;&amp; !!property.attribute.boolean;
+            <span class="hljs-keyword">if</span> (property.delegate.hasOwnProperty(<span class="hljs-string">'boolean'</span>)) {
+                isBoolean = property.delegate.boolean;
+            }</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-61">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-61">&#182;</a>
+              </div>
+              <p>Apply change to the child.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>            <span class="hljs-keyword">if</span> (targetAttName) {</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-62">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-62">&#182;</a>
+              </div>
+              <p>Update the child’s attribute value.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>                applyAttributeValue(target, targetAttName, value, isBoolean);
+            } <span class="hljs-keyword">else</span> {</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-63">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-63">&#182;</a>
+              </div>
+              <p>Update the child’s property value.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>                target[targetPropName] = value;
+            }
+        }
+    }</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-64">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-64">&#182;</a>
+              </div>
+              <p>Intercept read accesses of delegable properties.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>    <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">delegableGetAccessorInterceptor</span><span class="hljs-params">(property, next, el, value)</span> </span>{
+        <span class="hljs-keyword">var</span> result = next(value);</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-65">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-65">&#182;</a>
+              </div>
+              <p>Logic should be done after the effective write.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>        <span class="hljs-keyword">var</span> target = el.querySelector(property.delegate.target);
+        <span class="hljs-comment">/* istanbul ignore else  */</span>
+        <span class="hljs-keyword">if</span> (target) {</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-66">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-66">&#182;</a>
+              </div>
+              <p>Resolve the eventual targeted property’s name or attribute’s name.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>            <span class="hljs-keyword">var</span> targetPropName = property.delegate.property;
+            <span class="hljs-keyword">var</span> targetAttName = property.delegate.attribute;
+            <span class="hljs-keyword">if</span> (!targetPropName &amp;&amp; !targetAttName) {
+                targetPropName = property.propName;
+                targetAttName = property.attName;
+            }</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-67">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-67">&#182;</a>
+              </div>
+              <p>Check the boolean nature of the value.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>            <span class="hljs-keyword">var</span> isBoolean = property.attribute &amp;&amp; !!property.attribute.boolean;
+            <span class="hljs-keyword">if</span> (property.delegate.hasOwnProperty(<span class="hljs-string">'boolean'</span>)) {
+                isBoolean = property.delegate.boolean;
+            }</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-68">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-68">&#182;</a>
+              </div>
+              <p>Get value from the child.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>            <span class="hljs-keyword">if</span> (targetAttName) {</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-69">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-69">&#182;</a>
+              </div>
+              <p>Get the child’s attribute value.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>                result = isBoolean ? target.hasAttribute(targetAttName) : target.getAttribute(targetAttName);
+            } <span class="hljs-keyword">else</span> {</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-70">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-70">&#182;</a>
+              </div>
+              <p>Get the child’s property value.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>                result = target[targetPropName];
+            }
+        }
+        <span class="hljs-keyword">return</span> result;
+    }</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-71">
+            <div class="annotation">
+              
+              <div class="pilwrap for-h3">
+                <a class="pilcrow" href="#section-71">&#182;</a>
+              </div>
+              <h3 id="listeners">Listeners</h3>
+
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-72">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-72">&#182;</a>
+              </div>
+              <p>DOM event listener calling the structure’s event listener.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>    <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">eventListener</span><span class="hljs-params">(el, fn, evt)</span> </span>{
+        fn(el, evt);
+    }</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-73">
+            <div class="annotation">
+              
+              <div class="pilwrap for-h3">
+                <a class="pilcrow" href="#section-73">&#182;</a>
+              </div>
+              <h3 id="feature-s-functions">Feature’s functions</h3>
+
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-74">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-74">&#182;</a>
+              </div>
+              <p>Initialize the builtInFeature;</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>    <span class="hljs-keyword">var</span> builtInFeature = emptyFn();</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-75">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-75">&#182;</a>
+              </div>
+              <p>The setup function of the built-in feature</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>    builtInFeature.setup = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(struct, builder)</span> </span>{</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-76">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-76">&#182;</a>
+              </div>
+              <p>Iterate over structure’s properties in order to detect delegable properties.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>        listValues(struct.properties).filter(<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(property)</span> </span>{
+            <span class="hljs-keyword">return</span> property.delegate;
+        }).forEach(<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(property)</span> </span>{
+            <span class="hljs-keyword">if</span> (!property.attName) {</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-77">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-77">&#182;</a>
+              </div>
+              <p>Force the existence of getter and setter to handle interception.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>                property.set = property.set || emptyFn();
+                property.get = property.get || emptyFn();
+            }</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-78">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-78">&#182;</a>
+              </div>
+              <p>Create interceptor for the delegable property.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>            builder.intercept(
+                property.propName,
+                delegableSetAccessorInterceptor.bind(<span class="hljs-keyword">this</span>, property),
+                delegableGetAccessorInterceptor.bind(<span class="hljs-keyword">this</span>, property)
+            );
+        });</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-79">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-79">&#182;</a>
+              </div>
+              <p>Wrap the method createdCallback.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>        builder.wrap(<span class="hljs-string">'createdCallback'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(next, el)</span> </span>{
+            next(<span class="hljs-built_in">arguments</span>);</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-80">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-80">&#182;</a>
+              </div>
+              <p>Initialize the properties’ value after the call of the createdCallback method.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>            listValues(struct.properties).forEach(<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(property)</span> </span>{
+                <span class="hljs-keyword">if</span> (property.attName) {
+                    <span class="hljs-keyword">if</span> (el.hasAttribute(property.attName)) {
+                        el[property.propName] = property.attribute.boolean ? <span class="hljs-literal">true</span> : el.getAttribute(property.attName);
+                    } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (property.hasOwnProperty(<span class="hljs-string">'value'</span>)) {
+                        applyAttributeValue(el, property.attName, property.value, property.attribute.boolean);
+                    }
+                } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (property.hasOwnProperty(<span class="hljs-string">'value'</span>) &amp;&amp; property.writable) {
+                    el[property.propName] = property.value;
+                }
+            });
+        });</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-81">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-81">&#182;</a>
+              </div>
+              <p>Wrap the method attachedCallback.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>        builder.wrap(<span class="hljs-string">'attachedCallback'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(next, el)</span> </span>{
+            next(<span class="hljs-built_in">arguments</span>);</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-82">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-82">&#182;</a>
+              </div>
+              <p>Add the event listeners after the call of the attachedCallback method.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>            el.__eventHandlers = struct.listeners.map(<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(listener)</span> </span>{
+                <span class="hljs-keyword">var</span> target = listener.target ? el.querySelector(listener.target) : el;
+                <span class="hljs-keyword">var</span> callback = eventListener.bind(el, el, listener.fn);
+                target.addEventListener(listener.event, callback, <span class="hljs-literal">true</span>);
+                <span class="hljs-keyword">return</span> {
+                    event: listener.event,
+                    target: target,
+                    callback: callback
+                };
+            });
+        });</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-83">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-83">&#182;</a>
+              </div>
+              <p>Wrap the method detachedCallback.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>        builder.wrap(<span class="hljs-string">'detachedCallback'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(next, el)</span> </span>{</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-84">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-84">&#182;</a>
+              </div>
+              <p>Remove the event listeners before the call of the detachedCallback method.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>            el.__eventHandlers.forEach(<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(handler)</span> </span>{
+                handler.target.removeEventListener(handler.event, handler.callback, <span class="hljs-literal">true</span>);
+            });
+            el.__eventHandlers = <span class="hljs-literal">null</span>;
+            next(<span class="hljs-built_in">arguments</span>);
+        });</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-85">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-85">&#182;</a>
+              </div>
+              <p>Wrap the method attributeChangedCallback.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>        builder.wrap(<span class="hljs-string">'attributeChangedCallback'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(next, el, attName, oldVal, newVal)</span> </span>{</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-86">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-86">&#182;</a>
+              </div>
+              <p>Synchronize the attributes’ values with their properties</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>            <span class="hljs-keyword">var</span> property = struct.attributes[attName];
+            <span class="hljs-keyword">if</span> (property) {
+                <span class="hljs-keyword">var</span> value = newVal;
+                <span class="hljs-keyword">if</span> (property.attribute.boolean) {
+                    value = <span class="hljs-keyword">typeof</span> newVal === <span class="hljs-string">'string'</span> ? <span class="hljs-literal">true</span> : <span class="hljs-literal">false</span>;
+                }
+                el[property.propName] = value;
+            }
+            next(<span class="hljs-built_in">arguments</span>);
+        });
+    };</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-87">
+            <div class="annotation">
+              
+              <div class="pilwrap for-h2">
+                <a class="pilcrow" href="#section-87">&#182;</a>
+              </div>
+              <h2 id="ceb">ceb</h2>
+
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-88">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-88">&#182;</a>
+              </div>
+              <p>Create a base and valid structure;</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>    <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">baseStructFactory</span><span class="hljs-params">()</span> </span>{
+        <span class="hljs-keyword">return</span> {
+            properties: {},
+            methods: {},
+            wrappers: [],
+            interceptors: [],
+            listeners: [],
+            features: [{
+                fn: builtInFeature
+            }]
+        };
+    }</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-89">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-89">&#182;</a>
+              </div>
+              <p>Sanitize the properties on the fly</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>    <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">sanitizeProperty</span><span class="hljs-params">(property)</span> </span>{
+        <span class="hljs-keyword">if</span> (property.attribute) {</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-90">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-90">&#182;</a>
+              </div>
+              <p>A property linked to an attribute must have a valid attribute name</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>            property.attName = fromCamelCaseToHyphenCase(property.attribute.name || property.propName);
+        }</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-91">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-91">&#182;</a>
+              </div>
+              <p>By default a property is writable</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>        property.writable = property.hasOwnProperty(<span class="hljs-string">'writable'</span>) ? property.writable : <span class="hljs-literal">true</span>;
+        <span class="hljs-keyword">return</span> property;
+    }</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-92">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-92">&#182;</a>
+              </div>
+              <p>Provides the sugar API of <strong>ceb</strong>.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>    <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">builder</span><span class="hljs-params">(tagName, params)</span> </span>{</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-93">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-93">&#182;</a>
+              </div>
+              <p>The structure of the builder can be given from the parameters.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>        <span class="hljs-keyword">var</span> struct = params &amp;&amp; params.struct ? sanitizeStructure(params.struct) : baseStructFactory();</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-94">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-94">&#182;</a>
+              </div>
+              <p>A structure must have a tag name.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>        struct.tagName = tagName;</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-95">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-95">&#182;</a>
+              </div>
+              <p>A strucuture which is already registered will not register the custom element twice.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>        <span class="hljs-keyword">var</span> registered = params &amp;&amp; params.hasOwnProperty(<span class="hljs-string">'registered'</span>) ? params.registered : <span class="hljs-literal">false</span>;
+        <span class="hljs-keyword">var</span> api = {};</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-96">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-96">&#182;</a>
+              </div>
+              <p>Add a wrapper to the structure.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>        api.wrap = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(methName, fn, level)</span> </span>{
+            <span class="hljs-keyword">if</span> (!struct.wrappers[methName]) {
+                struct.wrappers[methName] = [];
+            }
+            fn.level = <span class="hljs-built_in">isNaN</span>(level) ? <span class="hljs-number">0</span> : level;
+            struct.wrappers[methName].push(fn);
+            <span class="hljs-keyword">return</span> api;
+        };</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-97">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-97">&#182;</a>
+              </div>
+              <p>Add an interceptor to the structure.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>        api.intercept = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(propName, setFn, getFn, level)</span> </span>{
+            <span class="hljs-keyword">if</span> (!struct.interceptors[propName]) {
+                struct.interceptors[propName] = {
+                    set: [],
+                    get: []
+                };
+            }
+            <span class="hljs-keyword">if</span> (setFn) {
+                setFn.level = <span class="hljs-built_in">isNaN</span>(level) ? <span class="hljs-number">0</span> : level;
+                struct.interceptors[propName].set.push(setFn);
+            }
+            <span class="hljs-keyword">if</span> (getFn) {
+                getFn.level = <span class="hljs-built_in">isNaN</span>(level) ? <span class="hljs-number">0</span> : level;
+                struct.interceptors[propName].get.push(getFn);
+            }
+            <span class="hljs-keyword">return</span> api;
+        };</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-98">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-98">&#182;</a>
+              </div>
+              <p>Set the extends value</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>        api[<span class="hljs-string">'extends'</span>] = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(anExtend)</span> </span>{
+            struct[<span class="hljs-string">'extends'</span>] = anExtend;
+            <span class="hljs-keyword">return</span> api;
+        };</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-99">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-99">&#182;</a>
+              </div>
+              <p>Set the herited prototype</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>        api.prototype = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(aProto)</span> </span>{
+            struct.prototype = aProto;
+            <span class="hljs-keyword">return</span> api;
+        };</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-100">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-100">&#182;</a>
+              </div>
+              <p>Add properties to the structure.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>        api.properties = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(someProperties)</span> </span>{
+            <span class="hljs-keyword">var</span> sanitizedProperties = <span class="hljs-built_in">Object</span>.getOwnPropertyNames(someProperties).map(<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(propName)</span> </span>{
+                <span class="hljs-keyword">return</span> <span class="hljs-built_in">Object</span>.assign(someProperties[propName], {
+                    propName: propName
+                });
+            }).map(sanitizeProperty).reduce(<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(previous, current)</span> </span>{
+                previous[current.propName] = current;
+                <span class="hljs-keyword">return</span> previous;
+            }, {});
+
+            <span class="hljs-built_in">Object</span>.assign(struct.properties, sanitizedProperties);
+
+            <span class="hljs-keyword">return</span> api;
+        };</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-101">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-101">&#182;</a>
+              </div>
+              <p>Add methods to the structure.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>        api.methods = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(someMethods)</span> </span>{
+            <span class="hljs-built_in">Object</span>.assign(struct.methods, someMethods);
+            <span class="hljs-keyword">return</span> api;
+        };</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-102">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-102">&#182;</a>
+              </div>
+              <p>Add a listener to the structure.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>        api.listen = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(queries, fn)</span> </span>{
+            queries.trim().split(<span class="hljs-string">','</span>).map(<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(query)</span> </span>{
+                <span class="hljs-keyword">var</span> parts = query.trim().split(<span class="hljs-string">' '</span>);
+                <span class="hljs-keyword">return</span> {
+                    event: parts[<span class="hljs-number">0</span>].trim(),
+                    target: (parts[<span class="hljs-number">1</span>] || <span class="hljs-string">''</span>).trim(),
+                    fn: fn
+                };
+            }).forEach(<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(listener)</span> </span>{
+                struct.listeners.push(listener);
+            });
+            <span class="hljs-keyword">return</span> api;
+        };</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-103">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-103">&#182;</a>
+              </div>
+              <p>Add a feature to the structure.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>        api.feature = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(fn, options, level)</span> </span>{
+            struct.features.push({
+                fn: fn,
+                options: options,
+                level: <span class="hljs-built_in">isNaN</span>(level) ? <span class="hljs-number">0</span> : level
+            });
+            <span class="hljs-keyword">return</span> api;
+        };</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-104">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-104">&#182;</a>
+              </div>
+              <p>Register the custom element if not already done.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>        api.register = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">()</span> </span>{
+            <span class="hljs-keyword">if</span> (!registered) {
+                registered = <span class="hljs-literal">true</span>;
+                <span class="hljs-keyword">return</span> build(struct);
+            }
+        };</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-105">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-105">&#182;</a>
+              </div>
+              <p>Get the current structure.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>        api.get = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">()</span> </span>{
+            <span class="hljs-keyword">return</span> struct;
+        };
+        <span class="hljs-keyword">return</span> api;
+    }</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-106">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-106">&#182;</a>
+              </div>
+              <p>The <code>ced()</code> function.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>    <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">ceb</span><span class="hljs-params">(params)</span> </span>{
+        <span class="hljs-keyword">var</span> api = {};</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-107">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-107">&#182;</a>
+              </div>
+              <p>A builder is given when a name is known.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>        api.name = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(tagName)</span> </span>{
+            <span class="hljs-keyword">return</span> builder(tagName, params);
+        };
+        <span class="hljs-keyword">return</span> api;
+    }
+
+    <span class="hljs-keyword">return</span> ceb;
+}));</pre></div></div>
+            
+        </li>
+        
+    </ul>
+  </div>
+</body>
+</html>
