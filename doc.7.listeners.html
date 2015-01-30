@@ -5,6 +5,7 @@
   <title>Listeners</title>
   <meta http-equiv="content-type" content="text/html; charset=UTF-8">
   <meta name="viewport" content="width=device-width, target-densitydpi=160dpi, initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
+  <link rel="stylesheet" media="all" href="public/stylesheets/normalize.css" />
   <link rel="stylesheet" media="all" href="docco.css" />
 </head>
 <body>
@@ -22,52 +23,46 @@
           <div id="jump_wrapper">
           <div id="jump_page">
             
-              
               <a class="source" href="index.html">
                 index
               </a>
             
-              
               <a class="source" href="doc.1.usage.html">
                 doc - usage
               </a>
             
-              
               <a class="source" href="doc.2.inheritance.html">
                 doc - inheritance
               </a>
             
-              
               <a class="source" href="doc.3.properties.html">
                 doc - properties
               </a>
             
-              
               <a class="source" href="doc.4.interceptors.html">
                 doc - interceptors
               </a>
             
-              
               <a class="source" href="doc.5.methods.html">
                 doc - methods
               </a>
             
-              
               <a class="source" href="doc.6.wrappers.html">
                 doc - wrappers
               </a>
             
-              
               <a class="source" href="doc.7.listeners.html">
                 doc - listeners
               </a>
             
-              
               <a class="source" href="doc.8.features.html">
                 doc - features
               </a>
             
-              
+              <a class="source" href="ceb-feature-template.html">
+                source - ceb-feature-template.js
+              </a>
+            
               <a class="source" href="ceb.html">
                 source - ceb.js
               </a>
@@ -127,20 +122,9 @@
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-4">&#182;</a>
               </div>
-              <p>The builder’s method <strong>listen</strong> detect from tis given arguments event listeners.
-<code>click, click button, submit form</code> contains three clauses:</p>
-<ul>
-<li>the first will add a listener listening the click event on the element instance</li>
-<li>the second will add a listener listening the click event on the child matching button</li>
-<li>the third will add a listener listening the submit event on the child matching form</li>
-</ul>
+              <p>The builder’s method <strong>listen</strong> will add DOM event listeners to the structure.</p>
 
             </div>
-            
-            <div class="content"><div class='highlight'><pre>builder.listen(<span class="hljs-string">'click, click button, submit form'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(el, evt)</span> </span>{
-    evt.preventDefault();
-    evt.stopPropagation();
-});</pre></div></div>
             
         </li>
         
@@ -151,9 +135,65 @@
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-5">&#182;</a>
               </div>
-              <p>The event are added when the element is inserted into the DOM and removed when it’s removed.</p>
+              <p>The event are added when the element is <strong>attached</strong> into the DOM and removed when it’s <strong>detached</strong>.</p>
 
             </div>
+            
+        </li>
+        
+        
+        <li id="section-6">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-6">&#182;</a>
+              </div>
+              <blockquote>
+<p>@param queries (string) a list of the tuple [event, selector].
+Where the event is the name of the event and the selector a valid CSS selector.</p>
+</blockquote>
+
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-7">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-7">&#182;</a>
+              </div>
+              <blockquote>
+<p>@param listener (function) the callback which will be called when the events occurred.
+Where the callback has two arguments, the current element and the event instance.</p>
+</blockquote>
+
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-8">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-8">&#182;</a>
+              </div>
+              <p><code>click, click button, submit form</code> contains three clauses:</p>
+<ul>
+<li>the first will add a listener listening the click event on the element instance</li>
+<li>the second will add a listener listening the click event on the child matching button</li>
+<li>the third will add a listener listening the submit event on the child matching form</li>
+</ul>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>
+builder.listen(<span class="hljs-string">'click, click button, submit form'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(el, evt)</span> </span>{
+    evt.preventDefault();
+    evt.stopPropagation();
+});</pre></div></div>
             
         </li>
         

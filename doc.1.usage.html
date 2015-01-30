@@ -5,6 +5,7 @@
   <title>Usage</title>
   <meta http-equiv="content-type" content="text/html; charset=UTF-8">
   <meta name="viewport" content="width=device-width, target-densitydpi=160dpi, initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
+  <link rel="stylesheet" media="all" href="public/stylesheets/normalize.css" />
   <link rel="stylesheet" media="all" href="docco.css" />
 </head>
 <body>
@@ -22,52 +23,46 @@
           <div id="jump_wrapper">
           <div id="jump_page">
             
-              
               <a class="source" href="index.html">
                 index
               </a>
             
-              
               <a class="source" href="doc.1.usage.html">
                 doc - usage
               </a>
             
-              
               <a class="source" href="doc.2.inheritance.html">
                 doc - inheritance
               </a>
             
-              
               <a class="source" href="doc.3.properties.html">
                 doc - properties
               </a>
             
-              
               <a class="source" href="doc.4.interceptors.html">
                 doc - interceptors
               </a>
             
-              
               <a class="source" href="doc.5.methods.html">
                 doc - methods
               </a>
             
-              
               <a class="source" href="doc.6.wrappers.html">
                 doc - wrappers
               </a>
             
-              
               <a class="source" href="doc.7.listeners.html">
                 doc - listeners
               </a>
             
-              
               <a class="source" href="doc.8.features.html">
                 doc - features
               </a>
             
-              
+              <a class="source" href="ceb-feature-template.html">
+                source - ceb-feature-template.js
+              </a>
+            
               <a class="source" href="ceb.html">
                 source - ceb.js
               </a>
@@ -135,6 +130,7 @@ A structure is composed of the following elements:</p>
 <li>methods</li>
 <li>interceptors catching the set and get of properties</li>
 <li>wrappers wrapping the call of methods</li>
+<li>DOM event listeners</li>
 <li>features enhancing the structure with reusable logic</li>
 </ul>
 
@@ -385,11 +381,18 @@ It can be used as prototype of another one.</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-21">&#182;</a>
               </div>
-              <p>The builder’s structure can be retrieved using the builder’s method <strong>get</strong>.</p>
+              <p>The builder’s structure can be retrieved using the builder’s method <strong>get</strong>.
+However, the structure object contains objects which are not sharable accross builders.
+A good way is to implement the creation of the structure into a function.
+Then call the function each time we need a structure.</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre><span class="hljs-keyword">var</span> aStructure = builder.get();</pre></div></div>
+            <div class="content"><div class='highlight'><pre><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">structureFactory</span><span class="hljs-params">()</span> </span>{
+    <span class="hljs-keyword">var</span> protectedBuilder = ceb().name(<span class="hljs-string">'base-structure'</span>);
+    <span class="hljs-comment">/* do stuff with protectedBuilder */</span>
+    <span class="hljs-keyword">return</span> protectedBuilder.get();
+}</pre></div></div>
             
         </li>
         
@@ -400,13 +403,17 @@ It can be used as prototype of another one.</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-22">&#182;</a>
               </div>
-              <p>An existing structure can be used as based structure of a future builder.</p>
+              <p><em>based-custom-element1</em> and <em>based-custom-element1</em> builders share, conceptually, the same base structure.</p>
 
             </div>
             
             <div class="content"><div class='highlight'><pre>ceb({
-    struct: aStructure
-}).name(<span class="hljs-string">'based-custom-element'</span>).register();</pre></div></div>
+    struct: structureFactory()
+}).name(<span class="hljs-string">'based-custom-element1'</span>).register();
+
+ceb({
+    struct: structureFactory()
+}).name(<span class="hljs-string">'based-custom-element2'</span>).register();</pre></div></div>
             
         </li>
         

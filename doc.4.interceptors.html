@@ -5,6 +5,7 @@
   <title>Interceptors</title>
   <meta http-equiv="content-type" content="text/html; charset=UTF-8">
   <meta name="viewport" content="width=device-width, target-densitydpi=160dpi, initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
+  <link rel="stylesheet" media="all" href="public/stylesheets/normalize.css" />
   <link rel="stylesheet" media="all" href="docco.css" />
 </head>
 <body>
@@ -22,52 +23,46 @@
           <div id="jump_wrapper">
           <div id="jump_page">
             
-              
               <a class="source" href="index.html">
                 index
               </a>
             
-              
               <a class="source" href="doc.1.usage.html">
                 doc - usage
               </a>
             
-              
               <a class="source" href="doc.2.inheritance.html">
                 doc - inheritance
               </a>
             
-              
               <a class="source" href="doc.3.properties.html">
                 doc - properties
               </a>
             
-              
               <a class="source" href="doc.4.interceptors.html">
                 doc - interceptors
               </a>
             
-              
               <a class="source" href="doc.5.methods.html">
                 doc - methods
               </a>
             
-              
               <a class="source" href="doc.6.wrappers.html">
                 doc - wrappers
               </a>
             
-              
               <a class="source" href="doc.7.listeners.html">
                 doc - listeners
               </a>
             
-              
               <a class="source" href="doc.8.features.html">
                 doc - features
               </a>
             
-              
+              <a class="source" href="ceb-feature-template.html">
+                source - ceb-feature-template.js
+              </a>
+            
               <a class="source" href="ceb.html">
                 source - ceb.js
               </a>
@@ -181,6 +176,11 @@ They wrap the accessors, by this way they can process logic around the effective
                 <a class="pilcrow" href="#section-7">&#182;</a>
               </div>
               <p>The function <em>interceptWrite</em> is a write access callback.</p>
+<blockquote>
+<p>@param next (function) will call the next stacked callback
+@param el (HTMLElement) the current element
+@param value (*) the value of the previous stacked callback</p>
+</blockquote>
 
             </div>
             
@@ -195,19 +195,6 @@ They wrap the accessors, by this way they can process logic around the effective
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-8">&#182;</a>
               </div>
-              <p>The argument <em>value</em> is the value of the previous stacked callback.</p>
-
-            </div>
-            
-        </li>
-        
-        
-        <li id="section-9">
-            <div class="annotation">
-              
-              <div class="pilwrap ">
-                <a class="pilcrow" href="#section-9">&#182;</a>
-              </div>
               <p>There, logic can be done with the element instance and the given value.</p>
 
             </div>
@@ -217,11 +204,11 @@ They wrap the accessors, by this way they can process logic around the effective
         </li>
         
         
-        <li id="section-10">
+        <li id="section-9">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-10">&#182;</a>
+                <a class="pilcrow" href="#section-9">&#182;</a>
               </div>
               <p>The function <em>next</em> will call the next stacked callback.
 Its argument will be the <em>value</em> of the next stacked callback.</p>
@@ -233,11 +220,11 @@ Its argument will be the <em>value</em> of the next stacked callback.</p>
         </li>
         
         
-        <li id="section-11">
+        <li id="section-10">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-11">&#182;</a>
+                <a class="pilcrow" href="#section-10">&#182;</a>
               </div>
               <p>There, logic can be done with the element instance and the returned value.
 Usually accessors set and so interceptors dedicated for writing don’t return values.</p>
@@ -249,11 +236,11 @@ Usually accessors set and so interceptors dedicated for writing don’t return v
         </li>
         
         
-        <li id="section-12">
+        <li id="section-11">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-12">&#182;</a>
+                <a class="pilcrow" href="#section-11">&#182;</a>
               </div>
               <p><em>result</em> will be the returned value of the function <em>next</em> into the previous stacked callback.</p>
 
@@ -265,15 +252,35 @@ Usually accessors set and so interceptors dedicated for writing don’t return v
         </li>
         
         
-        <li id="section-13">
+        <li id="section-12">
             <div class="annotation">
               
               <div class="pilwrap for-h3">
-                <a class="pilcrow" href="#section-13">&#182;</a>
+                <a class="pilcrow" href="#section-12">&#182;</a>
               </div>
               <h3 id="read-callback">Read callback</h3>
 
             </div>
+            
+        </li>
+        
+        
+        <li id="section-13">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-13">&#182;</a>
+              </div>
+              <p>The function <em>interceptRead</em> is a read access callback.</p>
+<blockquote>
+<p>@param next (function) will call the next stacked callback
+@param el (HTMLElement) the current element
+@param value (*) the value of the previous stacked callback</p>
+</blockquote>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">interceptRead</span><span class="hljs-params">(next, el, value)</span> </span>{</pre></div></div>
             
         </li>
         
@@ -284,11 +291,9 @@ Usually accessors set and so interceptors dedicated for writing don’t return v
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-14">&#182;</a>
               </div>
-              <p>The function <em>interceptRead</em> is a read access callback.</p>
+              <p>Usually accessors get and so interceptors dedicated for reading don’t have given value.</p>
 
             </div>
-            
-            <div class="content"><div class='highlight'><pre><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">interceptRead</span><span class="hljs-params">(next, el, value)</span> </span>{</pre></div></div>
             
         </li>
         
@@ -299,20 +304,6 @@ Usually accessors set and so interceptors dedicated for writing don’t return v
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-15">&#182;</a>
               </div>
-              <p>The argument <em>value</em> is the value of the previous stacked callback.
-Usually accessors get and so interceptors dedicated for reading don’t have given value.</p>
-
-            </div>
-            
-        </li>
-        
-        
-        <li id="section-16">
-            <div class="annotation">
-              
-              <div class="pilwrap ">
-                <a class="pilcrow" href="#section-16">&#182;</a>
-              </div>
               <p>There, logic can be done with the element instance and the given value.</p>
 
             </div>
@@ -322,11 +313,11 @@ Usually accessors get and so interceptors dedicated for reading don’t have giv
         </li>
         
         
-        <li id="section-17">
+        <li id="section-16">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-17">&#182;</a>
+                <a class="pilcrow" href="#section-16">&#182;</a>
               </div>
               <p>The function <em>next</em> will call the next stacked callback.
 Its argument will be the value of the next stacked callback.</p>
@@ -338,11 +329,11 @@ Its argument will be the value of the next stacked callback.</p>
         </li>
         
         
-        <li id="section-18">
+        <li id="section-17">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-18">&#182;</a>
+                <a class="pilcrow" href="#section-17">&#182;</a>
               </div>
               <p>There, logic can be done with the element instance and the returned value.</p>
 
@@ -353,11 +344,11 @@ Its argument will be the value of the next stacked callback.</p>
         </li>
         
         
-        <li id="section-19">
+        <li id="section-18">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-19">&#182;</a>
+                <a class="pilcrow" href="#section-18">&#182;</a>
               </div>
               <p><em>processedResult</em> will be the returned value of the function <em>next</em> into the previous stacked callback.</p>
 
@@ -369,13 +360,29 @@ Its argument will be the value of the next stacked callback.</p>
         </li>
         
         
-        <li id="section-20">
+        <li id="section-19">
             <div class="annotation">
               
               <div class="pilwrap for-h3">
-                <a class="pilcrow" href="#section-20">&#182;</a>
+                <a class="pilcrow" href="#section-19">&#182;</a>
               </div>
               <h3 id="intercept">Intercept</h3>
+
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-20">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-20">&#182;</a>
+              </div>
+              <p>The builder’s method <strong>intercept</strong> adds to the structure the given interceptors according to the intercepted property.</p>
+<p>The first argument of the method <em>intercept</em> is the property name.
+The second argument is the callback dedicated to the write access, it’s optional.
+The third argument is the callback dedicated to the read access, it’s optional.</p>
 
             </div>
             
@@ -388,10 +395,8 @@ Its argument will be the value of the next stacked callback.</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-21">&#182;</a>
               </div>
-              <p>The builder’s method <strong>intercept</strong> adds to the structure the given interceptors according to the intercepted property.</p>
-<p>The first argument of the method <em>intercept</em> is the property name.
-The second argument is the callback dedicated to the write access, it’s optional.
-The third argument is the callback dedicated to the read access, it’s optional.</p>
+              <p>The write accesses of the property <em>propIntercepted</em> will be intercepted by the callback <em>interceptWrite</em>.
+The read accesses of the property <em>propIntercepted</em> will be intercepted by the callback <em>interceptRead</em>.</p>
 
             </div>
             
@@ -404,8 +409,11 @@ The third argument is the callback dedicated to the read access, it’s optional
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-22">&#182;</a>
               </div>
-              <p>The write accesses of the property <em>propIntercepted</em> will be intercepted by the callback <em>interceptWrite</em>.
-The read accesses of the property <em>propIntercepted</em> will be intercepted by the callback <em>interceptRead</em>.</p>
+              <blockquote>
+<p>@param name (string) the name of the property to intercept
+@param interceptWrite (function) the callback for write accesses
+@param interceptRead (function) the callback for read accesses</p>
+</blockquote>
 
             </div>
             
