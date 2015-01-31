@@ -107,7 +107,7 @@ It will be available via <code>feature(el).header</code>.</p>
             </div>
             
             <div class="content"><div class='highlight'><pre>
-(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(g, factory)</span> </span>{
+(<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(g, factory)</span> </span>{
 <span class="hljs-pi">    'use strict'</span>;
 
     <span class="hljs-comment">/* istanbul ignore next */</span>
@@ -119,7 +119,7 @@ It will be available via <code>feature(el).header</code>.</p>
         g.cebFeatureTemplate = factory();
     }
 
-}(<span class="hljs-keyword">this</span>, <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span> </span>{
+}(<span class="hljs-keyword">this</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">()</span> </span>{
 <span class="hljs-pi">    'use strict'</span>;</pre></div></div>
             
         </li>
@@ -474,7 +474,7 @@ But each node have to be cloned :(</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>            refrencedNodes.forEach(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(entry)</span> </span>{
+            <div class="content"><div class='highlight'><pre>            refrencedNodes.forEach(<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(entry)</span> </span>{
                 feature(el)[entry.property] = el.querySelector(<span class="hljs-string">'['</span> + entry.attribute + <span class="hljs-string">']'</span>);
             });
         }
@@ -526,14 +526,14 @@ But each node have to be cloned :(</p>
             </div>
             
             <div class="content"><div class='highlight'><pre>        builder.methods({
-            applyLigthDOM: <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(el, lightChildren)</span> </span>{
-                setTimeout(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span> </span>{
+            applyLigthDOM: <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(el, lightChildren)</span> </span>{
+                setTimeout(<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">()</span> </span>{
                     <span class="hljs-keyword">var</span> contentNode = el.querySelector(<span class="hljs-string">'['</span> + el.getAttribute(<span class="hljs-string">'ceb-old-content-id'</span>) + <span class="hljs-string">']'</span>);
                     <span class="hljs-keyword">if</span> (contentNode) {
                         <span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span> contentNode.applyLigthDOM === <span class="hljs-string">'function'</span>) {
                             contentNode.applyLigthDOM(lightChildren);
                         } <span class="hljs-keyword">else</span> {
-                            lightChildren.forEach(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(child)</span> </span>{
+                            lightChildren.forEach(<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(child)</span> </span>{
                                 contentNode.appendChild(child);
                             });
                         }
@@ -556,7 +556,7 @@ apply the template before the original call.</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>        builder.wrap(<span class="hljs-string">'createdCallback'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(next, el)</span> </span>{
+            <div class="content"><div class='highlight'><pre>        builder.wrap(<span class="hljs-string">'createdCallback'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(next, el)</span> </span>{
             apply(tpl, el, isHandleLightDOM, isNodeReferences);
             next(<span class="hljs-built_in">arguments</span>);
         });
