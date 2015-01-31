@@ -118,18 +118,13 @@ To execute it with none evergreen browsers, you should need of:</p>
 <li>ES5 and some features from ES6 <a href="https://github.com/paulmillr/es6-shim">es6-shim</a></li>
 </ul>
 <hr>
-<h2 id="downloads">Downloads</h2>
-<p>Distributed files can be found <a href="https://github.com/tmorin/custom-elements-builder/tree/master/dist">there</a></p>
-<ul>
-<li><a href="https://raw.githubusercontent.com/tmorin/custom-elements-builder/master/dist/ceb.js">ceb.js</a> <em>commented</em></li>
-<li><a href="https://raw.githubusercontent.com/tmorin/custom-elements-builder/master/dist/ceb.min.js">ceb.min.js</a> <em>minified</em></li>
-<li><a href="https://raw.githubusercontent.com/tmorin/custom-elements-builder/master/dist/ceb.legacy.min.js">ceb.legacy.min.js</a> <em>shims, minified</em></li>
-<li><a href="https://raw.githubusercontent.com/tmorin/custom-elements-builder/master/dist/ceb-feature-template.js">ceb-feature-template.js</a> <em>commented</em></li>
-<li><a href="https://raw.githubusercontent.com/tmorin/custom-elements-builder/master/dist/ceb-feature-template.min.js">ceb-feature-template.min.js</a> <em>minified</em></li>
-</ul>
-<hr>
+<h2 id="cdn">CDN</h2>
+<p>CDN files can be found on <a href="https://cdnjs.com/libraries/custom-elements-builder">cdnjs</a></p>
+<pre><code>&lt;script src=<span class="hljs-string">"https://cdnjs.cloudflare.com/ajax/libs/custom-elements-builder/0.1.0/ceb.min.js"</span>&gt;<span class="xml"><span class="hljs-tag">&lt;/<span class="hljs-title">script</span>&gt;</span>
+
+<span class="hljs-tag">&lt;<span class="hljs-title">script</span> <span class="hljs-attribute">src</span>=<span class="hljs-value">"https://cdnjs.cloudflare.com/ajax/libs/custom-elements-builder/0.1.0/ceb-feature-template.min.js"</span>&gt;</span><span class="javascript"></span><span class="hljs-tag">&lt;/<span class="hljs-title">script</span>&gt;</span></span>
+</code></pre><hr>
 <h2 id="installation">Installation</h2>
-<p><strong>ceb</strong> is not yet released!</p>
 <ul>
 <li>npm: <code>npm install ceb --save</code></li>
 <li>bower: <code>npm bower ceb --save</code></li>
@@ -183,7 +178,7 @@ ceb()
     .wrap(<span class="hljs-string">'sayHello'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(next, el, to)</span> </span>{
         <span class="hljs-keyword">var</span> newArguments = [next, el, (to || <span class="hljs-string">''</span>).toUpperCase()];
         <span class="hljs-keyword">var</span> result = next(newArguments);
-        alert(result);
+        alert(<span class="hljs-string">'wrapped result: '</span> + result);
         <span class="hljs-keyword">return</span> result;
     })
     .listen(<span class="hljs-string">'click button'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(el)</span> </span>{
