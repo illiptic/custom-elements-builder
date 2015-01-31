@@ -16,6 +16,26 @@
 }(this, function () {
     'use strict';
 
+    // ## Polyfill
+
+    /* istanbul ignore next */
+    if (!('assign' in Object)) {
+        /* https://github.com/paulmillr/es6-shim/blob/master/es6-shim.js */
+        Object.defineProperty(Object, 'assign', {
+            configurable: true,
+            enumerable: false,
+            writable: true,
+            value: function polyfillAssign() {
+                return Array.prototype.reduce.call(arguments, function (target, source) {
+                    return Object.keys(Object(source)).reduce(function (target, key) {
+                        target[key] = source[key];
+                        return target;
+                    }, target);
+                });
+            }
+        });
+    }
+
     // ## Tools
 
     // Return a new empty function.
@@ -25,7 +45,7 @@
 
     // List the values of an object.
     function listValues(o) {
-        return Object.getOwnPropertyNames(o).map(function (propName) {
+        return Object.keys(o).map(function (propName) {
             return o[propName];
         });
     }
@@ -187,6 +207,9 @@
                 // A constant has a value which is not writable.
                 definedProperty.value = property.value;
                 definedProperty.writable = false;
+                if (property.hasOwnProperty('enumerable')) {
+                    definedProperty.enumerable = property.enumerable;
+                }
             } else if (!property.set && !property.get) {
                 // A none constant property without accessor must be writable.
                 definedProperty.writable = true;
@@ -218,7 +241,7 @@
     // Create an hash of methods from the structure's methods.
     function createMethodsHash(struct) {
         // Iterate over methods in order to wrap them with their wrappers.
-        return Object.getOwnPropertyNames(struct.methods).map(function (methName) {
+        return Object.keys(struct.methods).map(function (methName) {
             var stack = struct.wrappers[methName] || [];
             var fn = struct.methods[methName];
             return {
@@ -251,6 +274,7 @@
 
         // Override the originals methods to create the wrapped ones.
         var wrappedMethods = createMethodsHash(struct);
+
         // Apply the wrapped methods to the custom element prototype.
         Object.assign(struct.prototype, wrappedMethods);
 
@@ -488,7 +512,7 @@
         };
         // Add properties to the structure.
         api.properties = function (someProperties) {
-            var sanitizedProperties = Object.getOwnPropertyNames(someProperties).map(function (propName) {
+            var sanitizedProperties = Object.keys(someProperties).map(function (propName) {
                 return Object.assign(someProperties[propName], {
                     propName: propName
                 });
