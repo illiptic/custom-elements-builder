@@ -2,7 +2,7 @@
 
 <html>
 <head>
-  <title>Inheritance</title>
+  <title>Change logs</title>
   <meta http-equiv="content-type" content="text/html; charset=UTF-8">
   <meta name="viewport" content="width=device-width, target-densitydpi=160dpi, initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
   <link rel="stylesheet" media="all" href="public/stylesheets/normalize.css" />
@@ -85,7 +85,7 @@
               <div class="pilwrap for-h1">
                 <a class="pilcrow" href="#section-1">&#182;</a>
               </div>
-              <h1 id="inheritance">Inheritance</h1>
+              <h1 id="change-logs">Change logs</h1>
 
             </div>
             
@@ -95,14 +95,18 @@
         <li id="section-2">
             <div class="annotation">
               
-              <div class="pilwrap ">
+              <div class="pilwrap for-h2">
                 <a class="pilcrow" href="#section-2">&#182;</a>
               </div>
-              <p>Get a builder.</p>
+              <h2 id="0-1-1">0.1.1</h2>
+<ul>
+<li>remove ES6 dependencies</li>
+<li>switch from document-register-element to webcomponents-lite.js for IE9/IE10 support</li>
+<li>fix ceb-feature-template for IE9/IE10</li>
+<li>add more tested browsers</li>
+</ul>
 
             </div>
-            
-            <div class="content"><div class='highlight'><pre><span class="hljs-keyword">var</span> builder = ceb().name(<span class="hljs-string">'extended-tag'</span>);</pre></div></div>
             
         </li>
         
@@ -113,59 +117,12 @@
               <div class="pilwrap for-h2">
                 <a class="pilcrow" href="#section-3">&#182;</a>
               </div>
-              <h2 id="extends-and-prototype">Extends and prototype</h2>
+              <h2 id="0-1-0">0.1.0</h2>
+<ul>
+<li>intial version</li>
+</ul>
 
             </div>
-            
-        </li>
-        
-        
-        <li id="section-4">
-            <div class="annotation">
-              
-              <div class="pilwrap ">
-                <a class="pilcrow" href="#section-4">&#182;</a>
-              </div>
-              <p>By default the structure doesn’t set an extends value.
-However, the prototype value is by default <em>Object.create(HTMLElement.prototype)</em></p>
-
-            </div>
-            
-        </li>
-        
-        
-        <li id="section-5">
-            <div class="annotation">
-              
-              <div class="pilwrap ">
-                <a class="pilcrow" href="#section-5">&#182;</a>
-              </div>
-              <p>The builder’s method <strong>extends</strong> adds the given extends value to the structure.</p>
-<blockquote>
-<p>@param name (string) the name of the custom element</p>
-</blockquote>
-
-            </div>
-            
-            <div class="content"><div class='highlight'><pre>builder.extends(<span class="hljs-string">'button'</span>);</pre></div></div>
-            
-        </li>
-        
-        
-        <li id="section-6">
-            <div class="annotation">
-              
-              <div class="pilwrap ">
-                <a class="pilcrow" href="#section-6">&#182;</a>
-              </div>
-              <p>The builder’s method <strong>prototype</strong> adds the given prototype value to the structure.</p>
-<blockquote>
-<p>@param prototype (object) the prototype of the custom element</p>
-</blockquote>
-
-            </div>
-            
-            <div class="content"><div class='highlight'><pre>builder.prototype(<span class="hljs-built_in">Object</span>.create(HTMLButtonElement.prototype));</pre></div></div>
             
         </li>
         

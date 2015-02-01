@@ -27,6 +27,10 @@
                 index
               </a>
             
+              <a class="source" href="changelogs.html">
+                changelogs
+              </a>
+            
               <a class="source" href="doc.1.usage.html">
                 doc - usage
               </a>
@@ -103,32 +107,28 @@
 <li>The source code is continuously built on <a href="https://travis-ci.org/tmorin/custom-elements-builder">Travis</a></li>
 <li>The test suite is automatically executed using <a href="https://saucelabs.com/u/customelementbuilder">Sauce Labs</a></li>
 <li>The code coverage report is pushed to <a href="https://coveralls.io/r/tmorin/custom-elements-builder">coveralls</a></li>
+<li><a href="changelogs.html">Change logs</a></li>
 </ul>
 <hr>
 <h2 id="compatibilities">Compatibilities</h2>
 <p><a href="https://saucelabs.com/u/customelementbuilder"><img src="https://saucelabs.com/browser-matrix/customelementbuilder.svg" alt="Sauce Test Status"></a></p>
 <p><strong>ceb</strong> should and will work without dependencies on evergreen browsers.
-To execute it with none evergreen browsers, you should need of:</p>
+However for the others like IE9/IE10 you have to use a <a href="http://www.w3.org/TR/custom-elements/">Custom Elements</a> polyfill like:</p>
 <ul>
-<li>Obviously <a href="http://www.w3.org/TR/custom-elements/">Custom Elements</a> polyfill<ul>
 <li>webcomponents-lite.js from <a href="http://webcomponents.org/polyfills/">webcomponents.org</a></li>
 <li>or <a href="https://github.com/WebReflection/document-register-element">document-register-element</a></li>
-</ul>
-</li>
-<li>ES5 and some features from ES6 <a href="https://github.com/paulmillr/es6-shim">es6-shim</a></li>
 </ul>
 <hr>
 <h2 id="cdn">CDN</h2>
 <p>CDN files can be found on <a href="https://cdnjs.com/libraries/custom-elements-builder">cdnjs</a></p>
-<pre><code>&lt;script src=<span class="hljs-string">"https://cdnjs.cloudflare.com/ajax/libs/custom-elements-builder/0.1.0/ceb.min.js"</span>&gt;<span class="xml"><span class="hljs-tag">&lt;/<span class="hljs-title">script</span>&gt;</span>
+<pre><code>&lt;script src=<span class="hljs-string">"https://cdnjs.cloudflare.com/ajax/libs/custom-elements-builder/0.1.1/ceb.min.js"</span>&gt;<span class="xml"><span class="hljs-tag">&lt;/<span class="hljs-title">script</span>&gt;</span>
 
-<span class="hljs-tag">&lt;<span class="hljs-title">script</span> <span class="hljs-attribute">src</span>=<span class="hljs-value">"https://cdnjs.cloudflare.com/ajax/libs/custom-elements-builder/0.1.0/ceb-feature-template.min.js"</span>&gt;</span><span class="javascript"></span><span class="hljs-tag">&lt;/<span class="hljs-title">script</span>&gt;</span></span>
+<span class="hljs-tag">&lt;<span class="hljs-title">script</span> <span class="hljs-attribute">src</span>=<span class="hljs-value">"https://cdnjs.cloudflare.com/ajax/libs/custom-elements-builder/0.1.1/ceb-feature-template.min.js"</span>&gt;</span><span class="javascript"></span><span class="hljs-tag">&lt;/<span class="hljs-title">script</span>&gt;</span></span>
 </code></pre><hr>
 <h2 id="installation">Installation</h2>
 <ul>
 <li>npm: <code>npm install ceb --save</code></li>
 <li>bower: <code>npm bower ceb --save</code></li>
-<li>component <code>component install tmorin/custom-elements-builder</code></li>
 <li>amd: <code>require([&#39;ceb&#39;, ...</code></li>
 </ul>
 

@@ -27,6 +27,10 @@
                 index
               </a>
             
+              <a class="source" href="changelogs.html">
+                changelogs
+              </a>
+            
               <a class="source" href="doc.1.usage.html">
                 doc - usage
               </a>
@@ -94,7 +98,8 @@
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-2">&#182;</a>
               </div>
-              <p>Presently, this feature does work with IE9 and IE10.</p>
+              <p>Works on ever-green browsers and IE9/IE10.
+However the template feature doesn’t work with <a href="https://github.com/WebReflection/document-register-element">document-register-element</a> on IE9/IE10.</p>
 
             </div>
             
@@ -122,7 +127,7 @@ It will be available via <code>feature(el).header</code>.</p>
             <div class="content"><div class='highlight'><pre>
 (<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(g, factory)</span> </span>{
 <span class="hljs-pi">    'use strict'</span>;
-
+ 
     <span class="hljs-comment">/* istanbul ignore next */</span>
     <span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span> exports === <span class="hljs-string">'object'</span>) {
         <span class="hljs-built_in">module</span>.exports = factory();
@@ -352,7 +357,8 @@ but a sub content node linked to one of its descents.</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>            <span class="hljs-keyword">var</span> oldContentNode = findContentNode(el);</pre></div></div>
+            <div class="content"><div class='highlight'><pre>
+            <span class="hljs-keyword">var</span> oldContentNode = findContentNode(el);</pre></div></div>
             
         </li>
         
@@ -380,11 +386,9 @@ but a sub content node linked to one of its descents.</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-18">&#182;</a>
               </div>
-              <p>Generate the new content’s id value.</p>
+              <p>lightChildren = Array.prototype.slice.call(oldContentNode.childNodes);</p>
 
             </div>
-            
-            <div class="content"><div class='highlight'><pre>            <span class="hljs-keyword">var</span> newCebContentId = <span class="hljs-string">'ceb-'</span> + (counter++) + <span class="hljs-string">'-content'</span>;</pre></div></div>
             
         </li>
         
@@ -395,11 +399,11 @@ but a sub content node linked to one of its descents.</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-19">&#182;</a>
               </div>
-              <p>Replace the original attribute name by the id.</p>
+              <p>Generate the new content’s id value.</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>            template = template.replace(<span class="hljs-string">' ceb-content'</span>, <span class="hljs-string">' '</span> + newCebContentId);</pre></div></div>
+            <div class="content"><div class='highlight'><pre>            <span class="hljs-keyword">var</span> newCebContentId = <span class="hljs-string">'ceb-'</span> + (counter++) + <span class="hljs-string">'-content'</span>;</pre></div></div>
             
         </li>
         
@@ -409,6 +413,21 @@ but a sub content node linked to one of its descents.</p>
               
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-20">&#182;</a>
+              </div>
+              <p>Replace the original attribute name by the id.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>            template = template.replace(<span class="hljs-string">' ceb-content'</span>, <span class="hljs-string">' '</span> + newCebContentId);</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-21">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-21">&#182;</a>
               </div>
               <p>Keep a value of the content’s id value if the node is cloned.</p>
 
@@ -420,11 +439,11 @@ but a sub content node linked to one of its descents.</p>
         </li>
         
         
-        <li id="section-21">
+        <li id="section-22">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-21">&#182;</a>
+                <a class="pilcrow" href="#section-22">&#182;</a>
               </div>
               <p>Transform the template string into an alive DOM nodes.</p>
 
@@ -437,11 +456,11 @@ but a sub content node linked to one of its descents.</p>
         </li>
         
         
-        <li id="section-22">
+        <li id="section-23">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-22">&#182;</a>
+                <a class="pilcrow" href="#section-23">&#182;</a>
               </div>
               <p>Get the content node to add him the in pending light DOM.</p>
 
@@ -449,8 +468,22 @@ but a sub content node linked to one of its descents.</p>
             
             <div class="content"><div class='highlight'><pre>            <span class="hljs-keyword">var</span> newContentNode = findContentNode(el);
             lightChildren.forEach(<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(child)</span> </span>{
-                newContentNode.appendChild(child);
-            });
+                newContentNode.appendChild(child);</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-24">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-24">&#182;</a>
+              </div>
+              <p>newContentNode.appendChild(child);</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>            });
         }
 
         <span class="hljs-keyword">if</span> (isNodeReferences) {</pre></div></div>
@@ -458,11 +491,11 @@ but a sub content node linked to one of its descents.</p>
         </li>
         
         
-        <li id="section-23">
+        <li id="section-25">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-23">&#182;</a>
+                <a class="pilcrow" href="#section-25">&#182;</a>
               </div>
               <p>Get the reference nodes and attach them to the element templating scope.</p>
 
@@ -478,11 +511,11 @@ but a sub content node linked to one of its descents.</p>
         </li>
         
         
-        <li id="section-24">
+        <li id="section-26">
             <div class="annotation">
               
               <div class="pilwrap for-h2">
-                <a class="pilcrow" href="#section-24">&#182;</a>
+                <a class="pilcrow" href="#section-26">&#182;</a>
               </div>
               <h2 id="setup-function">Setup function</h2>
 
@@ -491,11 +524,11 @@ but a sub content node linked to one of its descents.</p>
         </li>
         
         
-        <li id="section-25">
+        <li id="section-27">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-25">&#182;</a>
+                <a class="pilcrow" href="#section-27">&#182;</a>
               </div>
               <p>The templeting process is done before the call of the <code>createdCallback</code> method defined in the structure.</p>
 
@@ -509,11 +542,11 @@ but a sub content node linked to one of its descents.</p>
         </li>
         
         
-        <li id="section-26">
+        <li id="section-28">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-26">&#182;</a>
+                <a class="pilcrow" href="#section-28">&#182;</a>
               </div>
               <p>Register a wrapper to the createdCallback callback in order to
 apply the template before the original call.</p>

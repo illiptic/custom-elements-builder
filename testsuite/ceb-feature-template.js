@@ -1,6 +1,7 @@
 // # ceb-feature-template.js
 
-// Presently, this feature does work with IE9 and IE10.
+// Works on ever-green browsers and IE9/IE10.
+// However the template feature doesn't work with [document-register-element](https://github.com/WebReflection/document-register-element) on IE9/IE10.
 
 // ## Light DOM
 //
@@ -19,7 +20,7 @@
 
 (function (g, factory) {
     'use strict';
-
+ 
     /* istanbul ignore next */
     if (typeof exports === 'object') {
         module.exports = factory();
@@ -90,12 +91,14 @@
             // When the node is freshly created, the content node is the element.
             // When the node has been created by clonning, the content node is not anymore the element,
             // but a sub content node linked to one of its descents.
+
             var oldContentNode = findContentNode(el);
 
             // Remove the light DOM to keep it.
             while (oldContentNode.childNodes.length > 0) {
                 lightChildren.push(oldContentNode.removeChild(oldContentNode.childNodes[0]));
             }
+            // lightChildren = Array.prototype.slice.call(oldContentNode.childNodes);
 
             // Generate the new content's id value.
             var newCebContentId = 'ceb-' + (counter++) + '-content';
@@ -115,6 +118,7 @@
             var newContentNode = findContentNode(el);
             lightChildren.forEach(function (child) {
                 newContentNode.appendChild(child);
+                // newContentNode.appendChild(child);
             });
         }
 

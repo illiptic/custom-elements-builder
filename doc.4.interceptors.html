@@ -27,6 +27,10 @@
                 index
               </a>
             
+              <a class="source" href="changelogs.html">
+                changelogs
+              </a>
+            
               <a class="source" href="doc.1.usage.html">
                 doc - usage
               </a>
@@ -380,11 +384,16 @@ Its argument will be the value of the next stacked callback.</p>
                 <a class="pilcrow" href="#section-20">&#182;</a>
               </div>
               <p>The builder’s method <strong>intercept</strong> adds to the structure the given interceptors according to the intercepted property.</p>
-<p>The first argument of the method <em>intercept</em> is the property name.
-The second argument is the callback dedicated to the write access, it’s optional.
-The third argument is the callback dedicated to the read access, it’s optional.</p>
+<blockquote>
+<p>@param name (string) the name of the property to intercept
+@param interceptWrite (function) the callback for write accesses
+@param interceptRead (function) the callback for read accesses</p>
+</blockquote>
 
             </div>
+            
+            <div class="content"><div class='highlight'><pre>
+builder.intercept(<span class="hljs-string">'propIntercepted'</span>, interceptWrite, interceptRead);</pre></div></div>
             
         </li>
         
@@ -395,8 +404,9 @@ The third argument is the callback dedicated to the read access, it’s optional
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-21">&#182;</a>
               </div>
-              <p>The write accesses of the property <em>propIntercepted</em> will be intercepted by the callback <em>interceptWrite</em>.
-The read accesses of the property <em>propIntercepted</em> will be intercepted by the callback <em>interceptRead</em>.</p>
+              <p>The first argument of the method <em>intercept</em> is the property name.
+The second argument is the callback dedicated to the write access, it’s optional.
+The third argument is the callback dedicated to the read access, it’s optional.</p>
 
             </div>
             
@@ -409,15 +419,10 @@ The read accesses of the property <em>propIntercepted</em> will be intercepted b
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-22">&#182;</a>
               </div>
-              <blockquote>
-<p>@param name (string) the name of the property to intercept
-@param interceptWrite (function) the callback for write accesses
-@param interceptRead (function) the callback for read accesses</p>
-</blockquote>
+              <p>The write accesses of the property <em>propIntercepted</em> will be intercepted by the callback <em>interceptWrite</em>.
+The read accesses of the property <em>propIntercepted</em> will be intercepted by the callback <em>interceptRead</em>.</p>
 
             </div>
-            
-            <div class="content"><div class='highlight'><pre>builder.intercept(<span class="hljs-string">'propIntercepted'</span>, interceptWrite, interceptRead);</pre></div></div>
             
         </li>
         

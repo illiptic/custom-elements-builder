@@ -27,6 +27,10 @@
                 index
               </a>
             
+              <a class="source" href="changelogs.html">
+                changelogs
+              </a>
+            
               <a class="source" href="doc.1.usage.html">
                 doc - usage
               </a>
@@ -169,6 +173,11 @@ Wrappers will wrap the method execution, by this way they can process logic arou
                 <a class="pilcrow" href="#section-7">&#182;</a>
               </div>
               <p>The function <em>wrapper</em> is the wrapper callback.</p>
+<blockquote>
+<p>@param next (function) will call the next stacked callback
+@param el (HTMLElement) the current element
+@param args… (*) original arugments are append to the two previous arguments</p>
+</blockquote>
 
             </div>
             
@@ -289,6 +298,10 @@ The second argument is the callback.</p>
                 <a class="pilcrow" href="#section-15">&#182;</a>
               </div>
               <p>The execution of <em>methodWrapped</em> will be wrapped with the callback <em>wrapper</em>.</p>
+<blockquote>
+<p>@param name (string) the name of the method to intercept
+@param wrapper (function) the callback</p>
+</blockquote>
 
             </div>
             
