@@ -2,11 +2,11 @@
 
 <html>
 <head>
-  <title>ceb-feature-template.js</title>
+  <title>ceb - ceb-feature-template.js</title>
   <meta http-equiv="content-type" content="text/html; charset=UTF-8">
   <meta name="viewport" content="width=device-width, target-densitydpi=160dpi, initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
   <link rel="stylesheet" media="all" href="public/stylesheets/normalize.css" />
-  <link rel="stylesheet" media="all" href="docco.css" />
+  <link rel="stylesheet" media="all" href="page.css" />
 </head>
 <body>
 
@@ -31,36 +31,16 @@
                 changelogs
               </a>
             
-              <a class="source" href="doc.1.usage.html">
-                doc - usage
+              <a class="source" href="0.2.x/doc.1.usage.html">
+                doc - 0.2.x
               </a>
             
-              <a class="source" href="doc.2.inheritance.html">
-                doc - inheritance
+              <a class="source" href="0.1.x/doc.1.usage.html">
+                doc - 0.1.x
               </a>
             
-              <a class="source" href="doc.3.properties.html">
-                doc - properties
-              </a>
-            
-              <a class="source" href="doc.4.interceptors.html">
-                doc - interceptors
-              </a>
-            
-              <a class="source" href="doc.5.methods.html">
-                doc - methods
-              </a>
-            
-              <a class="source" href="doc.6.wrappers.html">
-                doc - wrappers
-              </a>
-            
-              <a class="source" href="doc.7.listeners.html">
-                doc - listeners
-              </a>
-            
-              <a class="source" href="doc.8.features.html">
-                doc - features
+              <a class="source" href="ceb-feature-frp.html">
+                source - ceb-feature-frp.js
               </a>
             
               <a class="source" href="ceb-feature-template.html">
@@ -77,57 +57,31 @@
     
     <ul class="sections">
         
+          <li id="title">
+              <div class="annotation">
+                  <h1>ceb-feature-template.js</h1>
+              </div>
+          </li>
+        
         
         
         <li id="section-1">
             <div class="annotation">
               
-              <div class="pilwrap for-h1">
+              <div class="pilwrap ">
                 <a class="pilcrow" href="#section-1">&#182;</a>
               </div>
-              <h1 id="ceb-feature-template-js">ceb-feature-template.js</h1>
-
+              <pre><code>custom-elements-builder <span class="hljs-number">0.2</span><span class="hljs-number">.0</span> http:<span class="hljs-comment">//tmorin.github.io/custom-elements-builder</span>
+Custom Elements Builder (ceb) is ... a builder <span class="hljs-keyword">for</span> Custom Elements.
+Buil date: <span class="hljs-number">2015</span>-<span class="hljs-number">02</span>-<span class="hljs-number">02</span>
+Copyright <span class="hljs-number">2015</span>-<span class="hljs-number">2015</span> Thibault Morin
+Available under MIT license
+</code></pre>
             </div>
             
-        </li>
-        
-        
-        <li id="section-2">
-            <div class="annotation">
-              
-              <div class="pilwrap ">
-                <a class="pilcrow" href="#section-2">&#182;</a>
-              </div>
-              <p>Works on ever-green browsers and IE9/IE10.
-However the template feature doesn’t work with <a href="https://github.com/WebReflection/document-register-element">document-register-element</a> on IE9/IE10.</p>
-
-            </div>
-            
-        </li>
-        
-        
-        <li id="section-3">
-            <div class="annotation">
-              
-              <div class="pilwrap for-h2">
-                <a class="pilcrow" href="#section-3">&#182;</a>
-              </div>
-              <h2 id="light-dom">Light DOM</h2>
-<p>The template can contains a node having the attribute <code>ceb-content</code>.
-The marked node is intend to host the light DOM of the current element at the end of the templating process.</p>
-<p>If the template doesn’t contain this node, the light DOM will be lost.</p>
-<h2 id="dom-nodes-references">DOM nodes references</h2>
-<p>The template can contains nodes having the attribute <code>ceb-ref</code>.
-The marked nodes will be available at the end of the templating process from the feature function (<code>feature(el)</code>).</p>
-<p>That means, if a node has the attribute <code>ceb-ref=&quot;header&quot;</code>.
-It will be available via <code>feature(el).header</code>.</p>
-
-            </div>
-            
-            <div class="content"><div class='highlight'><pre>
-(<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(g, factory)</span> </span>{
+            <div class="content"><div class='highlight'><pre>(<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(g, factory)</span> </span>{
 <span class="hljs-pi">    'use strict'</span>;
- 
+
     <span class="hljs-comment">/* istanbul ignore next */</span>
     <span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span> exports === <span class="hljs-string">'object'</span>) {
         <span class="hljs-built_in">module</span>.exports = factory();
@@ -143,11 +97,11 @@ It will be available via <code>feature(el).header</code>.</p>
         </li>
         
         
-        <li id="section-4">
+        <li id="section-2">
             <div class="annotation">
               
               <div class="pilwrap for-h2">
-                <a class="pilcrow" href="#section-4">&#182;</a>
+                <a class="pilcrow" href="#section-2">&#182;</a>
               </div>
               <h2 id="feature-function">feature function</h2>
 
@@ -156,11 +110,11 @@ It will be available via <code>feature(el).header</code>.</p>
         </li>
         
         
-        <li id="section-5">
+        <li id="section-3">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-5">&#182;</a>
+                <a class="pilcrow" href="#section-3">&#182;</a>
               </div>
               <p>The template feature’s function returns the nodes’ reference of the template.</p>
 
@@ -176,11 +130,11 @@ It will be available via <code>feature(el).header</code>.</p>
         </li>
         
         
-        <li id="section-6">
+        <li id="section-4">
             <div class="annotation">
               
               <div class="pilwrap for-h2">
-                <a class="pilcrow" href="#section-6">&#182;</a>
+                <a class="pilcrow" href="#section-4">&#182;</a>
               </div>
               <h2 id="templating-stuff">Templating stuff</h2>
 
@@ -189,11 +143,11 @@ It will be available via <code>feature(el).header</code>.</p>
         </li>
         
         
-        <li id="section-7">
+        <li id="section-5">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-7">&#182;</a>
+                <a class="pilcrow" href="#section-5">&#182;</a>
               </div>
               <p>The counter is used to generate unique DOM’s id.</p>
 
@@ -204,11 +158,11 @@ It will be available via <code>feature(el).header</code>.</p>
         </li>
         
         
-        <li id="section-8">
+        <li id="section-6">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-8">&#182;</a>
+                <a class="pilcrow" href="#section-6">&#182;</a>
               </div>
               <p>Regex to detect the <em>ceb-ref</em> attributes</p>
 
@@ -219,11 +173,11 @@ It will be available via <code>feature(el).header</code>.</p>
         </li>
         
         
-        <li id="section-9">
+        <li id="section-7">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-9">&#182;</a>
+                <a class="pilcrow" href="#section-7">&#182;</a>
               </div>
               <p>Regex to detect the <em>ceb-content</em> attribute</p>
 
@@ -234,11 +188,11 @@ It will be available via <code>feature(el).header</code>.</p>
         </li>
         
         
-        <li id="section-10">
+        <li id="section-8">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-10">&#182;</a>
+                <a class="pilcrow" href="#section-8">&#182;</a>
               </div>
               <p>Find recursively the content’s node of the current element.</p>
 
@@ -255,11 +209,11 @@ It will be available via <code>feature(el).header</code>.</p>
         </li>
         
         
-        <li id="section-11">
+        <li id="section-9">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-11">&#182;</a>
+                <a class="pilcrow" href="#section-9">&#182;</a>
               </div>
               <p>Apply a template to an element.</p>
 
@@ -275,11 +229,11 @@ It will be available via <code>feature(el).header</code>.</p>
         </li>
         
         
-        <li id="section-12">
+        <li id="section-10">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-12">&#182;</a>
+                <a class="pilcrow" href="#section-10">&#182;</a>
               </div>
               <p>Update the template to detect the DOM nodes references.</p>
 
@@ -292,11 +246,11 @@ It will be available via <code>feature(el).header</code>.</p>
         </li>
         
         
-        <li id="section-13">
+        <li id="section-11">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-13">&#182;</a>
+                <a class="pilcrow" href="#section-11">&#182;</a>
               </div>
               <p>build an id of the reference</p>
 
@@ -307,11 +261,11 @@ It will be available via <code>feature(el).header</code>.</p>
         </li>
         
         
-        <li id="section-14">
+        <li id="section-12">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-14">&#182;</a>
+                <a class="pilcrow" href="#section-12">&#182;</a>
               </div>
               <p>replace the original attribute name by the idenitifer</p>
 
@@ -322,11 +276,11 @@ It will be available via <code>feature(el).header</code>.</p>
         </li>
         
         
-        <li id="section-15">
+        <li id="section-13">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-15">&#182;</a>
+                <a class="pilcrow" href="#section-13">&#182;</a>
               </div>
               <p>push the entry</p>
 
@@ -344,11 +298,11 @@ It will be available via <code>feature(el).header</code>.</p>
         </li>
         
         
-        <li id="section-16">
+        <li id="section-14">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-16">&#182;</a>
+                <a class="pilcrow" href="#section-14">&#182;</a>
               </div>
               <p>Get the current content node having the light DOM nodes,
 When the node is freshly created, the content node is the element.
@@ -363,11 +317,11 @@ but a sub content node linked to one of its descents.</p>
         </li>
         
         
-        <li id="section-17">
+        <li id="section-15">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-17">&#182;</a>
+                <a class="pilcrow" href="#section-15">&#182;</a>
               </div>
               <p>Remove the light DOM to keep it.</p>
 
@@ -380,11 +334,11 @@ but a sub content node linked to one of its descents.</p>
         </li>
         
         
-        <li id="section-18">
+        <li id="section-16">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-18">&#182;</a>
+                <a class="pilcrow" href="#section-16">&#182;</a>
               </div>
               <p>lightChildren = Array.prototype.slice.call(oldContentNode.childNodes);</p>
 
@@ -393,11 +347,11 @@ but a sub content node linked to one of its descents.</p>
         </li>
         
         
-        <li id="section-19">
+        <li id="section-17">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-19">&#182;</a>
+                <a class="pilcrow" href="#section-17">&#182;</a>
               </div>
               <p>Generate the new content’s id value.</p>
 
@@ -408,11 +362,11 @@ but a sub content node linked to one of its descents.</p>
         </li>
         
         
-        <li id="section-20">
+        <li id="section-18">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-20">&#182;</a>
+                <a class="pilcrow" href="#section-18">&#182;</a>
               </div>
               <p>Replace the original attribute name by the id.</p>
 
@@ -423,11 +377,11 @@ but a sub content node linked to one of its descents.</p>
         </li>
         
         
-        <li id="section-21">
+        <li id="section-19">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-21">&#182;</a>
+                <a class="pilcrow" href="#section-19">&#182;</a>
               </div>
               <p>Keep a value of the content’s id value if the node is cloned.</p>
 
@@ -439,11 +393,11 @@ but a sub content node linked to one of its descents.</p>
         </li>
         
         
-        <li id="section-22">
+        <li id="section-20">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-22">&#182;</a>
+                <a class="pilcrow" href="#section-20">&#182;</a>
               </div>
               <p>Transform the template string into an alive DOM nodes.</p>
 
@@ -456,11 +410,11 @@ but a sub content node linked to one of its descents.</p>
         </li>
         
         
-        <li id="section-23">
+        <li id="section-21">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-23">&#182;</a>
+                <a class="pilcrow" href="#section-21">&#182;</a>
               </div>
               <p>Get the content node to add him the in pending light DOM.</p>
 
@@ -473,11 +427,11 @@ but a sub content node linked to one of its descents.</p>
         </li>
         
         
-        <li id="section-24">
+        <li id="section-22">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-24">&#182;</a>
+                <a class="pilcrow" href="#section-22">&#182;</a>
               </div>
               <p>newContentNode.appendChild(child);</p>
 
@@ -491,11 +445,11 @@ but a sub content node linked to one of its descents.</p>
         </li>
         
         
-        <li id="section-25">
+        <li id="section-23">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-25">&#182;</a>
+                <a class="pilcrow" href="#section-23">&#182;</a>
               </div>
               <p>Get the reference nodes and attach them to the element templating scope.</p>
 
@@ -511,11 +465,11 @@ but a sub content node linked to one of its descents.</p>
         </li>
         
         
-        <li id="section-26">
+        <li id="section-24">
             <div class="annotation">
               
               <div class="pilwrap for-h2">
-                <a class="pilcrow" href="#section-26">&#182;</a>
+                <a class="pilcrow" href="#section-24">&#182;</a>
               </div>
               <h2 id="setup-function">Setup function</h2>
 
@@ -524,11 +478,11 @@ but a sub content node linked to one of its descents.</p>
         </li>
         
         
-        <li id="section-27">
+        <li id="section-25">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-27">&#182;</a>
+                <a class="pilcrow" href="#section-25">&#182;</a>
               </div>
               <p>The templeting process is done before the call of the <code>createdCallback</code> method defined in the structure.</p>
 
@@ -542,11 +496,11 @@ but a sub content node linked to one of its descents.</p>
         </li>
         
         
-        <li id="section-28">
+        <li id="section-26">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-28">&#182;</a>
+                <a class="pilcrow" href="#section-26">&#182;</a>
               </div>
               <p>Register a wrapper to the createdCallback callback in order to
 apply the template before the original call.</p>
@@ -557,6 +511,15 @@ apply the template before the original call.</p>
             apply(tpl, el, isHandleLightDOM, isNodeReferences);
             next(<span class="hljs-built_in">arguments</span>);
         });
+        <span class="hljs-keyword">if</span> (isHandleLightDOM) {
+            builder.properties({
+                contentNode: {
+                    get: <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(el)</span> </span>{
+                        <span class="hljs-keyword">return</span> findContentNode(el);
+                    }
+                }
+            });
+        }
     }
     feature.setup = setup;
 

@@ -1,26 +1,13 @@
-// # ceb-feature-template.js
-
-// Works on ever-green browsers and IE9/IE10.
-// However the template feature doesn't work with [document-register-element](https://github.com/WebReflection/document-register-element) on IE9/IE10.
-
-// ## Light DOM
 //
-// The template can contains a node having the attribute `ceb-content`.
-// The marked node is intend to host the light DOM of the current element at the end of the templating process.
+//     custom-elements-builder 0.2.0 http://tmorin.github.io/custom-elements-builder
+//     Custom Elements Builder (ceb) is ... a builder for Custom Elements.
+//     Buil date: 2015-02-02
+//     Copyright 2015-2015 Thibault Morin
+//     Available under MIT license
 //
-// If the template doesn't contain this node, the light DOM will be lost.
-//
-// ## DOM nodes references
-//
-// The template can contains nodes having the attribute `ceb-ref`.
-// The marked nodes will be available at the end of the templating process from the feature function (`feature(el)`).
-//
-// That means, if a node has the attribute `ceb-ref="header"`.
-// It will be available via `feature(el).header`.
-
 (function (g, factory) {
     'use strict';
- 
+
     /* istanbul ignore next */
     if (typeof exports === 'object') {
         module.exports = factory();
@@ -144,6 +131,15 @@
             apply(tpl, el, isHandleLightDOM, isNodeReferences);
             next(arguments);
         });
+        if (isHandleLightDOM) {
+            builder.properties({
+                contentNode: {
+                    get: function (el) {
+                        return findContentNode(el);
+                    }
+                }
+            });
+        }
     }
     feature.setup = setup;
 

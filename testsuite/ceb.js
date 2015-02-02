@@ -1,4 +1,10 @@
-// # ceb.js
+//
+//     custom-elements-builder 0.2.0 http://tmorin.github.io/custom-elements-builder
+//     Custom Elements Builder (ceb) is ... a builder for Custom Elements.
+//     Buil date: 2015-02-02
+//     Copyright 2015-2015 Thibault Morin
+//     Available under MIT license
+//
 (function (g, factory) {
     'use strict';
 
@@ -86,7 +92,7 @@
     }
 
     // Create an accessor function in order to wrap the original accessor with its accessors.
-    function accessorFactory(wrappers, wrapped) {
+    function accessorFactory(wrappers, wrapped, propName) {
         // Order the stack of wrappers
         var stack = wrappers.sort(compareLevels);
         return function accessor() {
@@ -95,19 +101,19 @@
             // calling the next function when its argument function next is called.
             // The original accessor is the last call.
             return stack.reduce(function (previous, current) {
-                return current.bind(el, previous, el);
-            }, wrapped.bind(el, el)).apply(el, arguments);
+                return current.bind(el, previous, el, propName);
+            }, wrapped.bind(el, el, propName)).apply(el, arguments);
         };
     }
 
     // Create the accessor set for a property linked to an attribute
     function attributeAccessorSetFactory(attName, setter, isBoolean) {
-        return function attributeAccessorSet(el, value) {
+        return function attributeAccessorSet(el, propName, value) {
             // By default, the attribute value is the set value.
             var attValue = value;
             if (setter) {
                 // The default value can be overridden by a given setter.
-                attValue = setter.call(el, el, value);
+                attValue = setter.call(el, el, propName, value);
             }
             // Finally apply the attribute to the linked attribute.
             applyAttributeValue(el, attName, attValue, isBoolean);
@@ -116,12 +122,12 @@
 
     // Create the accessor get for a property linked to an attribute
     function attributeAccessorGetFactory(attName, getter, isBoolean) {
-        return function attributeAccessorGet(el) {
+        return function attributeAccessorGet(el, propName) {
             // By default, the returned value is the attribute value.
             var value = isBoolean ? el.hasAttribute(attName) : el.getAttribute(attName);
             if (getter) {
                 // The returned value can be overridden by a given getter.
-                value = getter.call(el, el, value);
+                value = getter.call(el, el, propName, value);
             }
             // Finally the value is returned
             return value;
@@ -220,20 +226,20 @@
                 var interceptors = struct.interceptors[property.propName] || {};
                 if (property.set) {
                     var setStack = interceptors.set || [];
-                    definedProperty.set = accessorFactory(setStack, property.set);
+                    definedProperty.set = accessorFactory(setStack, property.set, property.propName);
                 }
                 if (property.get) {
                     var getStack = interceptors.get || [];
-                    definedProperty.get = accessorFactory(getStack, property.get);
+                    definedProperty.get = accessorFactory(getStack, property.get, property.propName);
                 }
             }
 
             // Finally add the defined property to the current property.
             return Object.assign(property, {
-                property: definedProperty
+                definedProperty: definedProperty
             });
         }).reduce(function (previous, current) {
-            previous[current.propName] = current.property;
+            previous[current.propName] = current.definedProperty;
             return previous;
         }, {});
     }
@@ -293,7 +299,7 @@
     // ### Interceptors
 
     // Intercept write accesses of delegable properties.
-    function delegableSetAccessorInterceptor(property, next, el, value) {
+    function delegableSetAccessorInterceptor(property, next, el, propName, value) {
         next(value);
         // Logic should be done after the effective write.
         var target = el.querySelector(property.delegate.target);
@@ -323,7 +329,7 @@
     }
 
     // Intercept read accesses of delegable properties.
-    function delegableGetAccessorInterceptor(property, next, el, value) {
+    function delegableGetAccessorInterceptor(property, next, el, propName, value) {
         var result = next(value);
         // Logic should be done after the effective write.
         var target = el.querySelector(property.delegate.target);
@@ -386,15 +392,24 @@
         builder.wrap('createdCallback', function (next, el) {
             next(arguments);
             // Initialize the properties' value after the call of the createdCallback method.
-            listValues(struct.properties).forEach(function (property) {
-                if (property.attName) {
-                    if (el.hasAttribute(property.attName)) {
-                        el[property.propName] = property.attribute.boolean ? true : el.getAttribute(property.attName);
-                    } else if (property.hasOwnProperty('value')) {
-                        applyAttributeValue(el, property.attName, property.value, property.attribute.boolean);
-                    }
-                } else if (property.hasOwnProperty('value') && property.writable) {
+            listValues(struct.properties).filter(function (property) {
+                return !property.attName;
+            }).forEach(function (property) {
+                if (property.hasOwnProperty('value') && property.writable) {
                     el[property.propName] = property.value;
+                } else if (property.valueFactory) {
+                    el[property.propName] = property.valueFactory(el);
+                }
+            });
+
+            // Initialize the attributes' value after the call of the createdCallback method.
+            listValues(struct.properties).filter(function (property) {
+                return property.attName;
+            }).forEach(function (property) {
+                if (el.hasAttribute(property.attName)) {
+                    el[property.propName] = property.attribute.boolean ? true : el.getAttribute(property.attName);
+                } else if (property.hasOwnProperty('value')) {
+                    applyAttributeValue(el, property.attName, property.value, property.attribute.boolean);
                 }
             });
         });

@@ -2,11 +2,12 @@
 
 <html>
 <head>
-  <title>Wrappers</title>
+  <title>ceb - template - 0.2.x</title>
   <meta http-equiv="content-type" content="text/html; charset=UTF-8">
   <meta name="viewport" content="width=device-width, target-densitydpi=160dpi, initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
-  <link rel="stylesheet" media="all" href="public/stylesheets/normalize.css" />
-  <link rel="stylesheet" media="all" href="docco.css" />
+  <link rel="stylesheet" media="all" href="../public/stylesheets/normalize.css" />
+  <link rel="stylesheet" media="all" href="../page.css" />
+  <link rel="stylesheet" media="all" href="doc.css" />
 </head>
 <body>
 
@@ -23,12 +24,8 @@
           <div id="jump_wrapper">
           <div id="jump_page">
             
-              <a class="source" href="index.html">
+              <a class="source" href="../">
                 index
-              </a>
-            
-              <a class="source" href="changelogs.html">
-                changelogs
               </a>
             
               <a class="source" href="doc.1.usage.html">
@@ -63,29 +60,36 @@
                 doc - features
               </a>
             
-              <a class="source" href="ceb-feature-template.html">
-                source - ceb-feature-template.js
+              <a class="source" href="feature.1.template.html">
+                feature - template
               </a>
             
-              <a class="source" href="ceb.html">
-                source - ceb.js
+              <a class="source" href="feature.2.frp.html">
+                feature - frp
               </a>
             
           </div>
         </li>
       </ul>
     
+
     <ul class="sections">
+        
+          <li id="title">
+              <div class="annotation">
+                  <h1>template <small>0.2.x</small></h1>
+              </div>
+          </li>
         
         
         
         <li id="section-1">
             <div class="annotation">
               
-              <div class="pilwrap for-h1">
+              <div class="pilwrap ">
                 <a class="pilcrow" href="#section-1">&#182;</a>
               </div>
-              <h1 id="wrappers">Wrappers</h1>
+              <p>Be careful, the template feature doesn’t work with <a href="https://github.com/WebReflection/document-register-element">document-register-element</a> on IE9/IE10!</p>
 
             </div>
             
@@ -95,14 +99,12 @@
         <li id="section-2">
             <div class="annotation">
               
-              <div class="pilwrap ">
+              <div class="pilwrap for-h2">
                 <a class="pilcrow" href="#section-2">&#182;</a>
               </div>
-              <p>Get a builder.</p>
+              <h2 id="overview">Overview</h2>
 
             </div>
-            
-            <div class="content"><div class='highlight'><pre><span class="hljs-keyword">var</span> builder = ceb().name(<span class="hljs-string">'methods-wrapped-tag'</span>);</pre></div></div>
             
         </li>
         
@@ -110,10 +112,10 @@
         <li id="section-3">
             <div class="annotation">
               
-              <div class="pilwrap for-h2">
+              <div class="pilwrap ">
                 <a class="pilcrow" href="#section-3">&#182;</a>
               </div>
-              <h2 id="wrappers">Wrappers</h2>
+              <p>The template feature works only with string forming a valid HTML fragment.</p>
 
             </div>
             
@@ -126,10 +128,11 @@
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-4">&#182;</a>
               </div>
-              <p>Methods can have wrappers.
-Wrappers will wrap the method execution, by this way they can process logic around the effective execution.</p>
+              <p>The ceb-content attribute tells to the template feature where push the light DOM.</p>
 
             </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="hljs-keyword">var</span> xButtonTemplate = <span class="hljs-string">'&lt;button ceb-content&gt;&lt;/button&gt;'</span>;</pre></div></div>
             
         </li>
         
@@ -140,15 +143,13 @@ Wrappers will wrap the method execution, by this way they can process logic arou
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-5">&#182;</a>
               </div>
-              <p>Interceptors work only against structure’s methods.</p>
+              <p>The template is given to the feature using the feature’s options hash.</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>builder.methods({
-    methodWrapped: <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(el, firsname, lastname)</span> </span>{
-        <span class="hljs-keyword">return</span> <span class="hljs-string">'Hello '</span> + firsname + <span class="hljs-string">' '</span> + lastname + <span class="hljs-string">'!'</span>;
-    }
-});</pre></div></div>
+            <div class="content"><div class='highlight'><pre>ceb().name(<span class="hljs-string">'x-button'</span>).feature(cebFeatureTemplate, {
+    template: xButtonTemplate
+}).register();</pre></div></div>
             
         </li>
         
@@ -156,12 +157,20 @@ Wrappers will wrap the method execution, by this way they can process logic arou
         <li id="section-6">
             <div class="annotation">
               
-              <div class="pilwrap for-h3">
+              <div class="pilwrap ">
                 <a class="pilcrow" href="#section-6">&#182;</a>
               </div>
-              <h3 id="callback">Callback</h3>
+              <p>The ceb-ref attribute tells to the template feature which node reference push the templating scope (i.e. <code>cebFeatureTemplate(el)</code>).
+Obviously templates can contain custom elements.</p>
 
             </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="hljs-keyword">var</span> xFormTemplate = <span class="hljs-string">''</span>;
+xFormTemplate = <span class="hljs-string">'&lt;form&gt;'</span>;
+xFormTemplate = <span class="hljs-string">'&lt;div ceb-content&gt;&lt;/div&gt;'</span>;
+xFormTemplate = <span class="hljs-string">'&lt;x-button ceb-ref="submitBtn"&gt;Reset&lt;/x-button&gt;'</span>;
+xFormTemplate = <span class="hljs-string">'&lt;x-button ceb-ref="resetBtn"&gt;Submit&lt;/x-button&gt;'</span>;
+xFormTemplate = <span class="hljs-string">'&lt;/form&gt;'</span>;</pre></div></div>
             
         </li>
         
@@ -172,16 +181,13 @@ Wrappers will wrap the method execution, by this way they can process logic arou
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-7">&#182;</a>
               </div>
-              <p>The function <em>wrapper</em> is the wrapper callback.</p>
-<blockquote>
-<p>@param next (function) will call the next stacked callback
-@param el (HTMLElement) the current element
-@param args… (*) original arugments are append to the two previous arguments</p>
-</blockquote>
+              <p>The template is given to the feature using the feature’s options hash.</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">wrapper</span><span class="hljs-params">(next, el, firsname, lastname)</span> </span>{</pre></div></div>
+            <div class="content"><div class='highlight'><pre>ceb().name(<span class="hljs-string">'x-form'</span>).feature(cebFeatureTemplate, {
+    template: xFormTemplate
+}).register();</pre></div></div>
             
         </li>
         
@@ -192,9 +198,12 @@ Wrappers will wrap the method execution, by this way they can process logic arou
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-8">&#182;</a>
               </div>
-              <p>The first two arguments are always valuated, however the following are given according tothe method execution.</p>
+              <p>Create a new x-form element.</p>
 
             </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="hljs-keyword">var</span> xForm = <span class="hljs-built_in">document</span>.createElement(<span class="hljs-string">'x-form'</span>);
+<span class="hljs-built_in">document</span>.body.appendChild(xForm);</pre></div></div>
             
         </li>
         
@@ -205,12 +214,11 @@ Wrappers will wrap the method execution, by this way they can process logic arou
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-9">&#182;</a>
               </div>
-              <p>There, logic can be done with the element instance and the given arguments.</p>
+              <p><code>submitBtn</code> and <code>resetBtn</code> are available from the templating scope.</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>    <span class="hljs-keyword">var</span> f = firsname || <span class="hljs-string">'anonymous'</span>;
-    <span class="hljs-keyword">var</span> l = lastname || <span class="hljs-string">''</span>;</pre></div></div>
+            <div class="content"><div class='highlight'><pre>cebFeatureTemplate(xForm).submitBtn.click();</pre></div></div>
             
         </li>
         
@@ -221,13 +229,11 @@ Wrappers will wrap the method execution, by this way they can process logic arou
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-10">&#182;</a>
               </div>
-              <p>The function <em>next</em> will call the next stacked callback.</p>
-<p>When input arguments are not changed <em>next(arguments)</em> works well.
-Because arguments are changed, the arguments’ array have to created manually.</p>
+              <p>Will create and append the element <code>span</code> into the content node of xForm.</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>    <span class="hljs-keyword">var</span> result = next(<span class="hljs-built_in">Array</span>.prototype.slice.call(<span class="hljs-built_in">arguments</span>).slice(<span class="hljs-number">0</span>, <span class="hljs-number">2</span>).concat([f, l]));</pre></div></div>
+            <div class="content"><div class='highlight'><pre>xForm.contentNode.appendChild(<span class="hljs-built_in">document</span>.createElement(<span class="hljs-string">'span'</span>));</pre></div></div>
             
         </li>
         
@@ -235,14 +241,12 @@ Because arguments are changed, the arguments’ array have to created manually.<
         <li id="section-11">
             <div class="annotation">
               
-              <div class="pilwrap ">
+              <div class="pilwrap for-h2">
                 <a class="pilcrow" href="#section-11">&#182;</a>
               </div>
-              <p>There, logic can be done with the element instance and the returned value.</p>
+              <h2 id="light-dom">Light DOM</h2>
 
             </div>
-            
-            <div class="content"><div class='highlight'><pre>    <span class="hljs-keyword">var</span> processedResult = <span class="hljs-string">'&lt;blink&gt;'</span> + result + <span class="hljs-string">'&lt;/blink&gt;'</span>;</pre></div></div>
             
         </li>
         
@@ -253,12 +257,10 @@ Because arguments are changed, the arguments’ array have to created manually.<
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-12">&#182;</a>
               </div>
-              <p><em>processedResult</em> will be the returned value of the function <em>next</em> into the previous stacked callback.</p>
+              <p>The template can contains a node having the attribute <code>ceb-content</code>.
+The marked node is intend to host the light DOM of the current element at the end of the templating process.</p>
 
             </div>
-            
-            <div class="content"><div class='highlight'><pre>    <span class="hljs-keyword">return</span> processedResult;
-}</pre></div></div>
             
         </li>
         
@@ -266,10 +268,10 @@ Because arguments are changed, the arguments’ array have to created manually.<
         <li id="section-13">
             <div class="annotation">
               
-              <div class="pilwrap for-h3">
+              <div class="pilwrap ">
                 <a class="pilcrow" href="#section-13">&#182;</a>
               </div>
-              <h3 id="wrap">Wrap</h3>
+              <p>If the template doesn’t contain this node, the light DOM will be lost.</p>
 
             </div>
             
@@ -279,12 +281,10 @@ Because arguments are changed, the arguments’ array have to created manually.<
         <li id="section-14">
             <div class="annotation">
               
-              <div class="pilwrap ">
+              <div class="pilwrap for-h2">
                 <a class="pilcrow" href="#section-14">&#182;</a>
               </div>
-              <p>The builder’s method <strong>wrap</strong> adds to the structure the given wrapper according to the wrapper method.</p>
-<p>The first argument of the method <em>wrap</em> is the method name.
-The second argument is the callback.</p>
+              <h2 id="dom-nodes-references">DOM nodes references</h2>
 
             </div>
             
@@ -297,15 +297,24 @@ The second argument is the callback.</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-15">&#182;</a>
               </div>
-              <p>The execution of <em>methodWrapped</em> will be wrapped with the callback <em>wrapper</em>.</p>
-<blockquote>
-<p>@param name (string) the name of the method to intercept
-@param wrapper (function) the callback</p>
-</blockquote>
+              <p>The template can contains nodes having the attribute <code>ceb-ref</code>.
+The marked nodes will be available at the end of the templating process from the feature function (<code>cebFeatureTemplate(el)</code>).</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>builder.wrap(<span class="hljs-string">'methodWrapped'</span>, wrapper);</pre></div></div>
+        </li>
+        
+        
+        <li id="section-16">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-16">&#182;</a>
+              </div>
+              <p>That means, if a node has the attribute <code>ceb-ref=&quot;header&quot;</code>.
+It will be available via <code>cebFeatureTemplate(el).header</code>.</p>
+
+            </div>
             
         </li>
         

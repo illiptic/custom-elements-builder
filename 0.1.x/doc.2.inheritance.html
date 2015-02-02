@@ -2,11 +2,12 @@
 
 <html>
 <head>
-  <title>Listeners</title>
+  <title>ceb - inheritance - 0.1.x</title>
   <meta http-equiv="content-type" content="text/html; charset=UTF-8">
   <meta name="viewport" content="width=device-width, target-densitydpi=160dpi, initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
-  <link rel="stylesheet" media="all" href="public/stylesheets/normalize.css" />
-  <link rel="stylesheet" media="all" href="docco.css" />
+  <link rel="stylesheet" media="all" href="../public/stylesheets/normalize.css" />
+  <link rel="stylesheet" media="all" href="../page.css" />
+  <link rel="stylesheet" media="all" href="doc.css" />
 </head>
 <body>
 
@@ -23,12 +24,8 @@
           <div id="jump_wrapper">
           <div id="jump_page">
             
-              <a class="source" href="index.html">
+              <a class="source" href="../">
                 index
-              </a>
-            
-              <a class="source" href="changelogs.html">
-                changelogs
               </a>
             
               <a class="source" href="doc.1.usage.html">
@@ -63,31 +60,32 @@
                 doc - features
               </a>
             
-              <a class="source" href="ceb-feature-template.html">
-                source - ceb-feature-template.js
-              </a>
-            
-              <a class="source" href="ceb.html">
-                source - ceb.js
-              </a>
-            
           </div>
         </li>
       </ul>
     
+
     <ul class="sections">
+        
+          <li id="title">
+              <div class="annotation">
+                  <h1>inheritance <small>0.1.x</small></h1>
+              </div>
+          </li>
         
         
         
         <li id="section-1">
             <div class="annotation">
               
-              <div class="pilwrap for-h1">
+              <div class="pilwrap ">
                 <a class="pilcrow" href="#section-1">&#182;</a>
               </div>
-              <h1 id="listeners">Listeners</h1>
+              <p>Get a builder.</p>
 
             </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="hljs-keyword">var</span> builder = ceb().name(<span class="hljs-string">'extended-tag'</span>);</pre></div></div>
             
         </li>
         
@@ -95,14 +93,12 @@
         <li id="section-2">
             <div class="annotation">
               
-              <div class="pilwrap ">
+              <div class="pilwrap for-h2">
                 <a class="pilcrow" href="#section-2">&#182;</a>
               </div>
-              <p>Get a builder.</p>
+              <h2 id="extends-and-prototype">Extends and prototype</h2>
 
             </div>
-            
-            <div class="content"><div class='highlight'><pre><span class="hljs-keyword">var</span> builder = ceb().name(<span class="hljs-string">'listening-tag'</span>);</pre></div></div>
             
         </li>
         
@@ -110,10 +106,11 @@
         <li id="section-3">
             <div class="annotation">
               
-              <div class="pilwrap for-h2">
+              <div class="pilwrap ">
                 <a class="pilcrow" href="#section-3">&#182;</a>
               </div>
-              <h2 id="listeners">Listeners</h2>
+              <p>By default the structure doesn’t set an extends value.
+However, the prototype value is by default <em>Object.create(HTMLElement.prototype)</em></p>
 
             </div>
             
@@ -126,20 +123,14 @@
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-4">&#182;</a>
               </div>
-              <p>The builder’s method <strong>listen</strong> will add DOM event listeners to the structure.</p>
+              <p>The builder’s method <strong>extends</strong> adds the given extends value to the structure.</p>
 <blockquote>
-<p>@param queries (string) a list of the tuple [event, selector].
-Where the event is the name of the event and the selector a valid CSS selector.</p>
-<p>@param listener (function) the callback which will be called when the events occurred.
-Where the callback has two arguments, the current element and the event instance.</p>
+<p>@param name (string) the name of the custom element</p>
 </blockquote>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>builder.listen(<span class="hljs-string">'click, click button, submit form'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(el, evt)</span> </span>{
-    evt.preventDefault();
-    evt.stopPropagation();
-});</pre></div></div>
+            <div class="content"><div class='highlight'><pre>builder.extends(<span class="hljs-string">'button'</span>);</pre></div></div>
             
         </li>
         
@@ -150,27 +141,14 @@ Where the callback has two arguments, the current element and the event instance
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-5">&#182;</a>
               </div>
-              <p>The event are added when the element is <strong>attached</strong> into the DOM and removed when it’s <strong>detached</strong>.</p>
+              <p>The builder’s method <strong>prototype</strong> adds the given prototype value to the structure.</p>
+<blockquote>
+<p>@param prototype (object) the prototype of the custom element</p>
+</blockquote>
 
             </div>
             
-        </li>
-        
-        
-        <li id="section-6">
-            <div class="annotation">
-              
-              <div class="pilwrap ">
-                <a class="pilcrow" href="#section-6">&#182;</a>
-              </div>
-              <p><code>click, click button, submit form</code> contains three clauses:</p>
-<ul>
-<li>the first will add a listener listening the click event on the element instance</li>
-<li>the second will add a listener listening the click event on the child matching button</li>
-<li>the third will add a listener listening the submit event on the child matching form</li>
-</ul>
-
-            </div>
+            <div class="content"><div class='highlight'><pre>builder.prototype(<span class="hljs-built_in">Object</span>.create(HTMLButtonElement.prototype));</pre></div></div>
             
         </li>
         

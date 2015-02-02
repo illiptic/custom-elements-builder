@@ -2,11 +2,11 @@
 
 <html>
 <head>
-  <title>ceb.js</title>
+  <title>ceb - ceb.js</title>
   <meta http-equiv="content-type" content="text/html; charset=UTF-8">
   <meta name="viewport" content="width=device-width, target-densitydpi=160dpi, initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
   <link rel="stylesheet" media="all" href="public/stylesheets/normalize.css" />
-  <link rel="stylesheet" media="all" href="docco.css" />
+  <link rel="stylesheet" media="all" href="page.css" />
 </head>
 <body>
 
@@ -31,36 +31,16 @@
                 changelogs
               </a>
             
-              <a class="source" href="doc.1.usage.html">
-                doc - usage
+              <a class="source" href="0.2.x/doc.1.usage.html">
+                doc - 0.2.x
               </a>
             
-              <a class="source" href="doc.2.inheritance.html">
-                doc - inheritance
+              <a class="source" href="0.1.x/doc.1.usage.html">
+                doc - 0.1.x
               </a>
             
-              <a class="source" href="doc.3.properties.html">
-                doc - properties
-              </a>
-            
-              <a class="source" href="doc.4.interceptors.html">
-                doc - interceptors
-              </a>
-            
-              <a class="source" href="doc.5.methods.html">
-                doc - methods
-              </a>
-            
-              <a class="source" href="doc.6.wrappers.html">
-                doc - wrappers
-              </a>
-            
-              <a class="source" href="doc.7.listeners.html">
-                doc - listeners
-              </a>
-            
-              <a class="source" href="doc.8.features.html">
-                doc - features
+              <a class="source" href="ceb-feature-frp.html">
+                source - ceb-feature-frp.js
               </a>
             
               <a class="source" href="ceb-feature-template.html">
@@ -77,16 +57,26 @@
     
     <ul class="sections">
         
+          <li id="title">
+              <div class="annotation">
+                  <h1>ceb.js</h1>
+              </div>
+          </li>
+        
         
         
         <li id="section-1">
             <div class="annotation">
               
-              <div class="pilwrap for-h1">
+              <div class="pilwrap ">
                 <a class="pilcrow" href="#section-1">&#182;</a>
               </div>
-              <h1 id="ceb-js">ceb.js</h1>
-
+              <pre><code>custom-elements-builder <span class="hljs-number">0.2</span><span class="hljs-number">.0</span> http:<span class="hljs-comment">//tmorin.github.io/custom-elements-builder</span>
+Custom Elements Builder (ceb) is ... a builder <span class="hljs-keyword">for</span> Custom Elements.
+Buil date: <span class="hljs-number">2015</span>-<span class="hljs-number">02</span>-<span class="hljs-number">02</span>
+Copyright <span class="hljs-number">2015</span>-<span class="hljs-number">2015</span> Thibault Morin
+Available under MIT license
+</code></pre>
             </div>
             
             <div class="content"><div class='highlight'><pre>(<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(g, factory)</span> </span>{
@@ -361,7 +351,7 @@
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>    <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">accessorFactory</span><span class="hljs-params">(wrappers, wrapped)</span> </span>{</pre></div></div>
+            <div class="content"><div class='highlight'><pre>    <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">accessorFactory</span><span class="hljs-params">(wrappers, wrapped, propName)</span> </span>{</pre></div></div>
             
         </li>
         
@@ -396,8 +386,8 @@ The original accessor is the last call.</p>
             </div>
             
             <div class="content"><div class='highlight'><pre>            <span class="hljs-keyword">return</span> stack.reduce(<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(previous, current)</span> </span>{
-                <span class="hljs-keyword">return</span> current.bind(el, previous, el);
-            }, wrapped.bind(el, el)).apply(el, <span class="hljs-built_in">arguments</span>);
+                <span class="hljs-keyword">return</span> current.bind(el, previous, el, propName);
+            }, wrapped.bind(el, el, propName)).apply(el, <span class="hljs-built_in">arguments</span>);
         };
     }</pre></div></div>
             
@@ -415,7 +405,7 @@ The original accessor is the last call.</p>
             </div>
             
             <div class="content"><div class='highlight'><pre>    <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">attributeAccessorSetFactory</span><span class="hljs-params">(attName, setter, isBoolean)</span> </span>{
-        <span class="hljs-keyword">return</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">attributeAccessorSet</span><span class="hljs-params">(el, value)</span> </span>{</pre></div></div>
+        <span class="hljs-keyword">return</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">attributeAccessorSet</span><span class="hljs-params">(el, propName, value)</span> </span>{</pre></div></div>
             
         </li>
         
@@ -446,7 +436,7 @@ The original accessor is the last call.</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>                attValue = setter.call(el, el, value);
+            <div class="content"><div class='highlight'><pre>                attValue = setter.call(el, el, propName, value);
             }</pre></div></div>
             
         </li>
@@ -480,7 +470,7 @@ The original accessor is the last call.</p>
             </div>
             
             <div class="content"><div class='highlight'><pre>    <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">attributeAccessorGetFactory</span><span class="hljs-params">(attName, getter, isBoolean)</span> </span>{
-        <span class="hljs-keyword">return</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">attributeAccessorGet</span><span class="hljs-params">(el)</span> </span>{</pre></div></div>
+        <span class="hljs-keyword">return</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">attributeAccessorGet</span><span class="hljs-params">(el, propName)</span> </span>{</pre></div></div>
             
         </li>
         
@@ -511,7 +501,7 @@ The original accessor is the last call.</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>                value = getter.call(el, el, value);
+            <div class="content"><div class='highlight'><pre>                value = getter.call(el, el, propName, value);
             }</pre></div></div>
             
         </li>
@@ -811,11 +801,11 @@ The defined properties are the input of Object.defineProperties().</p>
             <div class="content"><div class='highlight'><pre>                <span class="hljs-keyword">var</span> interceptors = struct.interceptors[property.propName] || {};
                 <span class="hljs-keyword">if</span> (property.set) {
                     <span class="hljs-keyword">var</span> setStack = interceptors.set || [];
-                    definedProperty.set = accessorFactory(setStack, property.set);
+                    definedProperty.set = accessorFactory(setStack, property.set, property.propName);
                 }
                 <span class="hljs-keyword">if</span> (property.get) {
                     <span class="hljs-keyword">var</span> getStack = interceptors.get || [];
-                    definedProperty.get = accessorFactory(getStack, property.get);
+                    definedProperty.get = accessorFactory(getStack, property.get, property.propName);
                 }
             }</pre></div></div>
             
@@ -833,10 +823,10 @@ The defined properties are the input of Object.defineProperties().</p>
             </div>
             
             <div class="content"><div class='highlight'><pre>            <span class="hljs-keyword">return</span> <span class="hljs-built_in">Object</span>.assign(property, {
-                property: definedProperty
+                definedProperty: definedProperty
             });
         }).reduce(<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(previous, current)</span> </span>{
-            previous[current.propName] = current.property;
+            previous[current.propName] = current.definedProperty;
             <span class="hljs-keyword">return</span> previous;
         }, {});
     }</pre></div></div>
@@ -1089,7 +1079,7 @@ The defined properties are the input of Object.defineProperties().</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>    <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">delegableSetAccessorInterceptor</span><span class="hljs-params">(property, next, el, value)</span> </span>{
+            <div class="content"><div class='highlight'><pre>    <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">delegableSetAccessorInterceptor</span><span class="hljs-params">(property, next, el, propName, value)</span> </span>{
         next(value);</pre></div></div>
             
         </li>
@@ -1209,7 +1199,7 @@ The defined properties are the input of Object.defineProperties().</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>    <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">delegableGetAccessorInterceptor</span><span class="hljs-params">(property, next, el, value)</span> </span>{
+            <div class="content"><div class='highlight'><pre>    <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">delegableGetAccessorInterceptor</span><span class="hljs-params">(property, next, el, propName, value)</span> </span>{
         <span class="hljs-keyword">var</span> result = next(value);</pre></div></div>
             
         </li>
@@ -1474,18 +1464,15 @@ The defined properties are the input of Object.defineProperties().</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>            listValues(struct.properties).forEach(<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(property)</span> </span>{
-                <span class="hljs-keyword">if</span> (property.attName) {
-                    <span class="hljs-keyword">if</span> (el.hasAttribute(property.attName)) {
-                        el[property.propName] = property.attribute.boolean ? <span class="hljs-literal">true</span> : el.getAttribute(property.attName);
-                    } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (property.hasOwnProperty(<span class="hljs-string">'value'</span>)) {
-                        applyAttributeValue(el, property.attName, property.value, property.attribute.boolean);
-                    }
-                } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (property.hasOwnProperty(<span class="hljs-string">'value'</span>) &amp;&amp; property.writable) {
+            <div class="content"><div class='highlight'><pre>            listValues(struct.properties).filter(<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(property)</span> </span>{
+                <span class="hljs-keyword">return</span> !property.attName;
+            }).forEach(<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(property)</span> </span>{
+                <span class="hljs-keyword">if</span> (property.hasOwnProperty(<span class="hljs-string">'value'</span>) &amp;&amp; property.writable) {
                     el[property.propName] = property.value;
+                } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (property.valueFactory) {
+                    el[property.propName] = property.valueFactory(el);
                 }
-            });
-        });</pre></div></div>
+            });</pre></div></div>
             
         </li>
         
@@ -1495,6 +1482,30 @@ The defined properties are the input of Object.defineProperties().</p>
               
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-82">&#182;</a>
+              </div>
+              <p>Initialize the attributes’ value after the call of the createdCallback method.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>            listValues(struct.properties).filter(<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(property)</span> </span>{
+                <span class="hljs-keyword">return</span> property.attName;
+            }).forEach(<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(property)</span> </span>{
+                <span class="hljs-keyword">if</span> (el.hasAttribute(property.attName)) {
+                    el[property.propName] = property.attribute.boolean ? <span class="hljs-literal">true</span> : el.getAttribute(property.attName);
+                } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (property.hasOwnProperty(<span class="hljs-string">'value'</span>)) {
+                    applyAttributeValue(el, property.attName, property.value, property.attribute.boolean);
+                }
+            });
+        });</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-83">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-83">&#182;</a>
               </div>
               <p>Wrap the method attachedCallback.</p>
 
@@ -1506,11 +1517,11 @@ The defined properties are the input of Object.defineProperties().</p>
         </li>
         
         
-        <li id="section-83">
+        <li id="section-84">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-83">&#182;</a>
+                <a class="pilcrow" href="#section-84">&#182;</a>
               </div>
               <p>Add the event listeners after the call of the attachedCallback method.</p>
 
@@ -1531,11 +1542,11 @@ The defined properties are the input of Object.defineProperties().</p>
         </li>
         
         
-        <li id="section-84">
+        <li id="section-85">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-84">&#182;</a>
+                <a class="pilcrow" href="#section-85">&#182;</a>
               </div>
               <p>Wrap the method detachedCallback.</p>
 
@@ -1546,11 +1557,11 @@ The defined properties are the input of Object.defineProperties().</p>
         </li>
         
         
-        <li id="section-85">
+        <li id="section-86">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-85">&#182;</a>
+                <a class="pilcrow" href="#section-86">&#182;</a>
               </div>
               <p>Remove the event listeners before the call of the detachedCallback method.</p>
 
@@ -1566,11 +1577,11 @@ The defined properties are the input of Object.defineProperties().</p>
         </li>
         
         
-        <li id="section-86">
+        <li id="section-87">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-86">&#182;</a>
+                <a class="pilcrow" href="#section-87">&#182;</a>
               </div>
               <p>Wrap the method attributeChangedCallback.</p>
 
@@ -1581,11 +1592,11 @@ The defined properties are the input of Object.defineProperties().</p>
         </li>
         
         
-        <li id="section-87">
+        <li id="section-88">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-87">&#182;</a>
+                <a class="pilcrow" href="#section-88">&#182;</a>
               </div>
               <p>Synchronize the attributes’ values with their properties</p>
 
@@ -1606,11 +1617,11 @@ The defined properties are the input of Object.defineProperties().</p>
         </li>
         
         
-        <li id="section-88">
+        <li id="section-89">
             <div class="annotation">
               
               <div class="pilwrap for-h2">
-                <a class="pilcrow" href="#section-88">&#182;</a>
+                <a class="pilcrow" href="#section-89">&#182;</a>
               </div>
               <h2 id="ceb">ceb</h2>
 
@@ -1619,11 +1630,11 @@ The defined properties are the input of Object.defineProperties().</p>
         </li>
         
         
-        <li id="section-89">
+        <li id="section-90">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-89">&#182;</a>
+                <a class="pilcrow" href="#section-90">&#182;</a>
               </div>
               <p>Create a base and valid structure;</p>
 
@@ -1645,11 +1656,11 @@ The defined properties are the input of Object.defineProperties().</p>
         </li>
         
         
-        <li id="section-90">
+        <li id="section-91">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-90">&#182;</a>
+                <a class="pilcrow" href="#section-91">&#182;</a>
               </div>
               <p>Sanitize the properties on the fly</p>
 
@@ -1661,11 +1672,11 @@ The defined properties are the input of Object.defineProperties().</p>
         </li>
         
         
-        <li id="section-91">
+        <li id="section-92">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-91">&#182;</a>
+                <a class="pilcrow" href="#section-92">&#182;</a>
               </div>
               <p>A property linked to an attribute must have a valid attribute name</p>
 
@@ -1677,11 +1688,11 @@ The defined properties are the input of Object.defineProperties().</p>
         </li>
         
         
-        <li id="section-92">
+        <li id="section-93">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-92">&#182;</a>
+                <a class="pilcrow" href="#section-93">&#182;</a>
               </div>
               <p>By default a property is writable</p>
 
@@ -1694,11 +1705,11 @@ The defined properties are the input of Object.defineProperties().</p>
         </li>
         
         
-        <li id="section-93">
+        <li id="section-94">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-93">&#182;</a>
+                <a class="pilcrow" href="#section-94">&#182;</a>
               </div>
               <p>Provides the sugar API of <strong>ceb</strong>.</p>
 
@@ -1709,11 +1720,11 @@ The defined properties are the input of Object.defineProperties().</p>
         </li>
         
         
-        <li id="section-94">
+        <li id="section-95">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-94">&#182;</a>
+                <a class="pilcrow" href="#section-95">&#182;</a>
               </div>
               <p>The structure of the builder can be given from the parameters.</p>
 
@@ -1724,11 +1735,11 @@ The defined properties are the input of Object.defineProperties().</p>
         </li>
         
         
-        <li id="section-95">
+        <li id="section-96">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-95">&#182;</a>
+                <a class="pilcrow" href="#section-96">&#182;</a>
               </div>
               <p>A structure must have a tag name.</p>
 
@@ -1739,11 +1750,11 @@ The defined properties are the input of Object.defineProperties().</p>
         </li>
         
         
-        <li id="section-96">
+        <li id="section-97">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-96">&#182;</a>
+                <a class="pilcrow" href="#section-97">&#182;</a>
               </div>
               <p>A strucuture which is already registered will not register the custom element twice.</p>
 
@@ -1755,11 +1766,11 @@ The defined properties are the input of Object.defineProperties().</p>
         </li>
         
         
-        <li id="section-97">
+        <li id="section-98">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-97">&#182;</a>
+                <a class="pilcrow" href="#section-98">&#182;</a>
               </div>
               <p>Add a wrapper to the structure.</p>
 
@@ -1777,11 +1788,11 @@ The defined properties are the input of Object.defineProperties().</p>
         </li>
         
         
-        <li id="section-98">
+        <li id="section-99">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-98">&#182;</a>
+                <a class="pilcrow" href="#section-99">&#182;</a>
               </div>
               <p>Add an interceptor to the structure.</p>
 
@@ -1808,11 +1819,11 @@ The defined properties are the input of Object.defineProperties().</p>
         </li>
         
         
-        <li id="section-99">
+        <li id="section-100">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-99">&#182;</a>
+                <a class="pilcrow" href="#section-100">&#182;</a>
               </div>
               <p>Set the extends value</p>
 
@@ -1826,11 +1837,11 @@ The defined properties are the input of Object.defineProperties().</p>
         </li>
         
         
-        <li id="section-100">
+        <li id="section-101">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-100">&#182;</a>
+                <a class="pilcrow" href="#section-101">&#182;</a>
               </div>
               <p>Set the herited prototype</p>
 
@@ -1844,11 +1855,11 @@ The defined properties are the input of Object.defineProperties().</p>
         </li>
         
         
-        <li id="section-101">
+        <li id="section-102">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-101">&#182;</a>
+                <a class="pilcrow" href="#section-102">&#182;</a>
               </div>
               <p>Add properties to the structure.</p>
 
@@ -1872,11 +1883,11 @@ The defined properties are the input of Object.defineProperties().</p>
         </li>
         
         
-        <li id="section-102">
+        <li id="section-103">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-102">&#182;</a>
+                <a class="pilcrow" href="#section-103">&#182;</a>
               </div>
               <p>Add methods to the structure.</p>
 
@@ -1890,11 +1901,11 @@ The defined properties are the input of Object.defineProperties().</p>
         </li>
         
         
-        <li id="section-103">
+        <li id="section-104">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-103">&#182;</a>
+                <a class="pilcrow" href="#section-104">&#182;</a>
               </div>
               <p>Add a listener to the structure.</p>
 
@@ -1917,11 +1928,11 @@ The defined properties are the input of Object.defineProperties().</p>
         </li>
         
         
-        <li id="section-104">
+        <li id="section-105">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-104">&#182;</a>
+                <a class="pilcrow" href="#section-105">&#182;</a>
               </div>
               <p>Add a feature to the structure.</p>
 
@@ -1939,11 +1950,11 @@ The defined properties are the input of Object.defineProperties().</p>
         </li>
         
         
-        <li id="section-105">
+        <li id="section-106">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-105">&#182;</a>
+                <a class="pilcrow" href="#section-106">&#182;</a>
               </div>
               <p>Register the custom element if not already done.</p>
 
@@ -1959,11 +1970,11 @@ The defined properties are the input of Object.defineProperties().</p>
         </li>
         
         
-        <li id="section-106">
+        <li id="section-107">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-106">&#182;</a>
+                <a class="pilcrow" href="#section-107">&#182;</a>
               </div>
               <p>Get the current structure.</p>
 
@@ -1978,11 +1989,11 @@ The defined properties are the input of Object.defineProperties().</p>
         </li>
         
         
-        <li id="section-107">
+        <li id="section-108">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-107">&#182;</a>
+                <a class="pilcrow" href="#section-108">&#182;</a>
               </div>
               <p>The <code>ced()</code> function.</p>
 
@@ -1994,11 +2005,11 @@ The defined properties are the input of Object.defineProperties().</p>
         </li>
         
         
-        <li id="section-108">
+        <li id="section-109">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-108">&#182;</a>
+                <a class="pilcrow" href="#section-109">&#182;</a>
               </div>
               <p>A builder is given when a name is known.</p>
 

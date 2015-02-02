@@ -2,11 +2,12 @@
 
 <html>
 <head>
-  <title>Features</title>
+  <title>ceb - features - 0.1.x</title>
   <meta http-equiv="content-type" content="text/html; charset=UTF-8">
   <meta name="viewport" content="width=device-width, target-densitydpi=160dpi, initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
-  <link rel="stylesheet" media="all" href="public/stylesheets/normalize.css" />
-  <link rel="stylesheet" media="all" href="docco.css" />
+  <link rel="stylesheet" media="all" href="../public/stylesheets/normalize.css" />
+  <link rel="stylesheet" media="all" href="../page.css" />
+  <link rel="stylesheet" media="all" href="doc.css" />
 </head>
 <body>
 
@@ -23,12 +24,8 @@
           <div id="jump_wrapper">
           <div id="jump_page">
             
-              <a class="source" href="index.html">
+              <a class="source" href="../">
                 index
-              </a>
-            
-              <a class="source" href="changelogs.html">
-                changelogs
               </a>
             
               <a class="source" href="doc.1.usage.html">
@@ -63,40 +60,26 @@
                 doc - features
               </a>
             
-              <a class="source" href="ceb-feature-template.html">
-                source - ceb-feature-template.js
-              </a>
-            
-              <a class="source" href="ceb.html">
-                source - ceb.js
-              </a>
-            
           </div>
         </li>
       </ul>
     
+
     <ul class="sections">
+        
+          <li id="title">
+              <div class="annotation">
+                  <h1>features <small>0.1.x</small></h1>
+              </div>
+          </li>
         
         
         
         <li id="section-1">
             <div class="annotation">
               
-              <div class="pilwrap for-h1">
-                <a class="pilcrow" href="#section-1">&#182;</a>
-              </div>
-              <h1 id="features">Features</h1>
-
-            </div>
-            
-        </li>
-        
-        
-        <li id="section-2">
-            <div class="annotation">
-              
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-2">&#182;</a>
+                <a class="pilcrow" href="#section-1">&#182;</a>
               </div>
               <p>Get a builder.</p>
 
@@ -107,13 +90,28 @@
         </li>
         
         
-        <li id="section-3">
+        <li id="section-2">
             <div class="annotation">
               
               <div class="pilwrap for-h2">
-                <a class="pilcrow" href="#section-3">&#182;</a>
+                <a class="pilcrow" href="#section-2">&#182;</a>
               </div>
               <h2 id="the-needs">The needs</h2>
+
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-3">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-3">&#182;</a>
+              </div>
+              <p>Custom Elements are, at the end, objects.
+So, they can inherit from another element (i.e. <a href="doc.2.inheritance.html">Extends and prototype</a>),
+This relation is vertical and one element can only inherit from another one.</p>
 
             </div>
             
@@ -126,9 +124,9 @@
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-4">&#182;</a>
               </div>
-              <p>Custom Elements are, at the end, objects.
-So, they can inherit from another element (i.e. <a href="doc.2.inheritance.html">Extends and prototype</a>),
-This relation is vertical and one element can only inherit from another one.</p>
+              <p>Due to the dynamic part of JavaScript, the <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/assign">mixin way</a> can be used to share functionalities.
+This new relation is horizontal and allows one object to be enhanced with others.
+However, this merging process overrides the properties and methods of the initial object.</p>
 
             </div>
             
@@ -141,9 +139,8 @@ This relation is vertical and one element can only inherit from another one.</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-5">&#182;</a>
               </div>
-              <p>Due to the dynamic part of JavaScript, the <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/assign">mixin way</a> can be used to share functionalities.
-This new relation is horizontal and allows one object to be enhanced with others.
-However, this merging process overrides the properties and methods of the initial object.</p>
+              <p>The <em>interceptors</em> and <em>wrappers</em> provided by <strong>ceb</strong> resolve the side effect of overriding.
+They act as an horizontal relations keeping alive the originals properties and methods.</p>
 
             </div>
             
@@ -156,8 +153,8 @@ However, this merging process overrides the properties and methods of the initia
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-6">&#182;</a>
               </div>
-              <p>The <em>interceptors</em> and <em>wrappers</em> provided by <strong>ceb</strong> resolve the side effect of overriding.
-They act as an horizontal relations keeping alive the originals properties and methods.</p>
+              <p>The features are containers of functionalities.
+They provide to custom elements where they are applied their functionalities.</p>
 
             </div>
             
@@ -167,11 +164,10 @@ They act as an horizontal relations keeping alive the originals properties and m
         <li id="section-7">
             <div class="annotation">
               
-              <div class="pilwrap ">
+              <div class="pilwrap for-h2">
                 <a class="pilcrow" href="#section-7">&#182;</a>
               </div>
-              <p>The features are containers of functionalities.
-They provide to custom elements where they are applied their functionalities.</p>
+              <h2 id="features">Features</h2>
 
             </div>
             
@@ -181,10 +177,11 @@ They provide to custom elements where they are applied their functionalities.</p
         <li id="section-8">
             <div class="annotation">
               
-              <div class="pilwrap for-h2">
+              <div class="pilwrap ">
                 <a class="pilcrow" href="#section-8">&#182;</a>
               </div>
-              <h2 id="features">Features</h2>
+              <p>A feature is a simple function taking only one argument: the element instance.
+This function is, for a custom element, the public API of the feature.</p>
 
             </div>
             
@@ -197,8 +194,10 @@ They provide to custom elements where they are applied their functionalities.</p
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-9">&#182;</a>
               </div>
-              <p>A feature is a simple function taking only one argument: the element instance.
-This function is, for a custom element, the public API of the feature.</p>
+              <p>However, a function <em>setup</em> can be attached to the feature’s function.
+It will be called by <strong>ceb</strong> before the full process of the structure.
+That’s mean the function <em>setup</em> can have access to the whole structure of future custom element.
+Moreover, a builder is given to this function, allowing feature to adds stuff to the structure.</p>
 
             </div>
             
@@ -211,10 +210,9 @@ This function is, for a custom element, the public API of the feature.</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-10">&#182;</a>
               </div>
-              <p>However, a function <em>setup</em> can be attached to the feature’s function.
-It will be called by <strong>ceb</strong> before the full process of the structure.
-That’s mean the function <em>setup</em> can have access to the whole structure of future custom element.
-Moreover, a builder is given to this function, allowing feature to adds stuff to the structure.</p>
+              <p>The following feature will handle a placeholder.
+The placeholder will be displayed according to the attributes placeholder-value and placeholder-target.
+By default the target is the element instance.</p>
 
             </div>
             
@@ -227,21 +225,6 @@ Moreover, a builder is given to this function, allowing feature to adds stuff to
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-11">&#182;</a>
               </div>
-              <p>The following feature will handle a placeholder.
-The placeholder will be displayed according to the attributes placeholder-value and placeholder-target.
-By default the target is the element instance.</p>
-
-            </div>
-            
-        </li>
-        
-        
-        <li id="section-12">
-            <div class="annotation">
-              
-              <div class="pilwrap ">
-                <a class="pilcrow" href="#section-12">&#182;</a>
-              </div>
               <p>There is no public API provided by the feature’s function.</p>
 
             </div>
@@ -251,11 +234,11 @@ By default the target is the element instance.</p>
         </li>
         
         
-        <li id="section-13">
+        <li id="section-12">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-13">&#182;</a>
+                <a class="pilcrow" href="#section-12">&#182;</a>
               </div>
               <p>The setup function is called with three arguments</p>
 <ul>
@@ -271,11 +254,11 @@ By default the target is the element instance.</p>
         </li>
         
         
-        <li id="section-14">
+        <li id="section-13">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-14">&#182;</a>
+                <a class="pilcrow" href="#section-13">&#182;</a>
               </div>
               <p>Check from the options if the native placeholder should be used.</p>
 
@@ -286,11 +269,11 @@ By default the target is the element instance.</p>
         </li>
         
         
-        <li id="section-15">
+        <li id="section-14">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-15">&#182;</a>
+                <a class="pilcrow" href="#section-14">&#182;</a>
               </div>
               <p>This function is an interceptor.
 The goal of this interceptor is to update the UI according to the value set.
@@ -303,11 +286,11 @@ That’s means, just after the write of the value, the UI must be updated.</p>
         </li>
         
         
-        <li id="section-16">
+        <li id="section-15">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-16">&#182;</a>
+                <a class="pilcrow" href="#section-15">&#182;</a>
               </div>
               <p>call the original set accessor in order to update the DOM’s attributes.</p>
 
@@ -318,11 +301,11 @@ That’s means, just after the write of the value, the UI must be updated.</p>
         </li>
         
         
-        <li id="section-17">
+        <li id="section-16">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-17">&#182;</a>
+                <a class="pilcrow" href="#section-16">&#182;</a>
               </div>
               <p>There, the DOM attribute has been written,
 so <code>el.placeholderValue === value</code>
@@ -333,11 +316,11 @@ or <code>el.placeholderTarget === value</code></p>
         </li>
         
         
-        <li id="section-18">
+        <li id="section-17">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-18">&#182;</a>
+                <a class="pilcrow" href="#section-17">&#182;</a>
               </div>
               <p>Detect the target according to the value of placeholderTarget.</p>
 
@@ -350,11 +333,11 @@ or <code>el.placeholderTarget === value</code></p>
         </li>
         
         
-        <li id="section-19">
+        <li id="section-18">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-19">&#182;</a>
+                <a class="pilcrow" href="#section-18">&#182;</a>
               </div>
               <p>The previous target is cleaned, because the target can change at any time.</p>
 
@@ -368,11 +351,11 @@ or <code>el.placeholderTarget === value</code></p>
         </li>
         
         
-        <li id="section-20">
+        <li id="section-19">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-20">&#182;</a>
+                <a class="pilcrow" href="#section-19">&#182;</a>
               </div>
               <p>Display the placeholder using the native attribute,
 and keep a reference of the DOM node which will be cleaned.</p>
@@ -389,11 +372,11 @@ and keep a reference of the DOM node which will be cleaned.</p>
         </li>
         
         
-        <li id="section-21">
+        <li id="section-20">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-21">&#182;</a>
+                <a class="pilcrow" href="#section-20">&#182;</a>
               </div>
               <p>The previous jquery’s plugin is destroyed, because the target can change at any time.</p>
 
@@ -407,11 +390,11 @@ and keep a reference of the DOM node which will be cleaned.</p>
         </li>
         
         
-        <li id="section-22">
+        <li id="section-21">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-22">&#182;</a>
+                <a class="pilcrow" href="#section-21">&#182;</a>
               </div>
               <p>Display the placeholder using a dedicated jquery plugin,
 and keep a reference of jquery instance in order to destroy it.</p>
@@ -432,11 +415,11 @@ and keep a reference of jquery instance in order to destroy it.</p>
         </li>
         
         
-        <li id="section-23">
+        <li id="section-22">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-23">&#182;</a>
+                <a class="pilcrow" href="#section-22">&#182;</a>
               </div>
               <p>Defined the two properties of the features.</p>
 
@@ -454,11 +437,11 @@ and keep a reference of jquery instance in order to destroy it.</p>
         </li>
         
         
-        <li id="section-24">
+        <li id="section-23">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-24">&#182;</a>
+                <a class="pilcrow" href="#section-23">&#182;</a>
               </div>
               <p>Intercept the property placeholderValue and placeholderTarget to update the UI on the fly.</p>
 
@@ -469,11 +452,11 @@ and keep a reference of jquery instance in order to destroy it.</p>
         </li>
         
         
-        <li id="section-25">
+        <li id="section-24">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-25">&#182;</a>
+                <a class="pilcrow" href="#section-24">&#182;</a>
               </div>
               <p>When the element is detached, the jquery plugin must be destroy to avoid memory leak.</p>
 
@@ -490,11 +473,11 @@ and keep a reference of jquery instance in order to destroy it.</p>
         </li>
         
         
-        <li id="section-26">
+        <li id="section-25">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-26">&#182;</a>
+                <a class="pilcrow" href="#section-25">&#182;</a>
               </div>
               <p>So, when the element is attached, the jquery plugin must be created if the element has just been cloned.</p>
 
@@ -515,11 +498,11 @@ and keep a reference of jquery instance in order to destroy it.</p>
         </li>
         
         
-        <li id="section-27">
+        <li id="section-26">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-27">&#182;</a>
+                <a class="pilcrow" href="#section-26">&#182;</a>
               </div>
               <p>The builder’s method feature adds the given feature to the structure.</p>
 <blockquote>

@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <title>ceb - frp - 0.2.x</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, target-densitydpi=160dpi, initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
+  <link rel="stylesheet" media="all" href="../public/stylesheets/normalize.css" />
+  <link rel="stylesheet" media="all" href="../page.css" />
+  <link rel="stylesheet" media="all" href="doc.css" />
+</head>
+<body>
+
+
+
+  <div id="container">
+    <div id="background"></div>
+
+    
+      <ul id="jump_to">
+        <li>
+          <a class="large" href="javascript:void(0);">Jump To &hellip;</a>
+          <a class="small" href="javascript:void(0);">+</a>
+          <div id="jump_wrapper">
+          <div id="jump_page">
+            
+              <a class="source" href="../">
+                index
+              </a>
+            
+              <a class="source" href="doc.1.usage.html">
+                doc - usage
+              </a>
+            
+              <a class="source" href="doc.2.inheritance.html">
+                doc - inheritance
+              </a>
+            
+              <a class="source" href="doc.3.properties.html">
+                doc - properties
+              </a>
+            
+              <a class="source" href="doc.4.interceptors.html">
+                doc - interceptors
+              </a>
+            
+              <a class="source" href="doc.5.methods.html">
+                doc - methods
+              </a>
+            
+              <a class="source" href="doc.6.wrappers.html">
+                doc - wrappers
+              </a>
+            
+              <a class="source" href="doc.7.listeners.html">
+                doc - listeners
+              </a>
+            
+              <a class="source" href="doc.8.features.html">
+                doc - features
+              </a>
+            
+              <a class="source" href="feature.1.template.html">
+                feature - template
+              </a>
+            
+              <a class="source" href="feature.2.frp.html">
+                feature - frp
+              </a>
+            
+          </div>
+        </li>
+      </ul>
+    
+
+    <ul class="sections">
+        
+          <li id="title">
+              <div class="annotation">
+                  <h1>frp <small>0.2.x</small></h1>
+              </div>
+          </li>
+        
+        
+        
+        <li id="section-1">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-1">&#182;</a>
+              </div>
+              <p>This feature gets <a href="http://en.wikipedia.org/wiki/Functional_reactive_programming">Functional Reactive Programming</a> to custom elements.
+Presently, properties can be observed and observers can be created from scratch.</p>
+<h2 id="integration">Integration</h2>
+<p>Due too the number of good libraries implementing the FRP paradigm
+and because Custom Elements Builder is just a builder,
+this feature is not locked to an external dependencies.</p>
+<p>So, some functions must be overridden to handle the targeted FRP library.
+By default their implementation are locked to <code>window.Rx</code>, <a href="http://reactive-extensions.github.io/RxJS">RxJS</a>.</p>
+<p>The functions can be overridden from the function feature:</p>
+<ul>
+<li>cebFeatureFrp.defaultPropertyObserverFactory</li>
+<li>cebFeatureFrp.defaultPropertyObservableInterceptor</li>
+<li>cebFeatureFrp.defaultDisposeDisposable</li>
+</ul>
+<p>Or from the feature’s options:</p>
+<ul>
+<li>options.propertyObserverFactory</li>
+<li>options.propertyObservableInterceptor</li>
+<li>options.disposeDisposable</li>
+</ul>
+<p>To know more about their implementation, check the <a href="../ceb-feature-frp.html">annotated source</a> of the feature.</p>
+
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-2">
+            <div class="annotation">
+              
+              <div class="pilwrap for-h2">
+                <a class="pilcrow" href="#section-2">&#182;</a>
+              </div>
+              <h2 id="observed-properties">Observed properties</h2>
+
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-3">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-3">&#182;</a>
+              </div>
+              <p>To enable it, the property’s structure must have the boolean <strong>observable</strong> to true.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>ceb().name(<span class="hljs-string">'observed-property'</span>).properties({
+    prop1: {
+        observable: <span class="hljs-literal">true</span>
+    }
+}).feature(cebFeatureFrp).register();</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-4">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-4">&#182;</a>
+              </div>
+              <p>Create a new observed-property.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="hljs-keyword">var</span> observedProperty = <span class="hljs-built_in">document</span>.createElement(<span class="hljs-string">'observed-property'</span>);
+<span class="hljs-built_in">document</span>.body.appendChild(observedProperty);</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-5">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-5">&#182;</a>
+              </div>
+              <p><code>prop1Observer</code> is the observer of <code>prop1</code></p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>observedProperty.prop1Observer.distinctUntilChanged().subscribe(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(value)</span> </span>{
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'the value'</span>);
+});</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-6">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-6">&#182;</a>
+              </div>
+              <p>Will display <em>test</em> in the console.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>observedProperty.prop1 = <span class="hljs-string">'test'</span>;</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-7">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-7">&#182;</a>
+              </div>
+              <p>Will not display <em>test</em> in the console, due to the <code>distinctUntilChanged</code> condition.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>observedProperty.prop1 = <span class="hljs-string">'test'</span>;</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-8">
+            <div class="annotation">
+              
+              <div class="pilwrap for-h2">
+                <a class="pilcrow" href="#section-8">&#182;</a>
+              </div>
+              <h2 id="disposable-and-factory">Disposable and factory</h2>
+
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-9">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-9">&#182;</a>
+              </div>
+              <p>The function feature provides a builder to help to create streams and subscribers according to the FRP library used.</p>
+
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-10">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-10">&#182;</a>
+              </div>
+              <p>Usually streams are firstly created and subscribers come to play with the data by the way.
+When a stream is destroyed (disposed), all subscriptions are destroyed too.</p>
+
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-11">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-11">&#182;</a>
+              </div>
+              <p>The goal of this builder is to create a function handling the logic for create stream and, if required, the
+subscriptions.
+Its returned object will be given to the <code>defaultDisposeObserver</code> when the element is detached.
+By default, the created function will return the stream unless the handlers factory returns something.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="hljs-keyword">var</span> aDisposableFactory = cebFeatureFrp</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-12">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-12">&#182;</a>
+              </div>
+              <p>The method <code>disposable</code> start the builder, its argument is a callback with the element as argument.
+The returned value of the callback must be … disposable.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>    .disposable(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(el)</span> </span>{
+        <span class="hljs-keyword">return</span> <span class="hljs-built_in">window</span>.Rx.DOM.click(el.querySelector(<span class="hljs-string">'button'</span>)).throttle(<span class="hljs-number">500</span>);
+    })</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-13">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-13">&#182;</a>
+              </div>
+              <p>The method <code>handlers</code> is used to create subscribers for the freshly created disposable.
+Its argument is a callback with the element and the disposable as arguments.
+The returned value of the callback can be disposable.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>    .handlers(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(el, disposable)</span> </span>{
+        disposable.subscribe(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span> </span>{
+            <span class="hljs-built_in">console</span>.log(el.tagName, <span class="hljs-string">'has been clicked!'</span>);
+        });
+    });</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-14">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-14">&#182;</a>
+              </div>
+              <p>Factory functions can be given as options in order to create streams from the current element.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>ceb().name(<span class="hljs-string">'disposable-factory'</span>).feature(cebFeatureFrp, {
+    disposables: [aDisposableFactory]
+}).register();</pre></div></div>
+            
+        </li>
+        
+    </ul>
+  </div>
+  <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-20179310-4', '/custom-elements-builder');
+  ga('send', 'pageview');
+</script>
+</body>
+</html>
