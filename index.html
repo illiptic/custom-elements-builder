@@ -33,6 +33,18 @@
                 home
               </a>
             
+              <a class="source" href="ceb-feature-frp.html">
+                ceb-feature-frp
+              </a>
+            
+              <a class="source" href="ceb-feature-template.html">
+                ceb-feature-template
+              </a>
+            
+              <a class="source" href="ceb.html">
+                ceb
+              </a>
+            
               <a class="source" href="changelogs.html">
                 changelogs
               </a>
@@ -43,18 +55,6 @@
             
               <a class="source" href="0.1.x/doc.1.usage.html">
                 doc - 0.1.x
-              </a>
-            
-              <a class="source" href="ceb-feature-frp.html">
-                source - ceb-feature-frp.js
-              </a>
-            
-              <a class="source" href="ceb-feature-template.html">
-                source - ceb-feature-template.js
-              </a>
-            
-              <a class="source" href="ceb.html">
-                source - ceb.js
               </a>
             
           </div>
@@ -120,195 +120,92 @@ However for the others like IE9/IE10 you have to use a <a href="http://www.w3.or
             </div>
             
             <div class="content"><div class='highlight'><pre>
-<span class="hljs-comment">/* http://jsfiddle.net/tmorin/xce2e756 */</span>
-<span class="hljs-comment">/*globals ceb:false, cebFeatureTemplate:false*/</span>
-<span class="hljs-comment">/*jshint -W106*/</span>
-(<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(g)</span> </span>{
+<span class="hljs-comment">/*
+ * The place-finder element is used to find a place.
+ * Its value is the latitude and longitude of a place.
+ * The user can find a place using the search field then select a result to update the element's value.
+ * Found places and value are displayed into a map.
+ * You can play with it on jsfiddle: http://jsfiddle.net/tmorin/xce2e756
+ */</span>
 
-    <span class="hljs-keyword">var</span> ol = g.ol;
-    <span class="hljs-keyword">var</span> Rx = g.Rx;
-    <span class="hljs-keyword">var</span> $ = g.$;
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">setupMap</span><span class="hljs-params">(el)</span> </span>{
+    <span class="hljs-comment">/* setup the map if needed */</span>
+}
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">destroyMap</span><span class="hljs-params">(el)</span> </span>{
+    <span class="hljs-comment">/* destroy the map */</span>
+}
 
-    <span class="hljs-keyword">var</span> spyQuery = cebFeatureFrp.disposable(<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(el)</span> </span>{
-        <span class="hljs-keyword">return</span> Rx.Observable.fromEvent(cebFeatureTemplate(el).query, <span class="hljs-string">'keyup'</span>).map(<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(evt)</span> </span>{
-            <span class="hljs-keyword">return</span> evt.target.value;
-        }).distinctUntilChanged();
-    }).handlers(<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(el, observer)</span> </span>{
-        observer.subscribe(<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(query)</span> </span>{
-            el.query = query;
-        });
+<span class="hljs-keyword">var</span> spyQuery = cebFeatureFrp.disposable(<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(el)</span> </span>{
+    <span class="hljs-keyword">return</span> <span class="hljs-built_in">window</span>.Rx.Observable.fromEvent(cebFeatureTemplate(el).query, <span class="hljs-string">'keyup'</span>).map(<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(evt)</span> </span>{
+        <span class="hljs-keyword">return</span> evt.target.value;
+    }).distinctUntilChanged();
+}).handlers(<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(el, observer)</span> </span>{
+    observer.subscribe(<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(query)</span> </span>{
+        el.query = query;
     });
+});
 
-    <span class="hljs-keyword">var</span> spyPlaces = cebFeatureFrp.disposable(<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(el)</span> </span>{
-        <span class="hljs-keyword">return</span> Rx.Observable.fromEvent(cebFeatureTemplate(el).places, <span class="hljs-string">'change'</span>).map(<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(evt)</span> </span>{
-            <span class="hljs-keyword">return</span> evt.target.value;
-        }).distinctUntilChanged();
-    }).handlers(<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(el, observer)</span> </span>{
-        observer.subscribe(<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(value)</span> </span>{
-            el.value = value;
-        });
+<span class="hljs-keyword">var</span> spyPlaces = cebFeatureFrp.disposable(<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(el)</span> </span>{
+    <span class="hljs-keyword">return</span> <span class="hljs-built_in">window</span>.Rx.Observable.fromEvent(cebFeatureTemplate(el).places, <span class="hljs-string">'change'</span>).map(<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(evt)</span> </span>{
+        <span class="hljs-keyword">return</span> evt.target.value;
+    }).distinctUntilChanged();
+}).handlers(<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(el, observer)</span> </span>{
+    observer.subscribe(<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(value)</span> </span>{
+        el.value = value;
     });
+});
 
-    <span class="hljs-keyword">var</span> searchPlaces = cebFeatureFrp.disposable(<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(el)</span> </span>{
-        <span class="hljs-keyword">return</span> el.queryObserver.throttle(<span class="hljs-number">300</span>).map(<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(query)</span> </span>{
-            <span class="hljs-keyword">return</span> query;
-        }).flatMapLatest(<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(query)</span> </span>{
-            el.map.setView(<span class="hljs-keyword">new</span> ol.View({
-                center: [<span class="hljs-number">0</span>, <span class="hljs-number">0</span>],
-                zoom: <span class="hljs-number">1</span>
-            }));
-            <span class="hljs-keyword">if</span> (el.markersLayer) {
-                el.map.removeLayer(el.markersLayer);
-            }
-            cebFeatureTemplate(el).places.innerHTML = <span class="hljs-string">''</span>;
-            <span class="hljs-keyword">return</span> $.ajax({
-                url: <span class="hljs-string">' http://nominatim.openstreetmap.org/search.php'</span>,
-                dataType: <span class="hljs-string">'json'</span>,
-                data: {
-                    q: query,
-                    format: <span class="hljs-string">'json'</span>,
-                    limit: <span class="hljs-number">10</span>
-                }
-            }).promise();
-        });
-    }).handlers(<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(el, observer)</span> </span>{
-        observer.subscribe(<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(places)</span> </span>{
-            el.places = places;
-        });
+<span class="hljs-keyword">var</span> searchPlaces = cebFeatureFrp.disposable(<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(el)</span> </span>{
+    <span class="hljs-keyword">return</span> el.queryObserver.throttle(<span class="hljs-number">300</span>).map(<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(query)</span> </span>{
+        <span class="hljs-keyword">return</span> query;
+    }).flatMapLatest(<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(query)</span> </span>{
+        <span class="hljs-comment">/* call web service to find a list of places */</span>
     });
-
-    <span class="hljs-keyword">var</span> displayPlacesInList = cebFeatureFrp.disposable(<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(el)</span> </span>{
-        <span class="hljs-keyword">return</span> el.placesObserver;
-    }).handlers(<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(el, observer)</span> </span>{
-        observer.subscribe(<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(places)</span> </span>{
-            places.map(<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(item)</span> </span>{
-                <span class="hljs-keyword">var</span> option = <span class="hljs-built_in">document</span>.createElement(<span class="hljs-string">'option'</span>);
-                option.textContent = item.display_name;
-                option.value = item.lon + <span class="hljs-string">','</span> + item.lat;
-                <span class="hljs-keyword">return</span> option;
-            }).forEach(cebFeatureTemplate(el).places.appendChild, cebFeatureTemplate(el).places);
-        });
+}).handlers(<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(el, observer)</span> </span>{
+    observer.subscribe(<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(places)</span> </span>{
+        el.places = places;
     });
+});
 
-    <span class="hljs-keyword">var</span> displayPlacesInMap = cebFeatureFrp.disposable(<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(el)</span> </span>{
-        <span class="hljs-keyword">return</span> el.placesObserver;
-    }).handlers(<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(el, observer)</span> </span>{
-        observer.subscribe(<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(places)</span> </span>{
-            <span class="hljs-keyword">var</span> featuresList = places.map(<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(place)</span> </span>{
-                <span class="hljs-keyword">var</span> lat = <span class="hljs-built_in">parseFloat</span>(place.lat);
-                <span class="hljs-keyword">var</span> lon = <span class="hljs-built_in">parseFloat</span>(place.lon);
-                <span class="hljs-keyword">return</span> {
-                    type: <span class="hljs-string">'Feature'</span>,
-                    geometry: {
-                        type: <span class="hljs-string">'Point'</span>,
-                        coordinates: ol.proj.transform([lon, lat], <span class="hljs-string">'EPSG:4326'</span>, <span class="hljs-string">'EPSG:3857'</span>)
-                    },
-                    properties: {
-                        name: place.display_name,
-                        icon: place.icon
-                    }
-                };
-            });
-            <span class="hljs-keyword">var</span> vectorSource = <span class="hljs-keyword">new</span> ol.source.GeoJSON({
-                object: {
-                    type: <span class="hljs-string">'FeatureCollection'</span>,
-                    features: featuresList
-                }
-            });
-            el.markersLayer = <span class="hljs-keyword">new</span> ol.layer.Vector({
-                source: vectorSource,
-                style: <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(feature, resolution)</span> </span>{
-                    <span class="hljs-keyword">var</span> iconStyle;
-                    <span class="hljs-keyword">if</span> (feature.getProperties().icon) {
-                        iconStyle = <span class="hljs-keyword">new</span> ol.style.Style({
-                            image: <span class="hljs-keyword">new</span> ol.style.Icon({
-                                anchor: [<span class="hljs-number">10</span>, <span class="hljs-number">10</span>],
-                                anchorXUnits: <span class="hljs-string">'pixels'</span>,
-                                anchorYUnits: <span class="hljs-string">'pixels'</span>,
-                                opacity: <span class="hljs-number">0.5</span>,
-                                src: feature.getProperties().icon
-                            })
-                        });
-                    } <span class="hljs-keyword">else</span> {
-                        iconStyle = <span class="hljs-keyword">new</span> ol.style.Style({
-                            image: <span class="hljs-keyword">new</span> ol.style.Circle({
-                                radius: <span class="hljs-number">5</span>,
-                                fill: <span class="hljs-keyword">new</span> ol.style.Fill({
-                                    color: <span class="hljs-string">'rgba(0, 0, 0, 0.5)'</span>
-                                })
-                            })
-                        });
-                    }
-                    <span class="hljs-keyword">return</span> [iconStyle];
-                }
-            });
-            el.map.addLayer(el.markersLayer);
-        });
+<span class="hljs-keyword">var</span> displayPlacesInList = cebFeatureFrp.disposable(<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(el)</span> </span>{
+    <span class="hljs-keyword">return</span> el.placesObserver;
+}).handlers(<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(el, observer)</span> </span>{
+    observer.subscribe(<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(places)</span> </span>{
+        <span class="hljs-comment">/* when places are found, they should be displayed into the select */</span>
     });
+});
 
-    <span class="hljs-keyword">var</span> displayValueInMap = cebFeatureFrp.disposable(<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(el)</span> </span>{
-        <span class="hljs-keyword">return</span> el.valueObserver.map(<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(value)</span> </span>{
-            <span class="hljs-keyword">return</span> value.split(<span class="hljs-string">','</span>);
-        });
-    }).handlers(<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(el, observer)</span> </span>{
-        observer.subscribe(<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(coord)</span> </span>{
-            el.map.setView(<span class="hljs-keyword">new</span> ol.View({
-                center: [<span class="hljs-number">0</span>, <span class="hljs-number">0</span>],
-                zoom: <span class="hljs-number">1</span>
-            }));
-            <span class="hljs-keyword">if</span> (el.valueLayer) {
-                el.map.removeLayer(el.valueLayer);
-            }
-            <span class="hljs-keyword">if</span> (coord.length &gt; <span class="hljs-number">1</span>) {
-                <span class="hljs-keyword">var</span> lon = <span class="hljs-built_in">parseFloat</span>(coord[<span class="hljs-number">0</span>]);
-                <span class="hljs-keyword">var</span> lat = <span class="hljs-built_in">parseFloat</span>(coord[<span class="hljs-number">1</span>]);
-                <span class="hljs-keyword">var</span> feature = {
-                    type: <span class="hljs-string">'Feature'</span>,
-                    geometry: {
-                        type: <span class="hljs-string">'Point'</span>,
-                        coordinates: ol.proj.transform([lon, lat], <span class="hljs-string">'EPSG:4326'</span>, <span class="hljs-string">'EPSG:3857'</span>)
-                    }
-                };
-                <span class="hljs-keyword">var</span> vectorSource = <span class="hljs-keyword">new</span> ol.source.GeoJSON({
-                    object: {
-                        type: <span class="hljs-string">'FeatureCollection'</span>,
-                        features: [feature]
-                    }
-                });
-                el.valueLayer = <span class="hljs-keyword">new</span> ol.layer.Vector({
-                    source: vectorSource,
-                    style: <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(feature, resolution)</span> </span>{
-                        <span class="hljs-keyword">var</span>
-                            iconStyle = <span class="hljs-keyword">new</span> ol.style.Style({
-                                image: <span class="hljs-keyword">new</span> ol.style.Circle({
-                                    radius: <span class="hljs-number">5</span>,
-                                    fill: <span class="hljs-keyword">new</span> ol.style.Fill({
-                                        color: <span class="hljs-string">'rgba(255, 0, 0, 1)'</span>
-                                    })
-                                })
-                            });
-                        <span class="hljs-keyword">return</span> [iconStyle];
-                    }
-                });
-                el.map.addLayer(el.valueLayer);
-            }
-        });
+<span class="hljs-keyword">var</span> displayPlacesInMap = cebFeatureFrp.disposable(<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(el)</span> </span>{
+    <span class="hljs-keyword">return</span> el.placesObserver;
+}).handlers(<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(el, observer)</span> </span>{
+    observer.subscribe(<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(places)</span> </span>{
+        <span class="hljs-comment">/* when places are found, they should be displayed into the map */</span>
     });
+});
 
-    <span class="hljs-keyword">var</span> cebSelectCountryTpl = <span class="hljs-string">''</span>;
-    cebSelectCountryTpl += <span class="hljs-string">'&lt;input type="hidden" ceb-ref="value"&gt;'</span>;
-    cebSelectCountryTpl += <span class="hljs-string">'&lt;nav&gt;'</span>;
-    cebSelectCountryTpl += <span class="hljs-string">'&lt;input type="text" ceb-ref="query" placeholder="type a place"&gt;'</span>;
-    cebSelectCountryTpl += <span class="hljs-string">'&lt;select ceb-ref="places" size="10"&gt;&lt;/select&gt;'</span>;
-    cebSelectCountryTpl += <span class="hljs-string">'&lt;/nav&gt;'</span>;
-    cebSelectCountryTpl += <span class="hljs-string">'&lt;section ceb-ref="map"&gt;&lt;/section&gt;'</span>;
-    ceb()
-        .name(<span class="hljs-string">'place-finder'</span>)
-        .feature(cebFeatureTemplate, {
-            template: cebSelectCountryTpl
-        })
-        .feature(cebFeatureFrp, {
-            disposables: [
+<span class="hljs-keyword">var</span> displayValueInMap = cebFeatureFrp.disposable(<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(el)</span> </span>{
+    <span class="hljs-keyword">return</span> el.valueObserver.map(<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(value)</span> </span>{
+        <span class="hljs-keyword">return</span> value.split(<span class="hljs-string">','</span>);
+    });
+}).handlers(<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(el, observer)</span> </span>{
+    observer.subscribe(<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(coord)</span> </span>{
+        <span class="hljs-comment">/* when a value is set, it should be displayed into the map*/</span>
+    });
+});
+
+<span class="hljs-keyword">var</span> cebSelectCountryTpl = <span class="hljs-string">''</span>;
+cebSelectCountryTpl += <span class="hljs-string">'&lt;input type="hidden" ceb-ref="value"&gt;'</span>;
+cebSelectCountryTpl += <span class="hljs-string">'&lt;input type="text" ceb-ref="query" placeholder="type a place"&gt;'</span>;
+cebSelectCountryTpl += <span class="hljs-string">'&lt;select ceb-ref="places" size="21"&gt;&lt;/select&gt;'</span>;
+cebSelectCountryTpl += <span class="hljs-string">'&lt;section ceb-ref="map"&gt;&lt;/section&gt;'</span>;
+
+ceb()
+    .name(<span class="hljs-string">'place-finder'</span>)
+    .feature(cebFeatureTemplate, {
+        template: cebSelectCountryTpl
+    })
+    .feature(cebFeatureFrp, {
+        disposables: [
             spyQuery,
             spyPlaces,
             searchPlaces,
@@ -316,53 +213,39 @@ However for the others like IE9/IE10 you have to use a <a href="http://www.w3.or
             displayPlacesInMap,
             displayValueInMap
         ]
-        })
-        .methods({
-            createdCallback: <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(el)</span> </span>{
-                <span class="hljs-keyword">var</span> osmLayer = <span class="hljs-keyword">new</span> ol.layer.Tile({
-                    source: <span class="hljs-keyword">new</span> ol.source.OSM()
-                });
-                el.map = <span class="hljs-keyword">new</span> ol.Map({
-                    target: cebFeatureTemplate(el).map,
-                    layers: [osmLayer],
-                    view: <span class="hljs-keyword">new</span> ol.View({
-                        center: [<span class="hljs-number">0</span>, <span class="hljs-number">0</span>],
-                        zoom: <span class="hljs-number">1</span>
-                    })
-                });
-            },
-            detachedCallback: <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(el)</span> </span>{
-                el.map.destroy();
+    })
+    .methods({
+        createdCallback: setupMap,
+        insertedCallback: setupMap,
+        detachedCallback: destroyMap
+    })
+    .properties({
+        query: {
+            attribute: <span class="hljs-literal">true</span>,
+            observable: <span class="hljs-literal">true</span>,
+            delegate: {
+                target: <span class="hljs-string">'input[type="text"]'</span>,
+                property: <span class="hljs-string">'value'</span>
             }
-        })
-        .properties({
-            query: {
-                attribute: <span class="hljs-literal">true</span>,
-                observable: <span class="hljs-literal">true</span>,
-                delegate: {
-                    target: <span class="hljs-string">'input[type="text"]'</span>,
-                    property: <span class="hljs-string">'value'</span>
-                }
-            },
-            places: {
-                observable: <span class="hljs-literal">true</span>
-            },
-            name: {
-                attribute: <span class="hljs-literal">true</span>,
-                delegate: {
-                    target: <span class="hljs-string">'input[type="hidden"]'</span>
-                }
-            },
-            value: {
-                attribute: <span class="hljs-literal">true</span>,
-                observable: <span class="hljs-literal">true</span>,
-                delegate: {
-                    target: <span class="hljs-string">'input[type="hidden"]'</span>
-                }
+        },
+        places: {
+            observable: <span class="hljs-literal">true</span>
+        },
+        name: {
+            attribute: <span class="hljs-literal">true</span>,
+            delegate: {
+                target: <span class="hljs-string">'input[type="hidden"]'</span>
             }
-        })
-        .register();
-}(<span class="hljs-keyword">this</span>));</pre></div></div>
+        },
+        value: {
+            attribute: <span class="hljs-literal">true</span>,
+            observable: <span class="hljs-literal">true</span>,
+            delegate: {
+                target: <span class="hljs-string">'input[type="hidden"]'</span>
+            }
+        }
+    })
+    .register();</pre></div></div>
             
         </li>
         

@@ -2,13 +2,19 @@
 
 <html>
 <head>
-  <title>ceb - ceb-feature-template.js</title>
-  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <meta charset="UTF-8">
+  <title>ceb: ceb-feature-template.js</title>
+
+  <meta name="description" content="Custom Elements Builder (ceb) is ... a builder for Custom Elements.">
+  <meta name="keywords " content="Web,Components,Custom,Element,Elements,DOM,W3C,FRP,functional,reactive,template,builder">
+  <meta name="language" content="en">
+  <meta name="author" content="Custom Elements Builder">
+
   <meta name="viewport" content="width=device-width, target-densitydpi=160dpi, initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
   <link rel="stylesheet" media="all" href="public/stylesheets/normalize.css" />
   <link rel="stylesheet" media="all" href="page.css" />
 </head>
-<body>
+<body lang="en">
 
 
 
@@ -24,7 +30,19 @@
           <div id="jump_page">
             
               <a class="source" href="index.html">
-                index
+                home
+              </a>
+            
+              <a class="source" href="ceb-feature-frp.html">
+                ceb-feature-frp
+              </a>
+            
+              <a class="source" href="ceb-feature-template.html">
+                ceb-feature-template
+              </a>
+            
+              <a class="source" href="ceb.html">
+                ceb
               </a>
             
               <a class="source" href="changelogs.html">
@@ -37,18 +55,6 @@
             
               <a class="source" href="0.1.x/doc.1.usage.html">
                 doc - 0.1.x
-              </a>
-            
-              <a class="source" href="ceb-feature-frp.html">
-                source - ceb-feature-frp.js
-              </a>
-            
-              <a class="source" href="ceb-feature-template.html">
-                source - ceb-feature-template.js
-              </a>
-            
-              <a class="source" href="ceb.html">
-                source - ceb.js
               </a>
             
           </div>
@@ -71,17 +77,31 @@
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-1">&#182;</a>
               </div>
-              <pre><code>custom-elements-builder <span class="hljs-number">0.2</span><span class="hljs-number">.0</span> http:<span class="hljs-comment">//tmorin.github.io/custom-elements-builder</span>
+              <pre><code>custom-elements-builder <span class="hljs-number">0.2</span><span class="hljs-number">.1</span> http:<span class="hljs-comment">//tmorin.github.io/custom-elements-builder</span>
 Custom Elements Builder (ceb) is ... a builder <span class="hljs-keyword">for</span> Custom Elements.
-Buil date: <span class="hljs-number">2015</span>-<span class="hljs-number">02</span>-<span class="hljs-number">02</span>
+Buil date: <span class="hljs-number">2015</span>-<span class="hljs-number">02</span>-<span class="hljs-number">06</span>
 Copyright <span class="hljs-number">2015</span>-<span class="hljs-number">2015</span> Thibault Morin
 Available under MIT license
 </code></pre>
             </div>
             
             <div class="content"><div class='highlight'><pre>(<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(g, factory)</span> </span>{
-<span class="hljs-pi">    'use strict'</span>;
+<span class="hljs-pi">    'use strict'</span>;</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-2">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-2">&#182;</a>
+              </div>
+              <p>Export the <strong>ceb-feature-template</strong> function according the detected loader.</p>
 
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>
     <span class="hljs-comment">/* istanbul ignore next */</span>
     <span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span> exports === <span class="hljs-string">'object'</span>) {
         <span class="hljs-built_in">module</span>.exports = factory();
@@ -97,24 +117,24 @@ Available under MIT license
         </li>
         
         
-        <li id="section-2">
+        <li id="section-3">
             <div class="annotation">
               
               <div class="pilwrap for-h2">
-                <a class="pilcrow" href="#section-2">&#182;</a>
+                <a class="pilcrow" href="#section-3">&#182;</a>
               </div>
-              <h2 id="feature-function">feature function</h2>
+              <h2 id="feature-function">Feature function</h2>
 
             </div>
             
         </li>
         
         
-        <li id="section-3">
+        <li id="section-4">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-3">&#182;</a>
+                <a class="pilcrow" href="#section-4">&#182;</a>
               </div>
               <p>The template feature’s function returns the nodes’ reference of the template.</p>
 
@@ -130,30 +150,15 @@ Available under MIT license
         </li>
         
         
-        <li id="section-4">
+        <li id="section-5">
             <div class="annotation">
               
               <div class="pilwrap for-h2">
-                <a class="pilcrow" href="#section-4">&#182;</a>
+                <a class="pilcrow" href="#section-5">&#182;</a>
               </div>
               <h2 id="templating-stuff">Templating stuff</h2>
 
             </div>
-            
-        </li>
-        
-        
-        <li id="section-5">
-            <div class="annotation">
-              
-              <div class="pilwrap ">
-                <a class="pilcrow" href="#section-5">&#182;</a>
-              </div>
-              <p>The counter is used to generate unique DOM’s id.</p>
-
-            </div>
-            
-            <div class="content"><div class='highlight'><pre>    <span class="hljs-keyword">var</span> counter = <span class="hljs-number">0</span>;</pre></div></div>
             
         </li>
         
@@ -164,11 +169,11 @@ Available under MIT license
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-6">&#182;</a>
               </div>
-              <p>Regex to detect the <em>ceb-ref</em> attributes</p>
+              <p>The counter is used to generate unique DOM’s id.</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>    <span class="hljs-keyword">var</span> nodesRegEx = <span class="hljs-regexp">/ceb\-ref=\W*(\w*)/igm</span>;</pre></div></div>
+            <div class="content"><div class='highlight'><pre>    <span class="hljs-keyword">var</span> counter = <span class="hljs-number">0</span>;</pre></div></div>
             
         </li>
         
@@ -179,11 +184,11 @@ Available under MIT license
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-7">&#182;</a>
               </div>
-              <p>Regex to detect the <em>ceb-content</em> attribute</p>
+              <p>Regex to detect the <em>ceb-ref</em> attributes</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>    <span class="hljs-keyword">var</span> contentRegEx = <span class="hljs-regexp">/ceb\-content/im</span>;</pre></div></div>
+            <div class="content"><div class='highlight'><pre>    <span class="hljs-keyword">var</span> nodesRegEx = <span class="hljs-regexp">/ceb\-ref=\W*(\w*)/igm</span>;</pre></div></div>
             
         </li>
         
@@ -193,6 +198,21 @@ Available under MIT license
               
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-8">&#182;</a>
+              </div>
+              <p>Regex to detect the <em>ceb-content</em> attribute</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>    <span class="hljs-keyword">var</span> contentRegEx = <span class="hljs-regexp">/ceb\-content/im</span>;</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-9">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-9">&#182;</a>
               </div>
               <p>Find recursively the content’s node of the current element.</p>
 
@@ -209,17 +229,35 @@ Available under MIT license
         </li>
         
         
-        <li id="section-9">
+        <li id="section-10">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-9">&#182;</a>
+                <a class="pilcrow" href="#section-10">&#182;</a>
+              </div>
+              <p>Render the template into the DOM</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>    <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">renderTemplate</span><span class="hljs-params">(el, template)</span> </span>{
+        el.innerHTML = template;
+    }
+    feature.renderTemplate = renderTemplate;</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-11">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-11">&#182;</a>
               </div>
               <p>Apply a template to an element.</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>    <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">apply</span><span class="hljs-params">(tpl, el, isHandleLightDOM, isNodeReferences)</span> </span>{
+            <div class="content"><div class='highlight'><pre>    <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">apply</span><span class="hljs-params">(el, tpl, options, isHandleLightDOM, isNodeReferences)</span> </span>{
         <span class="hljs-keyword">var</span> lightChildren = [],
             refrencedNodes = [],
             template = tpl;
@@ -229,11 +267,11 @@ Available under MIT license
         </li>
         
         
-        <li id="section-10">
+        <li id="section-12">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-10">&#182;</a>
+                <a class="pilcrow" href="#section-12">&#182;</a>
               </div>
               <p>Update the template to detect the DOM nodes references.</p>
 
@@ -246,11 +284,11 @@ Available under MIT license
         </li>
         
         
-        <li id="section-11">
+        <li id="section-13">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-11">&#182;</a>
+                <a class="pilcrow" href="#section-13">&#182;</a>
               </div>
               <p>build an id of the reference</p>
 
@@ -261,11 +299,11 @@ Available under MIT license
         </li>
         
         
-        <li id="section-12">
+        <li id="section-14">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-12">&#182;</a>
+                <a class="pilcrow" href="#section-14">&#182;</a>
               </div>
               <p>replace the original attribute name by the idenitifer</p>
 
@@ -276,11 +314,11 @@ Available under MIT license
         </li>
         
         
-        <li id="section-13">
+        <li id="section-15">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-13">&#182;</a>
+                <a class="pilcrow" href="#section-15">&#182;</a>
               </div>
               <p>push the entry</p>
 
@@ -298,11 +336,11 @@ Available under MIT license
         </li>
         
         
-        <li id="section-14">
+        <li id="section-16">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-14">&#182;</a>
+                <a class="pilcrow" href="#section-16">&#182;</a>
               </div>
               <p>Get the current content node having the light DOM nodes,
 When the node is freshly created, the content node is the element.
@@ -317,11 +355,11 @@ but a sub content node linked to one of its descents.</p>
         </li>
         
         
-        <li id="section-15">
+        <li id="section-17">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-15">&#182;</a>
+                <a class="pilcrow" href="#section-17">&#182;</a>
               </div>
               <p>Remove the light DOM to keep it.</p>
 
@@ -334,11 +372,11 @@ but a sub content node linked to one of its descents.</p>
         </li>
         
         
-        <li id="section-16">
+        <li id="section-18">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-16">&#182;</a>
+                <a class="pilcrow" href="#section-18">&#182;</a>
               </div>
               <p>lightChildren = Array.prototype.slice.call(oldContentNode.childNodes);</p>
 
@@ -347,11 +385,11 @@ but a sub content node linked to one of its descents.</p>
         </li>
         
         
-        <li id="section-17">
+        <li id="section-19">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-17">&#182;</a>
+                <a class="pilcrow" href="#section-19">&#182;</a>
               </div>
               <p>Generate the new content’s id value.</p>
 
@@ -362,11 +400,11 @@ but a sub content node linked to one of its descents.</p>
         </li>
         
         
-        <li id="section-18">
+        <li id="section-20">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-18">&#182;</a>
+                <a class="pilcrow" href="#section-20">&#182;</a>
               </div>
               <p>Replace the original attribute name by the id.</p>
 
@@ -377,11 +415,11 @@ but a sub content node linked to one of its descents.</p>
         </li>
         
         
-        <li id="section-19">
+        <li id="section-21">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-19">&#182;</a>
+                <a class="pilcrow" href="#section-21">&#182;</a>
               </div>
               <p>Keep a value of the content’s id value if the node is cloned.</p>
 
@@ -393,54 +431,20 @@ but a sub content node linked to one of its descents.</p>
         </li>
         
         
-        <li id="section-20">
-            <div class="annotation">
-              
-              <div class="pilwrap ">
-                <a class="pilcrow" href="#section-20">&#182;</a>
-              </div>
-              <p>Transform the template string into an alive DOM nodes.</p>
-
-            </div>
-            
-            <div class="content"><div class='highlight'><pre>        el.innerHTML = template;
-
-        <span class="hljs-keyword">if</span> (isHandleLightDOM) {</pre></div></div>
-            
-        </li>
-        
-        
-        <li id="section-21">
-            <div class="annotation">
-              
-              <div class="pilwrap ">
-                <a class="pilcrow" href="#section-21">&#182;</a>
-              </div>
-              <p>Get the content node to add him the in pending light DOM.</p>
-
-            </div>
-            
-            <div class="content"><div class='highlight'><pre>            <span class="hljs-keyword">var</span> newContentNode = findContentNode(el);
-            lightChildren.forEach(<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(child)</span> </span>{
-                newContentNode.appendChild(child);</pre></div></div>
-            
-        </li>
-        
-        
         <li id="section-22">
             <div class="annotation">
               
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-22">&#182;</a>
               </div>
-              <p>newContentNode.appendChild(child);</p>
+              <p>Transform the template string into an alive DOM nodes.</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>            });
-        }
+            <div class="content"><div class='highlight'><pre>        <span class="hljs-keyword">var</span> renderTemplate = options.renderTemplate || feature.renderTemplate;
+        renderTemplate(el, template);
 
-        <span class="hljs-keyword">if</span> (isNodeReferences) {</pre></div></div>
+        <span class="hljs-keyword">if</span> (isHandleLightDOM) {</pre></div></div>
             
         </li>
         
@@ -450,6 +454,27 @@ but a sub content node linked to one of its descents.</p>
               
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-23">&#182;</a>
+              </div>
+              <p>Get the content node to add him the in pending light DOM.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>            <span class="hljs-keyword">var</span> newContentNode = findContentNode(el);
+            lightChildren.forEach(<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(child)</span> </span>{
+                newContentNode.appendChild(child);
+            });
+        }
+
+        <span class="hljs-keyword">if</span> (isNodeReferences) {</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-24">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-24">&#182;</a>
               </div>
               <p>Get the reference nodes and attach them to the element templating scope.</p>
 
@@ -465,11 +490,11 @@ but a sub content node linked to one of its descents.</p>
         </li>
         
         
-        <li id="section-24">
+        <li id="section-25">
             <div class="annotation">
               
               <div class="pilwrap for-h2">
-                <a class="pilcrow" href="#section-24">&#182;</a>
+                <a class="pilcrow" href="#section-25">&#182;</a>
               </div>
               <h2 id="setup-function">Setup function</h2>
 
@@ -478,11 +503,11 @@ but a sub content node linked to one of its descents.</p>
         </li>
         
         
-        <li id="section-25">
+        <li id="section-26">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-25">&#182;</a>
+                <a class="pilcrow" href="#section-26">&#182;</a>
               </div>
               <p>The templeting process is done before the call of the <code>createdCallback</code> method defined in the structure.</p>
 
@@ -496,11 +521,11 @@ but a sub content node linked to one of its descents.</p>
         </li>
         
         
-        <li id="section-26">
+        <li id="section-27">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-26">&#182;</a>
+                <a class="pilcrow" href="#section-27">&#182;</a>
               </div>
               <p>Register a wrapper to the createdCallback callback in order to
 apply the template before the original call.</p>
@@ -508,9 +533,10 @@ apply the template before the original call.</p>
             </div>
             
             <div class="content"><div class='highlight'><pre>        builder.wrap(<span class="hljs-string">'createdCallback'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(next, el)</span> </span>{
-            apply(tpl, el, isHandleLightDOM, isNodeReferences);
+            apply(el, tpl, options, isHandleLightDOM, isNodeReferences);
             next(<span class="hljs-built_in">arguments</span>);
         });
+
         <span class="hljs-keyword">if</span> (isHandleLightDOM) {
             builder.properties({
                 contentNode: {
@@ -530,7 +556,8 @@ apply the template before the original call.</p>
         
     </ul>
   </div>
-  <script>
+
+<script>
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
   (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
   m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
@@ -538,5 +565,6 @@ apply the template before the original call.</p>
   ga('create', 'UA-20179310-4', '/custom-elements-builder');
   ga('send', 'pageview');
 </script>
+
 </body>
 </html>
