@@ -102,12 +102,13 @@ Presently, properties can be observed and observers can be created from scratch.
 and because Custom Elements Builder is just a builder,
 this feature is not locked to an external dependencies.</p>
 <p>So, some functions must be overridden to handle the targeted FRP library.
-By default their implementation are locked to <code>window.Rx</code>, <a href="http://reactive-extensions.github.io/RxJS">RxJS</a>.</p>
-<p>The functions can be overridden from the function feature:</p>
+By default their implementation throw <em>not implemented</em>.
+Include <a href="../ceb-feature-frp-rx.html">ceb-feature-frp-rx.js</a> to get an implementation based on Rx.</p>
+<p>The functions can be overridden from the feature’s function:</p>
 <ul>
-<li>cebFeatureFrp.defaultPropertyObserverFactory</li>
-<li>cebFeatureFrp.defaultPropertyObservableInterceptor</li>
-<li>cebFeatureFrp.defaultDisposeDisposable</li>
+<li>cebFeatureFrp.propertyObserverFactory</li>
+<li>cebFeatureFrp.propertyObservableInterceptor</li>
+<li>cebFeatureFrp.disposeDisposable</li>
 </ul>
 <p>Or from the feature’s options:</p>
 <ul>

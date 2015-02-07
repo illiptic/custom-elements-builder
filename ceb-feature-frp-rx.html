@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>ceb: ceb-feature-frp-rx.js</title>
+
+  <meta name="description" content="Custom Elements Builder (ceb) is ... a builder for Custom Elements.">
+  <meta name="keywords " content="Web,Components,Custom,Element,Elements,DOM,W3C,FRP,functional,reactive,template,builder">
+  <meta name="language" content="en">
+  <meta name="author" content="Custom Elements Builder">
+
+  <meta name="viewport" content="width=device-width, target-densitydpi=160dpi, initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
+  <link rel="stylesheet" media="all" href="public/stylesheets/normalize.css" />
+  <link rel="stylesheet" media="all" href="page.css" />
+</head>
+<body lang="en">
+
+
+
+  <div id="container">
+    <div id="background"></div>
+
+    
+      <ul id="jump_to">
+        <li>
+          <a class="large" href="javascript:void(0);">Jump To &hellip;</a>
+          <a class="small" href="javascript:void(0);">+</a>
+          <div id="jump_wrapper">
+          <div id="jump_page">
+            
+              <a class="source" href="index.html">
+                home
+              </a>
+            
+              <a class="source" href="changelogs.html">
+                changelogs
+              </a>
+            
+              <a class="source" href="0.2.x/doc.1.usage.html">
+                doc - 0.2.x
+              </a>
+            
+              <a class="source" href="0.1.x/doc.1.usage.html">
+                doc - 0.1.x
+              </a>
+            
+              <a class="source" href="ceb-feature-frp-rx.html">
+                source - ceb-feature-frp-rx.js
+              </a>
+            
+              <a class="source" href="ceb-feature-frp.html">
+                source - ceb-feature-frp.js
+              </a>
+            
+              <a class="source" href="ceb-feature-template.html">
+                source - ceb-feature-template.js
+              </a>
+            
+              <a class="source" href="ceb.html">
+                source - ceb.js
+              </a>
+            
+          </div>
+        </li>
+      </ul>
+    
+    <ul class="sections">
+        
+          <li id="title">
+              <div class="annotation">
+                  <h1>ceb-feature-frp-rx.js</h1>
+              </div>
+          </li>
+        
+        
+        
+        <li id="section-1">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-1">&#182;</a>
+              </div>
+              <pre><code>custom-elements-builder <span class="hljs-number">0.2</span><span class="hljs-number">.2</span> http:<span class="hljs-comment">//tmorin.github.io/custom-elements-builder</span>
+Custom Elements Builder (ceb) is ... a builder <span class="hljs-keyword">for</span> Custom Elements.
+Buil date: <span class="hljs-number">2015</span>-<span class="hljs-number">02</span>-<span class="hljs-number">07</span>
+Copyright <span class="hljs-number">2015</span>-<span class="hljs-number">2015</span> Thibault Morin
+Available under MIT license
+</code></pre>
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>(<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(g, factory)</span> </span>{
+<span class="hljs-pi">    'use strict'</span>;</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-2">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-2">&#182;</a>
+              </div>
+              <p>Export the <strong>ceb-feature-frp-rx</strong> function according the detected loader.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>
+    <span class="hljs-comment">/* istanbul ignore next */</span>
+    <span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span> exports === <span class="hljs-string">'object'</span>) {
+        <span class="hljs-built_in">module</span>.exports = factory(<span class="hljs-built_in">require</span>(<span class="hljs-string">'ceb-feature-frp'</span>), <span class="hljs-built_in">require</span>(<span class="hljs-string">'Rx'</span>));
+    } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span> define === <span class="hljs-string">'function'</span> &amp;&amp; define.amd) {
+        define(<span class="hljs-string">'ceb-feature-frp-rx'</span>, [<span class="hljs-string">'ceb-feature-frp'</span>, <span class="hljs-string">'Rx'</span>], factory);
+    } <span class="hljs-keyword">else</span> {
+        g.cebFeatureFrp = factory(g.cebFeatureFrp, g.Rx);
+    }
+
+}(<span class="hljs-keyword">this</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(cebFeatureFrp, Rx)</span> </span>{
+<span class="hljs-pi">    'use strict'</span>;
+
+    cebFeatureFrp.propertyObserverFactory = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">rxPropertyObserverFactory</span><span class="hljs-params">()</span> </span>{
+        <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> Rx.Subject();
+    };
+
+    cebFeatureFrp.propertyObservableInterceptor = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">rxPropertyObservableInterceptor</span><span class="hljs-params">(next, el, propName, value)</span> </span>{
+        next(value);
+        el[propName + <span class="hljs-string">'Observer'</span>].onNext(value);
+    };
+
+    cebFeatureFrp.disposeDisposable = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">rxDisposeDisposable</span><span class="hljs-params">(observer)</span> </span>{
+        observer.dispose();
+    };
+
+    <span class="hljs-keyword">return</span> cebFeatureFrp;
+}));</pre></div></div>
+            
+        </li>
+        
+    </ul>
+  </div>
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-20179310-4', '/custom-elements-builder');
+  ga('send', 'pageview');
+</script>
+
+</body>
+</html>
