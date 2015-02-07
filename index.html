@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <title>ceb: Custom Elements Builder</title>
 
-  <meta name="description" content="Custom Elements Builder (ceb) is ... a builder for Custom Elements.">
+  <meta name="description" content="Custom Elements Builder (ceb) is ... a scalable builder for Custom Elements.">
   <meta name="keywords " content="Web,Components,Custom,Element,Elements,DOM,W3C,FRP,functional,reactive,template,builder">
   <meta name="language" content="en">
   <meta name="author" content="Custom Elements Builder">
@@ -76,25 +76,18 @@
                 <a class="pilcrow" href="#section-1">&#182;</a>
               </div>
               <h1 id="custom-elements-builder">Custom Elements Builder</h1>
-<p><strong>ceb</strong> is a builder to help the development of Custom Elements.</p>
+<p><strong>ceb</strong> is a scalable builder to help the development of Custom Elements.</p>
 <ul>
 <li>The project is hosted on <a href="https://github.com/tmorin/custom-elements-builder">Github</a></li>
 <li>Every use cases are tested and validated from this <a href="./testsuite">test suite</a></li>
-<li>The source code is continuously built on <a href="https://travis-ci.org/tmorin/custom-elements-builder">Travis</a></li>
-<li>The test suite is automatically executed using <a href="https://saucelabs.com/u/customelementbuilder">Sauce Labs</a></li>
-<li>The code coverage report is pushed to <a href="https://coveralls.io/r/tmorin/custom-elements-builder">coveralls</a></li>
-<li><a href="changelogs.html">Change logs</a></li>
+<li><a href="changelogs.html">Change logs</a> <a href="https://coveralls.io/r/tmorin/custom-elements-builder">coveralls</a> <a href="https://travis-ci.org/tmorin/custom-elements-builder">Travis</a> <a href="https://saucelabs.com/u/customelementbuilder">Sauce Labs</a></li>
 </ul>
 <hr>
-<h2 id="documentation">Documentation</h2>
+<h2 id="guides">Guides</h2>
 <ul>
 <li><a href="0.2.x/doc.1.usage.html">0.2.x</a></li>
-<li><p><a href="0.1.x/doc.1.usage.html">0.1.x</a></p>
-</li>
-<li><p><a href="ceb.html">ceb.js</a></p>
-</li>
-<li><a href="ceb-feature-template.html">ceb-feature-template.js</a></li>
-<li><a href="ceb-feature-frp.html">ceb-feature-frp.js</a></li>
+<li><a href="0.1.x/doc.1.usage.html">0.1.x</a></li>
+<li><a href="https://github.com/tmorin/ceb-example-requirejs">ceb and requirejs integration</a></li>
 </ul>
 <hr>
 <h2 id="compatibilities">Compatibilities</h2>
@@ -123,137 +116,73 @@ However for the others like IE9/IE10 you have to use a <a href="http://www.w3.or
 <li>amd: <code>require([&#39;ceb&#39;, ...</code></li>
 <li>amd: <code>require([&#39;ceb-feature-template&#39;, ...</code></li>
 <li>amd: <code>require([&#39;ceb-feature-frp&#39;, ...</code></li>
+<li>amd: <code>require([&#39;ceb-feature-frp-rx&#39;, ...</code></li>
 </ul>
 
             </div>
             
             <div class="content"><div class='highlight'><pre>
-<span class="hljs-comment">/*
- * The place-finder element is used to find a place.
- * Its value is the latitude and longitude of a place.
- * The user can find a place using the search field then select a result to update the element's value.
- * Found places and value are displayed into a map.
- * You can play with it on jsfiddle: http://jsfiddle.net/tmorin/xce2e756
- */</span>
+<span class="hljs-comment">/* get a builder from a name */</span>
+<span class="hljs-keyword">var</span> builder = ceb().name(<span class="hljs-string">'super-button'</span>);
 
-<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">setupMap</span><span class="hljs-params">(el)</span> </span>{
-    <span class="hljs-comment">/* setup the map if needed */</span>
-}
-<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">destroyMap</span><span class="hljs-params">(el)</span> </span>{
-    <span class="hljs-comment">/* destroy the map */</span>
-}
+<span class="hljs-comment">/* super-button is an extention of the HTML button element */</span>
+builder.extends(<span class="hljs-string">'button'</span>).proptotype(<span class="hljs-built_in">Object</span>.create(HTMLButtonElement.prototype));
 
-<span class="hljs-keyword">var</span> spyQuery = cebFeatureFrp.disposable(<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(el)</span> </span>{
-    <span class="hljs-keyword">return</span> <span class="hljs-built_in">window</span>.Rx.Observable.fromEvent(cebFeatureTemplate(el).query, <span class="hljs-string">'keyup'</span>).map(<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(evt)</span> </span>{
-        <span class="hljs-keyword">return</span> evt.target.value;
-    }).distinctUntilChanged();
-}).handlers(<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(el, observer)</span> </span>{
-    observer.subscribe(<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(query)</span> </span>{
-        el.query = query;
-    });
-});
-
-<span class="hljs-keyword">var</span> spyPlaces = cebFeatureFrp.disposable(<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(el)</span> </span>{
-    <span class="hljs-keyword">return</span> <span class="hljs-built_in">window</span>.Rx.Observable.fromEvent(cebFeatureTemplate(el).places, <span class="hljs-string">'change'</span>).map(<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(evt)</span> </span>{
-        <span class="hljs-keyword">return</span> evt.target.value;
-    }).distinctUntilChanged();
-}).handlers(<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(el, observer)</span> </span>{
-    observer.subscribe(<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(value)</span> </span>{
-        el.value = value;
-    });
-});
-
-<span class="hljs-keyword">var</span> searchPlaces = cebFeatureFrp.disposable(<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(el)</span> </span>{
-    <span class="hljs-keyword">return</span> el.queryObserver.throttle(<span class="hljs-number">300</span>).map(<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(query)</span> </span>{
-        <span class="hljs-keyword">return</span> query;
-    }).flatMapLatest(<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(query)</span> </span>{
-        <span class="hljs-comment">/* call web service to find a list of places */</span>
-    });
-}).handlers(<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(el, observer)</span> </span>{
-    observer.subscribe(<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(places)</span> </span>{
-        el.places = places;
-    });
-});
-
-<span class="hljs-keyword">var</span> displayPlacesInList = cebFeatureFrp.disposable(<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(el)</span> </span>{
-    <span class="hljs-keyword">return</span> el.placesObserver;
-}).handlers(<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(el, observer)</span> </span>{
-    observer.subscribe(<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(places)</span> </span>{
-        <span class="hljs-comment">/* when places are found, they should be displayed into the select */</span>
-    });
-});
-
-<span class="hljs-keyword">var</span> displayPlacesInMap = cebFeatureFrp.disposable(<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(el)</span> </span>{
-    <span class="hljs-keyword">return</span> el.placesObserver;
-}).handlers(<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(el, observer)</span> </span>{
-    observer.subscribe(<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(places)</span> </span>{
-        <span class="hljs-comment">/* when places are found, they should be displayed into the map */</span>
-    });
-});
-
-<span class="hljs-keyword">var</span> displayValueInMap = cebFeatureFrp.disposable(<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(el)</span> </span>{
-    <span class="hljs-keyword">return</span> el.valueObserver.map(<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(value)</span> </span>{
-        <span class="hljs-keyword">return</span> value.split(<span class="hljs-string">','</span>);
-    });
-}).handlers(<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(el, observer)</span> </span>{
-    observer.subscribe(<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(coord)</span> </span>{
-        <span class="hljs-comment">/* when a value is set, it should be displayed into the map*/</span>
-    });
-});
-
-<span class="hljs-keyword">var</span> cebSelectCountryTpl = <span class="hljs-string">''</span>;
-cebSelectCountryTpl += <span class="hljs-string">'&lt;input type="hidden" ceb-ref="value"&gt;'</span>;
-cebSelectCountryTpl += <span class="hljs-string">'&lt;input type="text" ceb-ref="query" placeholder="type a place"&gt;'</span>;
-cebSelectCountryTpl += <span class="hljs-string">'&lt;select ceb-ref="places" size="21"&gt;&lt;/select&gt;'</span>;
-cebSelectCountryTpl += <span class="hljs-string">'&lt;section ceb-ref="map"&gt;&lt;/section&gt;'</span>;
-
-ceb()
-    .name(<span class="hljs-string">'place-finder'</span>)
-    .feature(cebFeatureTemplate, {
-        template: cebSelectCountryTpl
-    })
-    .feature(cebFeatureFrp, {
-        disposables: [
-            spyQuery,
-            spyPlaces,
-            searchPlaces,
-            displayPlacesInList,
-            displayPlacesInMap,
-            displayValueInMap
-        ]
-    })
-    .methods({
-        createdCallback: setupMap,
-        insertedCallback: setupMap,
-        detachedCallback: destroyMap
-    })
-    .properties({
-        query: {
-            attribute: <span class="hljs-literal">true</span>,
-            observable: <span class="hljs-literal">true</span>,
-            delegate: {
-                target: <span class="hljs-string">'input[type="text"]'</span>,
-                property: <span class="hljs-string">'value'</span>
-            }
+<span class="hljs-comment">/* define properties linked or not to attributes */</span>
+builder.properties({
+    label: {
+        attribute: {
+            boolean: <span class="hljs-literal">true</span>
         },
-        places: {
-            observable: <span class="hljs-literal">true</span>
+        <span class="hljs-comment">/*
+            when the label property is updated,
+            its value is push to the delegated target
+        */</span>
+        delegate: {
+            target: <span class="hljs-string">'span.label'</span>,
+            property: <span class="hljs-string">'textContent'</span>
         },
-        name: {
-            attribute: <span class="hljs-literal">true</span>,
-            delegate: {
-                target: <span class="hljs-string">'input[type="hidden"]'</span>
-            }
+        setter: <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(el, propName, value)</span> </span>{
+            <span class="hljs-comment">/*
+                I am bound to an attribute,
+                so, the given value will come from the set instruction
+                and the returned value will be the attribute's value
+            */</span>
+            <span class="hljs-keyword">return</span> value.toLowerCase();
         },
-        value: {
-            attribute: <span class="hljs-literal">true</span>,
-            observable: <span class="hljs-literal">true</span>,
-            delegate: {
-                target: <span class="hljs-string">'input[type="hidden"]'</span>
-            }
+        getter: <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(el, propName, value)</span> </span>{
+            <span class="hljs-comment">/*
+                I am still bound to an attribute,
+                so, the given value will be the attribute value
+                and the returned value will be the value of the get instruction
+            */</span>
+            <span class="hljs-keyword">return</span> value;
         }
-    })
-    .register();</pre></div></div>
+    }
+});
+
+<span class="hljs-comment">/* define methods */</span>
+builder.methods({
+    createdCallback: <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(el)</span> </span>{
+        <span class="hljs-comment">/*
+            yes, I am like another method
+            and yes, I will always have the element instance as first argument
+        */</span>
+    }
+});
+
+<span class="hljs-comment">/* listen events */</span>
+builder.listen(<span class="hljs-string">'click'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(el, evt)</span></span>{
+    <span class="hljs-comment">/* again, I've got the element instance as first argument */</span>
+});
+
+<span class="hljs-comment">/* the scalable part of ceb */</span>
+builder.feature(cebTemplateFeature, {
+    template: <span class="hljs-string">'&lt;span class="label"&gt;&lt;/span&gt;&lt;span ce-content&gt;&lt;/span&gt;'</span>
+});
+
+<span class="hljs-comment">/* register the super-button */</span>
+<span class="hljs-keyword">var</span> SuperButton = builder.register();</pre></div></div>
             
         </li>
         
