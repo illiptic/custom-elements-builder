@@ -1,19 +1,19 @@
 // ## Get a builder
 
-// The builder's method `name`, taking the name of the future custom element's name, returned a builder.
+// The method `name` returns a builder for a custom element that will have the passed value as its name.
 var builder = ceb().name('demo-custom-element');
 
-// A builder provides several methods helping to defined the structure of a custom element.
-// A structure is composed of the following elements:
+// A builder provides several methods that help define the structure of a custom element.
+// A custom-element's structure is composed of the following elements:
 // - extends and prototype values
 // - properties
 // - methods
-// - interceptors catching the set and get of properties
-// - wrappers wrapping the call of methods
+// - interceptors that catch property getters and setters
+// - wrappers for method calls
 // - DOM event listeners
 // - features enhancing the structure with reusable logic
 
-// ## Add stuff to the structure
+// ## Add to the structure
 
 // [Set extends and prototype values](doc.2.inheritance.html)
 builder.extends( /* the tag to extend*/ ).prototype( /* the prototype to inherit */ );
@@ -36,23 +36,23 @@ builder.listen( /* a mix of html selectors and events' name, the callback */ );
 // [Add features](doc.8.features.html)
 builder.feature( /* the feature's function, [the feature's options], [the level] */ );
 
-// ## Make it works
+// ## Make it work
 
 // When the setup of the structure is done,
 // the builder’s method `register` will register the corresponding custom element.
 var DemoCustomElement = builder.register();
 
 // The returned value is the JavaScript class of the registered custom element.
-// It can be used as prototype of another one.
+// It can be used as prototype for another custom element.
 ceb().name('proto-demo-custom-element').prototype(Object.create(DemoCustomElement.prototype));
 
-// ## Make it alive
+// ## Give it life
 
-// `demo-custom-element` is available from JavaScript as another HTML element.
+// Once registered, `demo-custom-element` becomes available in JavaScript like any HTML element.
 var aDemoCustomElementFromJs = document.createElement('demo-custom-element');
 document.body.appendChild(aDemoCustomElementFromJs);
 
-// `demo-custom-element` is available from HTML as another HTML element.
+// `demo-custom-element` is also available in HTML.
 document.body.innerHTML = '<demo-custom-element></demo-custom-element>';
 var aDemoCustomElementFromHTML = document.body.querySelector('demo-custom-element');
 
@@ -62,9 +62,9 @@ console.assert(aDemoCustomElementFromJs.nodeType === aDemoCustomElementFromHTML.
 // ## Reuse a structure
 
 // The builder's structure can be retrieved using the builder's method `get`.
-// However, the structure object contains objects which are not sharable accross builders.
-// A good way is to implement the creation of the structure into a function.
-// Then call the function each time we need a structure.
+// However, the structure object contains objects which are not sharable across builders.
+// A good solution is to implement a structure factory that will provide the
+// the same base structure every time we call it.
 function structureFactory() {
     var protectedBuilder = ceb().name('base-structure');
     /* do stuff with protectedBuilder */
